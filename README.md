@@ -41,9 +41,9 @@ More important we can start correlating all of these data points. Does the perfo
 
 ## Digma is about Continuous Feedback
 
-There are countless of CI/CD platforms out there, but almost no tool to provide feedback in the other direction. 
+There are countless of CI/CD platforms out there, but almost no tool to provide feedback back from prod and test to the code.
 
-Developer Observability is about deriving insights from a wide and holistic array of logs traces and metrics and making them useful throughout the development process. More simply put, its about connecting static code with runtime environments.
+With continuous feedback we can make code changes and design that are well informed on actual usage and real world expectations. 
 
 
 <p align="center">
