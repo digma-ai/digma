@@ -32,7 +32,7 @@ With *Developer Observability* we can use existing logs, traces and metrics to a
 * What data is passed into its parameters in runtime? 
 * What type of errors does it raise in runtime, under which conditions, and how do they impact the final end user
 
-More important we can start correlating all of these date points. Does the performance of this function scale differently for different shipping methods? How is all of this information trending between releases, commits, types of users?  
+More important we can start correlating all of these data points. Does the performance of this function scale differently for different shipping methods? How is all of this information trending between releases, commits, types of users?  
 
 <img src="images/sample_code_2.png" width="600" height="391">
 
