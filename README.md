@@ -4,9 +4,8 @@
 [![made with love by digma-ai](https://img.shields.io/badge/made%20with%20%E2%99%A5%20by-digma-ff1414.svg?style=flat-square)](https://github.com/digma-ai)
 
 <p align="center">
-<img src="https://www.digma.ai/assets/img/digmatic.png" width="300" height="346" >
+<img src="/images/bg.jpg" >
 </p>
-
 # What is Digma and why are we building it?
 
 ## Digma is about *Developer Observability*
