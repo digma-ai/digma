@@ -6,6 +6,7 @@
 <p align="center">
 <img src="/images/bg.jpg" >
 </p>
+
 # What is Digma and why are we building it?
 
 ## Digma is about *Developer Observability*
