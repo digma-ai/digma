@@ -7,36 +7,30 @@
 <img src="/images/bg.jpg" >
 </p>
 
-# What is Digma and why are we building it?
+# What is Digma and why are we building it? :bat:	
 
 ## Digma is about *Developer Observability*
 
 We believe that understanding code real-world requirements and behavior is critical to making better software. Something that can be done only if we connect the dots between design time and runtime.
-We see the right information being collected but not being processed and made available to developers early enough to make a difference.
 
-There are many observability tools out there, they all take a very monitoring centric - 'live events capture' approach to observabilty. We feel they have managed to miss what developers care about when writing their code. 
+There are many observability tools out there, they all take a very monitoring centric - 'live events capture' approach to observabilty. We feel they have managed to miss what developers care about when writing their code :computer:	. 
 
 Our goal is to create an **open platform** for interpreting and analyzing the information collected via observablity. Traces, logs, metrics are great! But additional effort is needed in order to take them that last mile into the development process.
 
 ## The Digma way:
 
 So how do we do that? Digma has three main design principles that we think are key in unlocking the potentional of observablity data.
+<p align="center">
 
-#### Insights over raw data 
+#### Insights and analytics over raw data 
 
-At the heart of Digma's datamodel are three main entities over which the platform aggregates data: 
+#### Proactive over reactive 
+#### Integrated over external 
+</p>
 
-* Code Objects, these are your functions and classes, as well as specific elements like 'Ra
-* Flows (how code objects are used together)
-* Commit and release history
+## :gear: How does Digma work?
 
-
-#### Proactive over reactive
-#### Integrated over external
-
-## But what is Digma actually?
-
-It is a pipeline. A continuous feedback pipeline that injects data from your observability sources and generates feedback.
+It is a pipeline. A continuous feedback pipeline that injects data from your observability :telescope: sources and generates feedback.
 
 ![Digma HL Architecture](/images/architecture_light.png#gh-light-mode-only)![Digma HL Architecture](/images/architecture_dark.png#gh-dark-mode-only)
 
@@ -105,6 +99,11 @@ We are still debating where we want to host our community and which platform to 
 
 We'll be releasing some of our Open Source code repos soon - still working on tidying things up. We welcome you as a contributer!
 
+At the heart of Digma's datamodel are three main entities over which the platform aggregates data: 
+
+* **Code Objects**, these are your functions and classes, as well as specific elements referenced within the code. 
+* **Flows** These are groups or clusters of traces that represent ways the code objects are used together
+* **Commits** and release history
 
 
 
