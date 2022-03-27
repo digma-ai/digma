@@ -10,11 +10,40 @@
 
 ## Digma is about *Developer Observability*
 
-We believe that understanding code real-world requirements and behavior is critical to making better software.
+We believe that understanding code real-world requirements and behavior is critical to making better software. Something that can be done only if we connect the dots between design time and runtime.
 We see the right information being collected but not being processed and made available to developers early enough to make a difference.
 
-<br/>
-<br/>
+There are many observability tools out there, they all take a very monitoring centric - 'live events capture' approach to observabilty. We feel they have managed to miss what developers care about when writing their code. 
+
+Our goal is to create an **open platform** for interpreting and analyzing the information collected via observablity. Traces, logs, metrics are great! But additional effort is needed in order to take them that last mile into the development process.
+
+## The Digma way:
+
+So how do we do that? Digma has three main design principles that we think are key in unlocking the potentional of observablity data.
+
+#### Insights over raw data 
+
+At the heart of Digma's datamodel are three main entities over which the platform aggregates data: 
+
+* Code Objects, these are your functions and classes, as well as specific elements like 'Ra
+* Flows (how code objects are used together)
+* Commit and release history
+
+
+#### Proactive over reactive
+#### Integrated over external
+
+## But what is Digma actually?
+
+It is a pipeline. A continuous feedback pipeline that injects data from your observability sources and generates feedback.
+
+![Digma HL Architecture](/images/architecture_light.png#gh-light-mode-only)![Digma HL Architecture](/images/architecture_dark.png#gh-dark-mode-only)
+
+
+## How are you different from...
+
+Well we don't compete with any tool existing today because... There isn't any tool that aims to generate this type of feedback. We do work very well together with other tools looking at the same data, though.
+
 
 ## Can you give me some examples?
 
