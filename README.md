@@ -9,7 +9,7 @@
 
 # What is Digma and why are we building it?	
 
-## Digma is about *Developer Observability*
+## :man_technologist::woman_technologist:	 Digma is about *Developer Observability*
 
 We believe that understanding code real-world requirements and behavior is critical to making better software. Something that can be done only if we connect the dots between design time and runtime.
 
@@ -17,7 +17,7 @@ There are many observability tools out there, they all take a very monitoring ce
 
 Our goal is to create an **open platform** for interpreting and analyzing the information collected via observablity. Traces, logs, metrics are great! But additional effort is needed in order to take them that last mile into the development process.
 
-## The Digma way: :bat:
+## :bat: The Digma way: 
 
 So how do we do that? How do we make observability relevant? Digma has three main design principles that we think are key in unlocking the potentional of observablity data.
 
@@ -75,7 +75,7 @@ We started publishing some more detailed blog posts explaining what we are tryin
 
 [Breaking the Fourth Wall in Coding](https://levelup.gitconnected.com/breaking-the-fourth-wall-in-coding-189055955c85)
 
-## Join our Beta waitlist!
+## :tada: Join our Beta waitlist!
 
 Visit our [beta invite page](https://lucent-biscochitos-0ce778.netlify.app/) to be a part of our early access beta. 
 
