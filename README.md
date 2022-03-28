@@ -64,10 +64,10 @@ We have created a short video that demonstrates what the product does which you 
 In short, we can use existing logs, traces and metrics to answer questions such as:
 
 * Where is this function called from, is it even used?
-* Is this a problematic area of the code? Where are my bottlnecks? 
+* Is this a problematic area of the code? Where are my bottlenecks? 
 * What type of errors does this code raise in runtime, what issues are escalating? Which are affecting the end user?
 
-More improtantly know whether sommething is important about the code we don't need to hop on another system, we can see that directly in the IDE as we are interactive with it. 
+More imprortantly, all of these insights should be directly accessible in the IDE so we can use them while writing code.. 
 
 ## How can I learn more about Digma?
 
