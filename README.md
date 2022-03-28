@@ -44,8 +44,9 @@ Well we don't compete with any tool existing today because... There isn't any to
 
 At the time of this writing, most of the data Digma collects is OpenTelemetry based. In the future we will definitely be able to injest data from other technologies as well such as eBPF or even CloudWatch.
 
+<p align="center">
 <img src="/images/digmaloveotel.png" width="500" height="200">
-
+</p>
 ## Can you give me some examples?
 
 Sure! Think about any piece of code in your IDE. In fact, lets take this random snippet I came across exploring Github: [Source Here](https://github.com/saleor/saleor/blob/main/saleor/shipping/tasks.py).
