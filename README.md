@@ -20,17 +20,17 @@ Our goal is to create an **open platform** for interpreting and analyzing the in
 ## :bat: The Digma way: 
 
 So how do we do that? How do we make observability relevant? Digma has three main design principles that we think are key in unlocking the potentional of observablity data.
-<p align="center">
 
-> **Code Insights and analytics** *over* **raw data**
 
-</p>
+> <p align="center"> <strong>Code Insights and analytics</strong> <em>over</emc> <strong>raw data</strong> </p>
+
 Because if it takes time and manual work to check aggregate  correlate and understand the significance of raw logs and traces you'll probably not do it a lot :beach_umbrella:	
-> **Proactive** *over* **reactive**
+
+> <p align="center"> <strong>Proactive</strong> <em>over</em> <strong>Reactive</strong> </p>
 
 Otherwise you won't know what to look for unless its already on  :fire:
 
-> **Integrated** *over* **external** 
+> <p align="center"><strong>Integrated</strong> <em>over</em> <strong>external</strong> </p>
 
 Because context switching is already an issue. Going back and forth between dashborts and :chart: is guaranteed to slow you down. 
 ## :gear: How does Digma work?
