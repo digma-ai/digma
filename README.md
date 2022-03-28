@@ -22,7 +22,7 @@ Our goal is to create an **open platform** for interpreting and analyzing the in
 So how do we do that? How do we make observability relevant? Digma has three main design principles that we think are key in unlocking the potentional of observablity data.
 
 
-> <p align="center"> <strong>Code Insights and analytics</strong> <em>over</emc> <strong>raw data</strong> </p>
+> <p align="center"> <strong style="font-weight: bold;">Code Insights and analytics</strong> <em>over</emc> <strong>raw data</strong> </p>
 
 Because if it takes time and manual work to check aggregate  correlate and understand the significance of raw logs and traces you'll probably not do it a lot :beach_umbrella:	
 
