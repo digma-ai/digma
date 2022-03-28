@@ -67,21 +67,6 @@ In short, we can use existing logs, traces and metrics to answer questions such 
 
 More improtantly know whether sommething is important about the code we don't need to hop on another system, we can see that directly in the IDE as we are interactive with it. 
 
-
-## Digma is about Continuous Feedback
-
-There are countless of CI/CD platforms out there, but almost no tool to provide feedback back from prod and test to the code.
-
-With continuous feedback we can make code changes and design that are well informed on actual usage and real world expectations. 
-
-
-<p align="center">
-<img src="images/loop.png" width="500" height="232">
-</p>
-
-<br/>
-<br/>
-
 ## How can I learn more about Digma?
 
 We started publishing some more detailed blog posts explaining what we are trying to accomplish:
@@ -90,11 +75,12 @@ We started publishing some more detailed blog posts explaining what we are tryin
 
 [Breaking the Fourth Wall in Coding](https://levelup.gitconnected.com/breaking-the-fourth-wall-in-coding-189055955c85)
 
-<br/>
-<br/>
 
-## How do I contribute
+## How do I contribute and are you guys even Open-sourcing this?
 
+We are committed to making Digma an Open Source platform. However, we are just getting started, and not everythign is finalized enough yet to accept contributors. Currently we've made our vscode plugin repo public with an MIT license. We'll continue to add the additional repos as they become formalized enough to start working on them jointly.
+
+In the meantime...
 ### Consider starring this repo - it helps us know you care!
 
 ### Join our community
@@ -103,13 +89,14 @@ We are still debating where we want to host our community and which platform to 
 
 ### Join as a contributor
 
-We'll be releasing some of our Open Source code repos soon - still working on tidying things up. We welcome you as a contributer!
+If you are interested in being a contributor at this time, drop us a line!
+We'll definitely be interested in talking to you and see how to get you more involves.
 
-At the heart of Digma's datamodel are three main entities over which the platform aggregates data: 
+<p align="center">
+<img src="/images/digma_logo_wingz.png">
+</p>
 
-* **Code Objects**, these are your functions and classes, as well as specific elements referenced within the code. 
-* **Flows** These are groups or clusters of traces that represent ways the code objects are used together
-* **Commits** and release history
+
 
 
 
