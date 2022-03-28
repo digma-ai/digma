@@ -90,10 +90,10 @@ We are still debating where we want to host our community and which platform to 
 ### Join as a contributor
 
 If you are interested in being a contributor at this time, drop us a line!
-We'll definitely be interested in talking to you and see how to get you more involves.
+We'll definitely be interested in talking to you and see how to get you more involved.
 
 <p align="center">
-<img src="/images/digma_logo_wingz.png">
+<img src="/images/digma_logo_wingz.png" width="400" height="486">
 </p>
 
 
