@@ -75,7 +75,7 @@ We started publishing some more detailed blog posts explaining what we are tryin
 
 [Breaking the Fourth Wall in Coding](https://levelup.gitconnected.com/breaking-the-fourth-wall-in-coding-189055955c85)
 
-## :tada: Join our Beta waitlist!
+### :tada: Join our Beta waitlist!
 
 Visit our [beta invite page](https://lucent-biscochitos-0ce778.netlify.app/) to be a part of our early access beta. 
 
