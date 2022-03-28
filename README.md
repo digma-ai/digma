@@ -32,7 +32,7 @@ Otherwise you won't know what to look for unless its already on  :fire:
 
 > ###### **Integrated** *over* external
 
-Because context switching is already an issue. Going back and forth between dashborts and :chart: is guaranteed to slow you down. 
+Because context switching is already an issue. Going back and forth between dashboards and charts is guaranteed to slow you down. 
 ## :gear: How does Digma work?
 
 It is a pipeline. A continuous feedback pipeline that injects data from your observability :telescope: sources and generates feedback.
