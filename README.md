@@ -13,7 +13,7 @@
 
 We believe that understanding code real-world requirements and behavior is critical to making better software. Something that can be done only if we connect the dots between design time and runtime.
 
-There are many observability tools out there, they all take a very monitoring centric - 'live events capture' approach to observabilty. We feel they have managed to miss what developers care about when writing their code :computer:	. 
+There are many observability tools out there, they all take a very monitoring centric - 'live events capture' approach to observabilty. We feel they have managed to miss what developers care about when writing their code. 
 
 Our goal is to create an **open platform** for interpreting and analyzing the information collected via observablity. Traces, logs, metrics are great! But additional effort is needed in order to take them that last mile into the development process.
 
@@ -75,13 +75,16 @@ We started publishing some more detailed blog posts explaining what we are tryin
 
 [Breaking the Fourth Wall in Coding](https://levelup.gitconnected.com/breaking-the-fourth-wall-in-coding-189055955c85)
 
+## Join our Beta waitlist!
 
-## How do I contribute and are you guys even Open-sourcing this?
+Visit our [beta invite page](https://lucent-biscochitos-0ce778.netlify.app/) to be a part of our early access beta. 
+
+## How do I contribute or get involved, and are you guys even open-sourcing this?
 
 We are committed to making Digma an Open Source platform. However, we are just getting started, and some of the code is not yet finalized enough yet to accept contributors. Currently we've made our [vscode plugin repo](https://github.com/digma-ai/digma-vscode-plugin)
 public with an MIT license. We'll continue to add the additional repos as they become formalized enough to start working on them jointly.
 
-In the meantime...
+## In the meantime...
 ### Consider :star: this repo! It helps us know you care!
 
 ### Join our community :classical_building:	
