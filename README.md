@@ -78,10 +78,11 @@ We started publishing some more detailed blog posts explaining what we are tryin
 
 ## How do I contribute and are you guys even Open-sourcing this?
 
-We are committed to making Digma an Open Source platform. However, we are just getting started, and not everythign is finalized enough yet to accept contributors. Currently we've made our vscode plugin repo public with an MIT license. We'll continue to add the additional repos as they become formalized enough to start working on them jointly.
+We are committed to making Digma an Open Source platform. However, we are just getting started, and some of the code is not yet finalized enough yet to accept contributors. Currently we've made our [vscode plugin repo](https://github.com/digma-ai/digma-vscode-plugin)
+public with an MIT license. We'll continue to add the additional repos as they become formalized enough to start working on them jointly.
 
 In the meantime...
-### Consider starring this repo :star: It helps us know you care!
+### Consider :star: this repo! It helps us know you care!
 
 ### Join our community :classical_building:	
 
@@ -90,7 +91,7 @@ We are still debating where we want to host our community and which platform to 
 ### Join as a contributor :octocat:	
 
 If you are interested in being a contributor at this time, drop us a line!
-We'll definitely be interested in talking to you and see how to get you more involved.
+We'll definitely be interested in talking to you and see how to get you more involved!
 
 <p align="center">
 <img src="/images/digma_logo_wingz.png" width="400" height="486">
