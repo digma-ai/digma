@@ -7,7 +7,7 @@
 <img src="/images/bg.jpg" >
 </p>
 
-# What is Digma and why are we building it? :bat:	
+# What is Digma and why are we building it?	
 
 ## Digma is about *Developer Observability*
 
@@ -17,17 +17,17 @@ There are many observability tools out there, they all take a very monitoring ce
 
 Our goal is to create an **open platform** for interpreting and analyzing the information collected via observablity. Traces, logs, metrics are great! But additional effort is needed in order to take them that last mile into the development process.
 
-## The Digma way:
+## The Digma way: :bat:
 
-So how do we do that? Digma has three main design principles that we think are key in unlocking the potentional of observablity data.
-<p align="center">
+So how do we do that? How do we make observability relevant? Digma has three main design principles that we think are key in unlocking the potentional of observablity data.
 
-#### Insights and analytics over raw data 
+#### Code Insights and analytics over raw data
+Because if it takes time and manual work to check aggregate  correlate and understand the significance of raw logs and traces you'll probably not do it a lot :beach_umbrella:	
 
 #### Proactive over reactive 
+Otherwise you won't know what to look for unless its already on  :fire:
 #### Integrated over external 
-</p>
-
+Because context switching is already an issue. Going back and forth between dashborts and :chart: is guaranteed to slow you down. 
 ## :gear: How does Digma work?
 
 It is a pipeline. A continuous feedback pipeline that injects data from your observability :telescope: sources and generates feedback.
@@ -37,7 +37,11 @@ It is a pipeline. A continuous feedback pipeline that injects data from your obs
 
 ## How are you different from...
 
-Well we don't compete with any tool existing today because... There isn't any tool that aims to generate this type of feedback. We do work very well together with other tools looking at the same data, though.
+Well we don't compete with any tool existing today because... There isn't any tool that aims to generate this type of feedback. We do work very well together with other tools looking at the same data, like Jaeger, Prometheus, even traditional observability tools like Datadog or Splunk. 
+
+At the time of this writing, most of the data Digma collects is OpenTelemetry based. In the future we will definitely be able to injest data from other technologies as well such as eBPF or even CloudWatch.
+
+![Digma HL Architecture](/images/digmaloveotel.png)
 
 
 ## Can you give me some examples?
