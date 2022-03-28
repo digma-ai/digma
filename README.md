@@ -40,7 +40,7 @@ It is a pipeline. A continuous feedback pipeline that injects data from your obs
 
 ## How are you different from...
 
-Well we don't compete with any tool existing today because... There isn't any tool that aims to generate this type of feedback. We do work very well together with other tools looking at the same data, like Jaeger, Prometheus, even traditional observability tools like Datadog or Splunk. 
+Well we don't compete with any tool existing today because... There isn't any tool that aims to generate this type of feedback. We do work very well together with other tools looking at the same data, like Jaeger, Prometheus, even traditional observability tools like Datadog or Splunk. There are plenty of tools that try to offer troubleshooting/debugging capabilities (once an issue is already identified) or give some raw realtime data. This is not where our headspace is at.
 
 At the time of this writing, most of the data Digma collects is OpenTelemetry based. In the future we will definitely be able to ingest data from other technologies as well such as eBPF or even CloudWatch.
 
@@ -61,11 +61,11 @@ We have created a short video that demonstrates what the product does which you 
 
 In short, we can use existing logs, traces and metrics to answer questions such as:
 
-* Where is this function called from, is it even used
-* What data is passed into its parameters in runtime? 
-* What type of errors does it raise in runtime, under which conditions, and how do they impact the final end user
+* Where is this function called from, is it even used?
+* Is this a problematic area of the code? Where are my bottlnecks? 
+* What type of errors does this code raise in runtime, what issues are escalating? Which are affecting the end user?
 
-More important we can start correlating all of these data points. Does the performance of this function scale differently for different shipping methods? How is all of this information trending between releases, commits, types of users?  
+More improtantly know whether sommething is important about the code we don't need to hop on another system, we can see that directly in the IDE as we are interactive with it. 
 
 
 ## Digma is about Continuous Feedback
