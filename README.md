@@ -21,12 +21,15 @@ Our goal is to create an **open platform** for interpreting and analyzing the in
 
 So how do we do that? How do we make observability relevant? Digma has three main design principles that we think are key in unlocking the potentional of observablity data.
 
-#### Code Insights and analytics over raw data
-Because if it takes time and manual work to check aggregate  correlate and understand the significance of raw logs and traces you'll probably not do it a lot :beach_umbrella:	
+> **Code Insights and analytics** *over* **raw data**
 
-#### Proactive over reactive 
+Because if it takes time and manual work to check aggregate  correlate and understand the significance of raw logs and traces you'll probably not do it a lot :beach_umbrella:	
+> **Proactive** *over* **reactive**
+
 Otherwise you won't know what to look for unless its already on  :fire:
-#### Integrated over external 
+
+> **Integrated** *over* **external** 
+
 Because context switching is already an issue. Going back and forth between dashborts and :chart: is guaranteed to slow you down. 
 ## :gear: How does Digma work?
 
@@ -41,8 +44,7 @@ Well we don't compete with any tool existing today because... There isn't any to
 
 At the time of this writing, most of the data Digma collects is OpenTelemetry based. In the future we will definitely be able to injest data from other technologies as well such as eBPF or even CloudWatch.
 
-![Digma HL Architecture](/images/digmaloveotel.png)
-
+<img src="/images/digmaloveotel.png" width="500" height="200">
 
 ## Can you give me some examples?
 
