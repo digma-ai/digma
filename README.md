@@ -81,13 +81,13 @@ We started publishing some more detailed blog posts explaining what we are tryin
 We are committed to making Digma an Open Source platform. However, we are just getting started, and not everythign is finalized enough yet to accept contributors. Currently we've made our vscode plugin repo public with an MIT license. We'll continue to add the additional repos as they become formalized enough to start working on them jointly.
 
 In the meantime...
-### Consider starring this repo - it helps us know you care!
+### Consider starring this repo :star: It helps us know you care!
 
-### Join our community
+### Join our community :classical_building:	
 
 We are still debating where we want to host our community and which platform to use. In the meanwhile, if you want to get involved in the discussion please message us at community@digma.ai and we'll be happy to include you in some of our early discussion forums.
 
-### Join as a contributor
+### Join as a contributor :octocat:	
 
 If you are interested in being a contributor at this time, drop us a line!
 We'll definitely be interested in talking to you and see how to get you more involved.
