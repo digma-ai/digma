@@ -42,21 +42,24 @@ It is a pipeline. A continuous feedback pipeline that injects data from your obs
 
 Well we don't compete with any tool existing today because... There isn't any tool that aims to generate this type of feedback. We do work very well together with other tools looking at the same data, like Jaeger, Prometheus, even traditional observability tools like Datadog or Splunk. 
 
-At the time of this writing, most of the data Digma collects is OpenTelemetry based. In the future we will definitely be able to injest data from other technologies as well such as eBPF or even CloudWatch.
+At the time of this writing, most of the data Digma collects is OpenTelemetry based. In the future we will definitely be able to ingest data from other technologies as well such as eBPF or even CloudWatch.
 
 <p align="center">
 <img src="/images/digmaloveotel.png" width="500" height="200">
 </p>
+
 ## Can you give me some examples?
 
-Sure! Think about any piece of code in your IDE. In fact, lets take this random snippet I came across exploring Github: [Source Here](https://github.com/saleor/saleor/blob/main/saleor/shipping/tasks.py).
+We understand that Digma may sound abstract :art: 
+We have created a short video that demonstrates what the product does which you can find here:
 
-<img src="images/sample_code.png" width="600" height="391">
+<p align="center">
 
-Looking at the above call we can infer a lot about what it does but not so much about
-**how it is used**
+[![Digma in practice](/images/video-s.png)](https://youtu.be/MnJIyVVqPDU "Digma in Practice")
 
-With *Developer Observability* we can use existing logs, traces and metrics to answer questions such as:
+</p>
+
+In short, we can use existing logs, traces and metrics to answer questions such as:
 
 * Where is this function called from, is it even used
 * What data is passed into its parameters in runtime? 
@@ -64,10 +67,6 @@ With *Developer Observability* we can use existing logs, traces and metrics to a
 
 More important we can start correlating all of these data points. Does the performance of this function scale differently for different shipping methods? How is all of this information trending between releases, commits, types of users?  
 
-<img src="images/sample_code_2.png" width="600" height="391">
-
-<br/>
-<br/>
 
 ## Digma is about Continuous Feedback
 
