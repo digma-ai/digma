@@ -79,7 +79,7 @@ We started publishing some more detailed blog posts explaining what we are tryin
 
 ### :tada: Join our Beta waitlist!
 
-Visit our [beta invite page](https://lucent-biscochitos-0ce778.netlify.app/) to be a part of our early access beta. 
+Visit our [beta invite page](https://www.digma.ai/) to be a part of our early access beta. 
 
 ## How do I contribute or get involved, and are you guys even open-sourcing this?
 
