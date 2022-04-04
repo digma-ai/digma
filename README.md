@@ -86,7 +86,7 @@ Visit our [beta invite page](https://www.digma.ai/) to be a part of our early ac
 We are committed to making Digma an Open Source platform. However, we are just getting started, and some of the code is not yet finalized enough yet to accept contributors. Currently we've made our [vscode plugin repo](https://github.com/digma-ai/digma-vscode-plugin)
 public with an MIT license. We'll continue to add the additional repos as they become formalized enough to start working on them jointly.
 
-## In the meantime...
+## ⏲️ In the meantime...
 ### Consider :star: this repo! It helps us know you care!
 
 ### Join our community :classical_building:	
@@ -98,9 +98,20 @@ We are still debating where we want to host our community and which platform to 
 If you are interested in being a contributor at this time, drop us a line!
 We'll definitely be interested in talking to you and see how to get you more involved!
 
+
+## FAQ
+
+* **Is this going to instrument my code and change it in creepy ways in production?** Absolutely not! We rely on the OpenTelemetry vanilla instrumentation with a few added attributes of our own. We leave your code untouched.
+* **Do I need to make code changes to use Digma?** If you're already using OpenTelemetry you're good to go. If you are not yet using it, we should be a part of your stack if you're considering adding observability to your code!
+* **Can I use Digma right now?** We haven't opened the flood gates just yet but you are welcome to sign on to our beta program (via [this link](https://wwww.digma.ai)) or drop us a line if you want to be a part of the alpha.
+* **Which platforms/stacks do you currently support** We have a limited set of language specific components but for the sake of focus we currently support [**.NET**](https://dotnet.microsoft.com/en-us/) and [**Python**](https://www.python.org/) over [**Visual Studio Code**](https://code.visualstudio.com/). Over the next month we'll add [**Jetbrains IDEs**](https://www.jetbrains.com/) and [**GoLang**](https://go.dev/) which are already in progress. If you're using other stacks you wish to see supported please sign on to the beta and fill our survey - we're definitely taking youre responses into considation.
+
+<br>
+
 <p align="center">
 <img src="/images/digma_logo_wingz.png" width="400" height="486">
 </p>
+
 
 
 
