@@ -77,6 +77,9 @@ We started publishing some more detailed blog posts explaining what we are tryin
 
 [Breaking the Fourth Wall in Coding](https://levelup.gitconnected.com/breaking-the-fourth-wall-in-coding-189055955c85)
 
+[You're never done. By definition.](https://betterprogramming.pub/youre-never-done-by-definition-c04ac77c616b)
+
+
 ### :tada: Join our Beta waitlist!
 
 Visit our [beta invite page](https://www.digma.ai/) to be a part of our early access beta. 
