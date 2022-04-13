@@ -11,20 +11,20 @@
 
 ## :man_technologist::woman_technologist:	 Digma is about *Developer Observability*
 
-We believe that understanding code real-world requirements and behavior is critical to making better software. Something that can be done only if we connect the dots between design time and runtime.
+We believe that understanding code, real-world requirements, and behavior is critical to making better software. Something that can be done only if we connect the dots between design time and runtime.
 
-There are many observability tools out there, they all take a very monitoring centric - 'live events capture' approach to observabilty. We feel they have managed to miss what developers care about when writing their code. 
+There are many observability tools out there, they all take a very monitoring centric - 'live events capture' approach to observability. We feel they have managed to miss what developers care about when writing their code. 
 
-Our goal is to create an **open platform** for interpreting and analyzing the information collected via observablity. Traces, logs, metrics are great! But additional effort is needed in order to take them that last mile into the development process.
+Our goal is to create an **open platform** for interpreting and analyzing the information collected via observability. Traces, logs, metrics are great! But additional effort is needed in order to take them that last mile into the development process.
 
 ## :bat: The Digma way: 
 
-So how do we do that? How do we make observability relevant? Digma has three main design principles that we think are key in unlocking the potentional of observablity data.
+So how do we do that? How do we make observability relevant? Digma has three main design principles that we think are key in unlocking the potential of observability data.
 
 
 > ###### **Code Insights and analytics** *over* Raw data
 
-Because if it takes time and manual work to check aggregate  correlate and understand the significance of raw logs and traces you'll probably not do it a lot :beach_umbrella:	
+Because, if it takes time and manual work to check, aggregate, correlate, and understand the significance of raw logs and traces, you'll probably not do it a lot :beach_umbrella:	
 
 > ###### **Proactive** *over* Reactive
 
@@ -63,11 +63,11 @@ We have created a short video that demonstrates what the product does which you 
 
 In short, we can use existing logs, traces and metrics to answer questions such as:
 
-* Where is this function called from, is it even used?
+* Where is this function called from? Is it even used?
 * Is this a problematic area of the code? Where are my bottlenecks? 
-* What type of errors does this code raise in runtime, what issues are escalating? Which are affecting the end user?
+* What type of errors does this code raise in runtime? What issues are escalating? Which are affecting the end user?
 
-More imprortantly, all of these insights should be directly accessible in the IDE so we can use them while writing code.. 
+More importantly, all of these insights should be directly accessible in the IDE so we can use them while writing code.. 
 
 ## How can I learn more about Digma?
 
@@ -105,9 +105,9 @@ We'll definitely be interested in talking to you and see how to get you more inv
 ## FAQ
 
 * **Is this going to instrument my code and change it in creepy ways in production?** Absolutely not! We rely on the OpenTelemetry vanilla instrumentation with a few added attributes of our own. We leave your code untouched.
-* **Do I need to make code changes to use Digma?** If you're already using OpenTelemetry you're good to go. If you are not yet using it, we should be a part of your stack if you're considering adding observability to your code!
-* **Can I use Digma right now?** We haven't opened the flood gates just yet but you are welcome to sign on to our beta program (via [this link](https://wwww.digma.ai)) or drop us a line if you want to be a part of the alpha.
-* **Which platforms/stacks do you currently support?** We have a limited set of language specific components but for the sake of focus we currently support [**.NET**](https://dotnet.microsoft.com/en-us/) and [**Python**](https://www.python.org/) over [**Visual Studio Code**](https://code.visualstudio.com/). Over the next month we'll add [**Jetbrains IDEs**](https://www.jetbrains.com/) and [**GoLang**](https://go.dev/) which are already in progress. If you're using other stacks you wish to see supported please sign on to the beta and fill our survey - we're definitely taking youre responses into considation.
+* **Do I need to make code changes to use Digma?** If you're already using OpenTelemetry, you're good to go. If you are not yet using it, we should be a part of your stack if you're considering adding observability to your code!
+* **Can I use Digma right now?** We haven't opened the flood gates just yet, but you are welcome to sign on to our beta program (via [this link](https://wwww.digma.ai)) or drop us a line if you want to be a part of the alpha.
+* **Which platforms/stacks do you currently support?** We have a limited set of language specific components, but, for the sake of focus, we currently support [**.NET**](https://dotnet.microsoft.com/en-us/) and [**Python**](https://www.python.org/) over [**Visual Studio Code**](https://code.visualstudio.com/). Over the next month, we'll add [**Jetbrains IDEs**](https://www.jetbrains.com/) and [**GoLang**](https://go.dev/) which are already in progress. If you're using other stacks you wish to see supported, please sign on to the beta and fill our survey - we're definitely taking your responses into consideration.
 
 <br>
 
