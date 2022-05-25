@@ -84,7 +84,7 @@ You can find detailed instructions for [Python](https://github.com/digma-ai/open
 
 That's it! As you start using you application and accumulating trace data, Digma will start showing insights in the IDE sidepane.
 
-<img width="452" alt="image" src="https://user-images.githubusercontent.com/93863/170363423-fc1adfb0-be84-43e2-a9b9-01c9254bc00e.png">
+<img width="485" alt="image" src="https://user-images.githubusercontent.com/93863/170363819-8343fc49-3791-4c9b-afee-a4af9d55e11d.png">
 
 
 ## Do you have any example applications I can clone?
