@@ -69,15 +69,38 @@ In short, we can use existing logs, traces and metrics to answer questions such 
 
 More importantly, all of these insights should be directly accessible in the IDE so we can use them while writing code.. 
 
+## Running Digma Locally 
+
+Digma is not yet released but you can already download and play around with it.  There are three steps to get Digma up and running:
+
+1. Install the IDE Plugin from the [marketplace](https://marketplace.visualstudio.com/items?itemName=digma.digma), as of now vscode is supported but other IDEs plugin are in progress
+2. Start the Digma backend locally via the Docker Compose file included [here](https://github.com/digma-ai/digma/blob/main/docker/docker-compose.yml).
+```bash
+curl https://raw.githubusercontent.com/digma-ai/digma/main/docker/docker-compose.yml --output docker-compose.yml
+docker compose up
+```
+3. Add 1-2 lines of code to add Digma to your OTEL exporters, Digma also adds a few attributes to your spans to align them with code locations. 
+You can find detailed instructions for [Python](https://github.com/digma-ai/opentelemetry-instrumentation-digma), [Django](https://github.com/digma-ai/opentelemetry-instrumentation-digma-django) and [.NET](https://github.com/digma-ai/OpenTelemetry.Instrumentation.Digma). More guides will be updated soon.
+
+That's it! As you start using you application and accumulating trace data, Digma will start showing insights in the IDE sidepane.
+
+## Do you have any example applications I can clone?
+
+We have a few listed here, we are working on adding more!
+
+* [DotNet Sample Application](https://github.com/digma-ai/otel-sample-application-dotnet)
+* [Django Sample Application](https://github.com/digma-ai/otel-sample-django-application)
+* [FastAPI Sample Application](https://github.com/doppleware/gringotts-vault-api)
+
 ## How can I learn more about Digma?
 
-We started publishing some more detailed blog posts explaining what we are trying to accomplish:
+We started publishing some more detailed blog posts explaining what we are trying to accomplish. Here are some examples:
 
 [CI-CD-CF The Devops Toolchain Missing Link](https://levelup.gitconnected.com/ci-cd-cf-the-devops-toolchains-missing-link-b5c88caf6282)
 
-[Breaking the Fourth Wall in Coding](https://levelup.gitconnected.com/breaking-the-fourth-wall-in-coding-189055955c85)
-
 [You're never done. By definition.](https://betterprogramming.pub/youre-never-done-by-definition-c04ac77c616b)
+
+[The Observant Developer](https://betterprogramming.pub/the-observant-developer-part-1-1939d53fd5a4)
 
 
 ### :tada: Join our Beta waitlist!
