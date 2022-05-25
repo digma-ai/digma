@@ -79,7 +79,7 @@ Digma is not yet released but you can already download and play around with it. 
 curl https://raw.githubusercontent.com/digma-ai/digma/main/docker/docker-compose.yml --output docker-compose.yml
 docker compose up -d
 ```
-3. Add 1-2 lines of code to add Digma to your OTEL exporters, Digma also adds a few attributes to your spans to align them with code locations. 
+3. Add 1-2 lines of code to instrument Digma. If you're not yet using OpenTelemetry, we've included a few helper methods to quickly set up both.
 You can find detailed instructions for [Python](https://github.com/digma-ai/opentelemetry-instrumentation-digma), [Django](https://github.com/digma-ai/opentelemetry-instrumentation-digma-django) and [.NET](https://github.com/digma-ai/OpenTelemetry.Instrumentation.Digma). More guides will be updated soon.
 
 That's it! As you start using you application and accumulating trace data, Digma will start showing insights in the IDE sidepane.
