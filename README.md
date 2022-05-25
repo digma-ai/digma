@@ -77,7 +77,7 @@ Digma is not yet released but you can already download and play around with it. 
 2. Start the Digma backend locally via the Docker Compose file included [here](https://github.com/digma-ai/digma/blob/main/docker/docker-compose.yml).
 ```bash
 curl https://raw.githubusercontent.com/digma-ai/digma/main/docker/docker-compose.yml --output docker-compose.yml
-docker compose up
+docker compose up -d
 ```
 3. Add 1-2 lines of code to add Digma to your OTEL exporters, Digma also adds a few attributes to your spans to align them with code locations. 
 You can find detailed instructions for [Python](https://github.com/digma-ai/opentelemetry-instrumentation-digma), [Django](https://github.com/digma-ai/opentelemetry-instrumentation-digma-django) and [.NET](https://github.com/digma-ai/OpenTelemetry.Instrumentation.Digma). More guides will be updated soon.
