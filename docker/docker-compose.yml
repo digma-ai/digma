@@ -1,0 +1,93 @@
+version: '3.6'
+services:
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq/
+      - rabbitmq_log:/var/log/rabbitmq/
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
+  postgres:
+    image: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+  redis:
+    image: redis:alpine
+    volumes:
+      - redis_data:/data
+  influxdb:
+    image: influxdb:latest
+    volumes:
+      - influxdb_data:/var/lib/influxdb2
+      - influxdb_config:/etc/influxdb2
+    environment:
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=${INFLUXDB_USERNAME:-admin}
+      - DOCKER_INFLUXDB_INIT_PASSWORD=${INFLUXDB_PASSWORD:-12345678}
+      - DOCKER_INFLUXDB_INIT_ORG=${INFLUXDB_ORG:-digma}
+      - DOCKER_INFLUXDB_INIT_BUCKET=${INFLUXDB_BUCKET:-errors}
+      - DOCKER_INFLUXDB_INIT_RETENTION=${INFLUXDB_BUCKET_RETENTION:-24w}
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=${INFLUXDB_ADMIN_TOKEN:-dc61908e-05bc-411a-9fe2-e3356b8dc7c0}
+  digma-collector-api:
+    image: digmatic/digma-collector
+    ports:
+      - "5049:5049"
+      - "5050:5050"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT:-Development}
+      - CacheSettings__RedisConnection=${REDIS_CONNECTION:-redis}
+      - ConnectionStrings__Postgres=Server=${POSTGRES_SERVER:-postgres};Port=${POSTGRES_SERVER_PORT:-5432};Database=digma_analytics;User Id=${POSTGRES_USER:-postgres};Password=${POSTGRES_PWD:-postgres};
+      - influx2__Url=http://${INFLUXDB_URL:-influxdb}:8086
+      - RabbitMq__Host=${RabbitMq_Host:-rabbitmq}
+      - RabbitMq__Username=${RabbitMq_Username:-admin}
+      - RabbitMq__Password=${RabbitMq_Password:-admin}
+      - OtlpExporterUrl=
+    depends_on:
+      - redis
+      - influxdb
+      - rabbitmq
+  digma-plugin-api:
+    image: digmatic/digma-plugin-api
+    ports:
+      - "5051:5051"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT:-Development}
+      - CacheSettings__RedisConnection=${REDIS_CONNECTION:-redis}
+      - influx2__Url=http://${INFLUXDB_URL:-influxdb}:8086
+      - AnalyticsUrl=http://${ANALYTICS_URL:-digma-analytics}:5052
+      - OtlpExporterUrl=
+    depends_on:
+      - redis
+      - influxdb
+  digma-analytics:
+    image: digmatic/digma-analytics
+    environment:
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT:-Development}
+      - influx2__Url=http://${INFLUXDB_URL:-influxdb}:8086
+      - ConnectionStrings__Postgres=Server=${POSTGRES_SERVER:-postgres};Port=${POSTGRES_SERVER_PORT:-5432};Database=digma_analytics;User Id=${POSTGRES_USER:-postgres};Password=${POSTGRES_PWD:-postgres};
+      - RabbitMq__Host=${RabbitMq_Host:-rabbitmq}
+      - RabbitMq__Username=${RabbitMq_Username:-admin}
+      - RabbitMq__Password=${RabbitMq_Password:-admin}
+      - CacheSettings__RedisConnection=${REDIS_CONNECTION:-redis}
+      - OtlpExporterUrl=
+    depends_on:
+      - influxdb
+      - postgres
+      - rabbitmq
+
+volumes:
+  rabbitmq_data:
+  rabbitmq_log:
+  postgres_data:
+  redis_data:
+  influxdb_data:
+  influxdb_config:
+    
+networks:
+  default:
+    name: tracing-network
