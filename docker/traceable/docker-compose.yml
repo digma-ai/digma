@@ -8,7 +8,7 @@ services:
     environment:
       - RABBITMQ_DEFAULT_USER=admin
       - RABBITMQ_DEFAULT_PASS=admin
-
+      
   postgres:
     image: postgres
     volumes:
@@ -43,6 +43,7 @@ services:
       - "5049:5049"
       - "5050:5050"
     environment:
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT:-Development}
       - CacheSettings__RedisConnection=${REDIS_CONNECTION:-redis}
       - ConnectionStrings__Postgres=Server=${POSTGRES_SERVER:-postgres};Port=${POSTGRES_SERVER_PORT:-5432};Database=digma_analytics;User Id=${POSTGRES_USER:-postgres};Password=${POSTGRES_PWD:-postgres};
       - influx2__Url=http://${INFLUXDB_URL:-influxdb}:8086
@@ -59,6 +60,7 @@ services:
     ports:
       - "5051:5051"
     environment:
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT:-Development}
       - CacheSettings__RedisConnection=${REDIS_CONNECTION:-redis}
       - influx2__Url=http://${INFLUXDB_URL:-influxdb}:8086
       - AnalyticsUrl=http://${ANALYTICS_URL:-digma-analytics}:5052
@@ -66,6 +68,7 @@ services:
   digma-analytics:
     image: digmatic/digma-analytics
     environment:
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT:-Development}
       - influx2__Url=http://${INFLUXDB_URL:-influxdb}:8086
       - ConnectionStrings__Postgres=Server=${POSTGRES_SERVER:-postgres};Port=${POSTGRES_SERVER_PORT:-5432};Database=digma_analytics;User Id=${POSTGRES_USER:-postgres};Password=${POSTGRES_PWD:-postgres};
       - RabbitMq__Host=${RabbitMq_Host:-rabbitmq}
@@ -77,6 +80,80 @@ services:
       - postgres
       - rabbitmq
 
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    container_name: jaeger
+    ports:
+      - "16686:16686"
+      - "14250"
+      - "0.0.0.0:14268:14268"
+
+  collector:
+    container_name: otel-collector
+    image: otel/opentelemetry-collector:0.48.0
+    command: ["--config=/otel-local-config.yaml"]
+    volumes:
+      - ./collector-config.yaml:/otel-local-config.yaml
+    ports:
+      #- "0.0.0.0:8889:8889"   # Prometheus exporter metrics
+      - "0.0.0.0:4317:4317" # OTLP receiver
+    depends_on:
+      - jaeger
+    environment:
+      - OTLP_EXPORTER_DIGMA_COLLECTOR_API=host.docker.internal:5060
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  apm-server:
+    container_name: elastic-apm-server
+    image: 'docker.elastic.co/apm/apm-server:7.13.0'
+    cap_add:
+      - CHOWN
+      - DAC_OVERRIDE
+      - SETGID
+      - SETUID
+    cap_drop:
+      - ALL
+    ports:
+      - '8200:8200'
+    command: |
+      apm-server -e
+        -E apm-server.rum.enabled=true
+        -E setup.kibana.host=kibana:5601
+        -E setup.template.settings.index.number_of_replicas=0
+        -E apm-server.kibana.enabled=true
+        -E apm-server.kibana.host=kibana:5601
+        -E output.elasticsearch.hosts=["elasticsearch:9200"]
+    healthcheck:
+      interval: 10s
+      retries: 12
+      test: >-
+        curl --write-out 'HTTP %{http_code}' --fail --silent --output /dev/null http://elasticsearch:8200/
+
+  elasticsearch:
+    container_name: elasticsearch
+    image: 'docker.elastic.co/elasticsearch/elasticsearch:7.13.0'
+    ports:
+      - '9200:9200'
+    volumes:
+      - 'elasticsearch-data:/usr/share/elasticsearch/data'
+    environment:
+      - xpack.monitoring.enabled=true
+      - xpack.watcher.enabled=false
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+      - discovery.type=single-node
+
+  kibana:
+    container_name: kibana
+    image: 'docker.elastic.co/kibana/kibana:7.13.0'
+    ports:
+      - '5601:5601'
+    depends_on:
+      - elasticsearch
+    environment:
+      - 'ELASTICSEARCH_URL=http://localhost:9200'
+      - xpack.apm.enabled=false
+
 volumes:
   rabbitmq_data:
   rabbitmq_log:
@@ -84,6 +161,7 @@ volumes:
   redis_data:
   influxdb_data:
   influxdb_config:
+  elasticsearch-data: null
     
 networks:
   default:

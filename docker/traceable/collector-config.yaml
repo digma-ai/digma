@@ -29,7 +29,7 @@ service:
   pipelines:
     traces:
       receivers: [otlp]
-      exporters: [jaeger,otlp/digma,otlp/elastic]
+      exporters: [jaeger,otlp/elastic]
       processors: [batch]
     metrics:
       receivers: [otlp]
