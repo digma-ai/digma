@@ -90,4 +90,4 @@ volumes:
     
 networks:
   default:
-    name: tracing-network
+    name: digma-network
