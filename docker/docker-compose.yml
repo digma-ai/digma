@@ -61,9 +61,6 @@ services:
       - influx2__Url=http://${INFLUXDB_URL:-influxdb}:8086
       - AnalyticsUrl=http://${ANALYTICS_URL:-digma-analytics}:5052
       - OtlpExporterUrl=
-    depends_on:
-      - redis
-      - influxdb
   digma-analytics:
     image: digmatic/digma-analytics
     environment:
