@@ -113,11 +113,8 @@ services:
       - redis
 
   collector:
-    container_name: otel-collector
-    image: otel/opentelemetry-collector:0.48.0
+    image: digmatic/configured-otel-collector:latest
     command: ["--config=/otel-local-config.yaml"]
-    volumes:
-      - ./collector-config.yaml:/otel-local-config.yaml
     ports:
       #- "0.0.0.0:8889:8889"   # Prometheus exporter metrics
       - "0.0.0.0:4317:4317" # OTLP receiver
