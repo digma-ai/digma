@@ -8,7 +8,7 @@ services:
     environment:
       - RABBITMQ_DEFAULT_USER=admin
       - RABBITMQ_DEFAULT_PASS=admin
-      
+
   postgres:
     image: postgres
     volumes:
@@ -17,6 +17,8 @@ services:
       - POSTGRES_NAME=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
 
   redis:
     image: redis:alpine
@@ -36,7 +38,9 @@ services:
       - DOCKER_INFLUXDB_INIT_BUCKET=${INFLUXDB_BUCKET:-errors}
       - DOCKER_INFLUXDB_INIT_RETENTION=${INFLUXDB_BUCKET_RETENTION:-24w}
       - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=${INFLUXDB_ADMIN_TOKEN:-dc61908e-05bc-411a-9fe2-e3356b8dc7c0}
-
+    ports:
+      - '8086:8086'
+      
   digma-collector-api:
     image: digmatic/digma-collector
     ports:
@@ -88,12 +92,29 @@ services:
       - "14250"
       - "0.0.0.0:14268:14268"
 
-  collector:
-    container_name: otel-collector
-    image: otel/opentelemetry-collector:0.48.0
-    command: ["--config=/otel-local-config.yaml"]
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "8080:80"
     volumes:
-      - ./collector-config.yaml:/otel-local-config.yaml
+      - pgadmin_data:/var/lib/pgadmin
+
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    environment:
+      - REDIS_HOSTS=${REDIS_CONNECTION:-redis}
+    ports:
+      - 8081:8081
+    depends_on:
+      - redis
+
+  collector:
+    image: digmatic/configured-otel-collector:latest
+    command: ["--config=/otel-local-config.yaml"]
     ports:
       #- "0.0.0.0:8889:8889"   # Prometheus exporter metrics
       - "0.0.0.0:4317:4317" # OTLP receiver
@@ -162,6 +183,7 @@ volumes:
   influxdb_data:
   influxdb_config:
   elasticsearch-data: null
+  pgadmin_data:
     
 networks:
   default:
