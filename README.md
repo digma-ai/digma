@@ -80,7 +80,14 @@ curl https://raw.githubusercontent.com/digma-ai/digma/main/docker/docker-compose
 docker compose up -d
 ```
 3. Add 1-2 lines of code to instrument Digma. If you're not yet using OpenTelemetry, we've included a few helper methods to quickly set up both.
-You can find detailed instructions for [Python](https://github.com/digma-ai/opentelemetry-instrumentation-digma), [Django](https://github.com/digma-ai/opentelemetry-instrumentation-digma-django) and [.NET](https://github.com/digma-ai/OpenTelemetry.Instrumentation.Digma). More guides will be updated soon.
+
+Follow the instructions based on your programming language and framework:
+
+* [Python](https://github.com/digma-ai/opentelemetry-instrumentation-digma), 
+* [.NET](https://github.com/digma-ai/OpenTelemetry.Instrumentation.Digma). 
+* [GOLang](https://github.com/digma-ai/otel-go-instrumentation).
+
+More guides will be updated soon.
 
 That's it! As you start using you application and accumulating trace data, Digma will start showing insights in the IDE sidepane.
 
