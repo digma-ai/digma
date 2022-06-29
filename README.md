@@ -17,6 +17,29 @@ There are many observability tools out there, they all take a very monitoring ce
 
 Our goal is to create an **open platform** for interpreting and analyzing the information collected via observability. Traces, logs, metrics are great! But additional effort is needed in order to take them that last mile into the development process.
 
+## Can you give me some examples?
+
+We understand that Digma may sound abstract :art: 
+We have created a short video that demonstrates what the product does which you can find here:
+
+<p align="center">
+
+[![Digma in practice](/images/video-s.png)](https://youtu.be/MnJIyVVqPDU "Digma in Practice")
+
+</p>
+
+In short, we can use existing logs, traces and metrics to answer questions such as:
+
+* Where is this function called from? Is it even used?
+* Is this a problematic area of the code? Where are my bottlenecks? 
+* What type of errors does this code raise in runtime? What issues are escalating? Which are affecting the end user?
+
+More importantly, all of these insights should be directly accessible in the IDE so we can use them while writing code.. 
+
+### :tada: Join our Beta waitlist!
+
+Visit our [beta invite page](https://www.digma.ai/) to be a part of our early access beta. 
+
 ## :bat: The Digma way: 
 
 So how do we do that? How do we make observability relevant? Digma has three main design principles that we think are key in unlocking the potential of observability data.
@@ -49,25 +72,6 @@ At the time of this writing, most of the data Digma collects is OpenTelemetry ba
 <p align="center">
 <img src="/images/digmaloveotel.png" width="500" height="200">
 </p>
-
-## Can you give me some examples?
-
-We understand that Digma may sound abstract :art: 
-We have created a short video that demonstrates what the product does which you can find here:
-
-<p align="center">
-
-[![Digma in practice](/images/video-s.png)](https://youtu.be/MnJIyVVqPDU "Digma in Practice")
-
-</p>
-
-In short, we can use existing logs, traces and metrics to answer questions such as:
-
-* Where is this function called from? Is it even used?
-* Is this a problematic area of the code? Where are my bottlenecks? 
-* What type of errors does this code raise in runtime? What issues are escalating? Which are affecting the end user?
-
-More importantly, all of these insights should be directly accessible in the IDE so we can use them while writing code.. 
 
 ## Running Digma Locally 
 
@@ -112,10 +116,6 @@ We started publishing some more detailed blog posts explaining what we are tryin
 
 [The Observant Developer](https://betterprogramming.pub/the-observant-developer-part-1-1939d53fd5a4)
 
-
-### :tada: Join our Beta waitlist!
-
-Visit our [beta invite page](https://www.digma.ai/) to be a part of our early access beta. 
 
 ## How do I contribute or get involved, and are you guys even open-sourcing this?
 
