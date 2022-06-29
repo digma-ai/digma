@@ -11,11 +11,11 @@
 
 ## :man_technologist::woman_technologist:	 Digma is about *Developer Observability*
 
-We believe that understanding code, real-world requirements, and behavior is critical to making better software. Something that can be done only if we connect the dots between design time and runtime.
+We believe that understanding code, real-world requirements and behavior is critical to making better software. It empowers developers to own their code all the way to production. 
 
-There are many observability tools out there, they all take a very monitoring centric - 'live events capture' approach to observability. We feel they have managed to miss what developers care about when writing their code. 
+There are many observability tools out there, However, we feel they have managed to miss what developers care about when writing their code. Their focus is dashboards, whereas we think observability should be integrated into the dev process itself. 
 
-Our goal is to create an **open platform** for interpreting and analyzing the information collected via observability. Traces, logs, metrics are great! But additional effort is needed in order to take them that last mile into the development process.
+Our goal is to create an **open platform** for interpreting and analyzing the information collected via observability. Traces, logs, metrics are great! But additional effort is needed in order to take them that last mile and make them impactful.
 
 ## Can you give me some examples?
 
@@ -34,11 +34,11 @@ In short, we can use existing logs, traces and metrics to answer questions such 
 * Is this a problematic area of the code? Where are my bottlenecks? 
 * What type of errors does this code raise in runtime? What issues are escalating? Which are affecting the end user?
 
-More importantly, all of these insights should be directly accessible in the IDE so we can use them while writing code.. 
+More importantly, all of these insights should be directly accessible in the IDE so we can use them while coding.
 
 ### :tada: Join our Beta waitlist!
 
-Visit our [beta invite page](https://www.digma.ai/) to be a part of our early access beta. 
+If continuous feedback is something you'd like to try, please sign up for our beta relase [beta invite page](https://www.digma.ai/). 
 
 ## :bat: The Digma way: 
 
