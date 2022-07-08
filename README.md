@@ -24,7 +24,7 @@ We have created a short video that demonstrates what the product does which you 
 
 <p align="center">
 
-[![Digma in practice](/images/video-s.png)](https://youtu.be/MnJIyVVqPDU "Digma in Practice")
+[![Digma in practice](/images/video-s.png)](https://youtu.be/oXSpZ4Jrya8 "Digma in Practice")
 
 </p>
 
