@@ -31,7 +31,7 @@ If you're already using OpenTelemetry, awesome! We'll fit right into your stack.
 
 Install [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/) if you don't have it set up already.
 
-Run the following from termina/commmand line:
+Run the following from terminal/commmand line:
 
 Linux/MacOS
 ```bash
