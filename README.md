@@ -40,10 +40,7 @@ Then run: `docker compose up -d` to start the Digma backend.
 
 ### 3. Add a few lines of code to instrument Digma.
 
-* [Python](https://github.com/digma-ai/opentelemetry-instrumentation-digma), 
-* [.NET](https://github.com/digma-ai/OpenTelemetry.Instrumentation.Digma). 
-* [GOLang](https://github.com/digma-ai/otel-go-instrumentation).
-
+Check out these simple instructions for [Python](https://github.com/digma-ai/opentelemetry-instrumentation-digma), [.NET](https://github.com/digma-ai/OpenTelemetry.Instrumentation.Digma) and [GOLang](https://github.com/digma-ai/otel-go-instrumentation).
 
 **That's it!**  :tada:  As you start using you application and accumulating trace data, Digma will start showing insights in the IDE sidepane.
 
