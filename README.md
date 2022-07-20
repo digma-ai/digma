@@ -4,6 +4,7 @@
 <h1 align="center">
  Continuous Feedback for Developers
 </h1>
+
 <!-- Place this tag in your head or just before your close body tag. -->
 [![Medium Badge](https://img.shields.io/badge/Blog-black?style=flat&logo=medium&logoColor=white&link=https://medium.com/@roni-dover)](https://medium.com/@roni-dover)
 [![Twitter Badge](https://badgen.net/badge/icon/twitter?icon=twitter&label)](https://twitter.com/doppleware)
