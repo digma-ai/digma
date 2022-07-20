@@ -34,7 +34,7 @@ Run the following from terminal/commmand line:
 _Linux & MacOS:_ `curl https://get.digma.ai/  --output docker-compose.yml`  
 _Windows (PowerShell):_ `iwr https://get.digma.ai/  -outfile docker-compose.yml`
 
-Then run: `docker compose up -d` to start the Digma backend. (You'll need [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/) set up)
+Then run: `docker compose up -d` to start the Digma backend. (You'll need [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/) installed)
 
 ### 3. Add a few lines of code to instrument Digma.
 
