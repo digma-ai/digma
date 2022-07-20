@@ -51,14 +51,14 @@ docker compose up -d
 * [GOLang](https://github.com/digma-ai/otel-go-instrumentation).
 
 
-**That's it!** As you start using you application and accumulating trace data, Digma will start showing insights in the IDE sidepane.
+**That's it!**  :tada:  As you start using you application and accumulating trace data, Digma will start showing insights in the IDE sidepane.
 
 ### Once you're up and running:
-* ##### Consider :star: this repo! It helps us know you care!
+* #### Consider :star: this repo! It helps us know you care!
 * Having issues? Questions? Want to suggest new ideas or discuss Digma with us? Join the [Digma community](https://community.digma.ai)
-* Try one of the sample projects we've already set up with data. You can find sampels for [.NET](https://github.com/digma-ai/otel-sample-application-dotnet), [Golang](https://github.com/digma-ai/otel-sample-application-go) and [Python](https://github.com/doppleware/gringotts-vault-api) with more coming soon
+* Try one of the sample projects we've already set up with data. You can find samples for [.NET](https://github.com/digma-ai/otel-sample-application-dotnet), [Golang](https://github.com/digma-ai/otel-sample-application-go) and [Python](https://github.com/doppleware/gringotts-vault-api) with more coming soon
 
-##### :tada: Join the Digma Cloud waitlist! 
+### Join the Digma Cloud waitlist! 
 If continuous feedback is something you'd like to try but don't want to set up everything yourself, [sign up](https://www.digma.ai/) for Digma Cloud beta program. 
 
 ## What does Digma look like?
