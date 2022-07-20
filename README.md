@@ -38,7 +38,7 @@ Linux/MacOS
 curl https://raw.githubusercontent.com/digma-ai/digma/main/docker/docker-compose.yml --output docker-compose.yml
 docker compose up -d
 ```
-Windows:
+Windows (PowerShell):
 ```bash
 iwr https://raw.githubusercontent.com/digma-ai/digma/main/docker/docker-compose.yml -outfile docker-compose.yml
 docker compose up -d
