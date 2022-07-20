@@ -29,14 +29,12 @@ Get the Digma plugin from the vsCode [marketplace](https://marketplace.visualstu
 ### 2. Start the Digma backend locally via the Docker Compose file
 Already using OpenTelemetry? Awesome! We'll fit right into your stack. Otherwise - don't worry! everything you need is included in the quick setup.
 
-Install [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/) if you don't have it set up already.
-
 Run the following from terminal/commmand line:
 
 _Linux & MacOS:_ `curl https://raw.githubusercontent.com/digma-ai/digma/main/docker/docker-compose.yml --output docker-compose.yml`  
 _Windows (PowerShell):_ `iwr https://raw.githubusercontent.com/digma-ai/digma/main/docker/docker-compose.yml -outfile docker-compose.yml`
 
-Then run: `docker compose up -d` to start the Digma backend.
+Then run: `docker compose up -d` to start the Digma backend. (You'll need [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/) set up)
 
 ### 3. Add a few lines of code to instrument Digma.
 
