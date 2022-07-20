@@ -18,7 +18,7 @@ Digma makes observability relevant in dev, empowering developers to own their co
 
 ## :gear: How Digma works
 
-The Digma IDE plugin provides code-level insights related to performance, errors and usage, as your are making code changes. The insights are continually generated from your OpenTelemetry traces and metrics which are collected and analyzed by the Digma backend. 
+The Digma IDE plugin provides code-level insights related to performance, errors and usage, available as you are making code changes. The insights are continually generated from your OpenTelemetry traces and metrics which are collected and analyzed by the Digma backend. 
 
 ## Getting started in three steps
 
