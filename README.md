@@ -27,7 +27,7 @@ The Digma IDE plugin provides code-level insights related to performance, errors
 Get the Digma plugin from the vsCode [marketplace](https://marketplace.visualstudio.com/items?itemName=digma.digma), additional IDEs support coming soon.
 
 ### 2. Start the Digma backend locally via the Docker Compose file
-If you're already using OpenTelemetry, awesome! We'll fit right into your stack. If you haven't had a chance yet to test out OTEL, don't worry! we've included everything you need in the quick setup process.
+Already using OpenTelemetry? Awesome! We'll fit right into your stack. Otherwise - don't worry! everything you need is included in the quick setup.
 
 Install [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/) if you don't have it set up already.
 
