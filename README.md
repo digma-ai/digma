@@ -33,16 +33,10 @@ Install [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https
 
 Run the following from terminal/commmand line:
 
-Linux/MacOS
-```bash
-curl https://raw.githubusercontent.com/digma-ai/digma/main/docker/docker-compose.yml --output docker-compose.yml
-docker compose up -d
-```
-Windows (PowerShell):
-```bash
-iwr https://raw.githubusercontent.com/digma-ai/digma/main/docker/docker-compose.yml -outfile docker-compose.yml
-docker compose up -d
-```
+_Linux & MacOS:_ `curl https://raw.githubusercontent.com/digma-ai/digma/main/docker/docker-compose.yml --output docker-compose.yml`  
+_Windows (PowerShell):_ `iwr https://raw.githubusercontent.com/digma-ai/digma/main/docker/docker-compose.yml -outfile docker-compose.yml`
+
+Then run: `docker compose up -d` to start the Digma backend.
 
 ### 3. Add a few lines of code to instrument Digma.
 
