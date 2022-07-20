@@ -1,23 +1,66 @@
+<p align="center">
+<img src="/images/bg.jpg" >
+</p>
+<h1 align="center">
+ Continuous Feedback for Developers
+</h1>
 <!-- Place this tag in your head or just before your close body tag. -->
 [![Medium Badge](https://img.shields.io/badge/Blog-black?style=flat&logo=medium&logoColor=white&link=https://medium.com/@roni-dover)](https://medium.com/@roni-dover)
 [![Twitter Badge](https://badgen.net/badge/icon/twitter?icon=twitter&label)](https://twitter.com/doppleware)
 [![made with love by digma-ai](https://img.shields.io/badge/made%20with%20%E2%99%A5%20by-digma-ff1414.svg?style=flat-square)](https://github.com/digma-ai)
 
-<p align="center">
-<img src="/images/bg.jpg" >
-</p>
+## :raised_eyebrow:	What is Digma
 
-# What is Digma and why are we building it?	
+Digma is a Continuous Feedback pipeline, comprised of an analysis backend and an IDE plugin with the goal of continually analyzing observability sources and providing feedback during development. 
 
-## :man_technologist::woman_technologist:	 Digma is about *Developer Observability*
+Digma makes observability relevant in dev, empowering developers to own their code all the way to production, improving code quality and preventing critical issues before they escalate. 
 
-We believe that understanding code, real-world requirements and behavior is critical to making better software. It empowers developers to own their code all the way to production. 
+## :gear: How Digma works
 
-There are many observability tools out there, However, we feel they have managed to miss what developers care about when writing their code. Their focus is dashboards, whereas we think observability should be integrated into the dev process itself. 
+The Digma IDE plugin provides code-level insights related to performance, errors and usage, as your are making code changes. The insights are continually generated from your OpenTelemetry traces and metrics which are collected and analyzed by the Digma backend. 
 
-Our goal is to create an **open platform** for interpreting and analyzing the information collected via observability. Traces, logs, metrics are great! But additional effort is needed in order to take them that last mile and make them impactful.
+## Getting started in three steps
 
-## Can you give me some examples?
+
+### 1. Install the IDE Plugin
+Get the Digma plugin from the vsCode [marketplace](https://marketplace.visualstudio.com/items?itemName=digma.digma), additional IDEs support coming soon.
+
+### 2. Start the Digma backend locally via the Docker Compose file
+If you're already using OpenTelemetry, awesome! We'll fit right into your stack. If you haven't had a chance yet to test out OTEL, don't worry! we've included everything you need in the quick setup process.
+
+Install [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/) if you don't have it set up already.
+
+Run the following from termina/commmand line:
+
+Linux/MacOS
+```bash
+curl https://raw.githubusercontent.com/digma-ai/digma/main/docker/docker-compose.yml --output docker-compose.yml
+docker compose up -d
+```
+Windows:
+```bash
+iwr https://raw.githubusercontent.com/digma-ai/digma/main/docker/docker-compose.yml -outfile docker-compose.yml
+docker compose up -d
+```
+
+### 3. Add a few lines of code to instrument Digma.
+
+* [Python](https://github.com/digma-ai/opentelemetry-instrumentation-digma), 
+* [.NET](https://github.com/digma-ai/OpenTelemetry.Instrumentation.Digma). 
+* [GOLang](https://github.com/digma-ai/otel-go-instrumentation).
+
+
+**That's it!** As you start using you application and accumulating trace data, Digma will start showing insights in the IDE sidepane.
+
+### Once you're up and running:
+* ##### Consider :star: this repo! It helps us know you care!
+* Having issues? Questions? Want to suggest new ideas or discuss Digma with us? Join the [Digma community](https://community.digma.ai)
+* Try one of the sample projects we've already set up with data. You can find sampels for [.NET](https://github.com/digma-ai/otel-sample-application-dotnet), [Golang](https://github.com/digma-ai/otel-sample-application-go) and [Python](https://github.com/doppleware/gringotts-vault-api) with more coming soon
+
+##### :tada: Join the Digma Cloud waitlist! 
+If continuous feedback is something you'd like to try but don't want to set up everything yourself, [sign up](https://www.digma.ai/) for Digma Cloud beta program. 
+
+## What does Digma look like?
 
 We understand that Digma may sound abstract :art: 
 We have created a short video that demonstrates what the product does which you can find here:
@@ -34,33 +77,17 @@ In short, we can use existing logs, traces and metrics to answer questions such 
 * Is this a problematic area of the code? Where are my bottlenecks? 
 * What type of errors does this code raise in runtime? What issues are escalating? Which are affecting the end user?
 
-More importantly, all of these insights should be directly accessible in the IDE so we can use them while coding.
-
-### :tada: Join our Beta waitlist!
-
-If continuous feedback is something you'd like to try, please sign up for our beta relase [beta invite page](https://www.digma.ai/). 
-
-## :bat: The Digma way: 
-
-So how do we do that? How do we make observability relevant? Digma has three main design principles that we think are key in unlocking the potential of observability data.
-
-
-> ###### **Code Insights and analytics** *over* Raw data
-
-Because, if it takes time and manual work to check, aggregate, correlate, and understand the significance of raw logs and traces, you'll probably not do it a lot :beach_umbrella:	
-
-> ###### **Proactive** *over* Reactive
-
-Otherwise you won't know what to look for unless its already on  :fire:
-
-> ###### **Integrated** *over* external
-
-Because context switching is already an issue. Going back and forth between dashboards and charts is guaranteed to slow you down. 
-## :gear: How does Digma work?
-
-It is a pipeline. A continuous feedback pipeline that injects data from your observability :telescope: sources and generates feedback.
+More importantly, all of these insights should be directly accessible in the IDE so we can use them while coding. 
 
 ![Digma HL Architecture](/images/architecture_light.png#gh-light-mode-only)![Digma HL Architecture](/images/architecture_dark.png#gh-dark-mode-only)
+
+## The story behind Digma: :man_technologist::woman_technologist:
+
+We believe that understanding code, real-world requirements and behavior is critical to making better software. It empowers developers to own their code all the way to production. 
+
+There are many observability tools out there, However, we feel they have managed to miss what developers care about when writing their code. Their focus is dashboards, whereas we think observability should be integrated into the dev process itself. 
+
+Our goal is to create an **open platform** for interpreting and analyzing the information collected via observability. Traces, logs, metrics are great! But additional effort is needed in order to take them that last mile and make them impactful.
 
 
 ## How are you different from...
@@ -72,39 +99,6 @@ At the time of this writing, most of the data Digma collects is OpenTelemetry ba
 <p align="center">
 <img src="/images/digmaloveotel.png" width="500" height="200">
 </p>
-
-## Running Digma Locally 
-
-Digma is not yet released but you can already download and play around with it.  There are three steps to get Digma up and running:
-
-1. Install the IDE Plugin from the [marketplace](https://marketplace.visualstudio.com/items?itemName=digma.digma), as of now vscode is supported but other IDEs plugin are in progress
-2. Start the Digma backend locally via the Docker Compose file included [here](https://github.com/digma-ai/digma/blob/main/docker/docker-compose.yml).
-```bash
-curl https://raw.githubusercontent.com/digma-ai/digma/main/docker/docker-compose.yml --output docker-compose.yml
-docker compose up -d
-```
-3. Add 1-2 lines of code to instrument Digma. If you're not yet using OpenTelemetry, we've included a few helper methods to quickly set up both.
-
-Follow the instructions based on your programming language and framework:
-
-* [Python](https://github.com/digma-ai/opentelemetry-instrumentation-digma), 
-* [.NET](https://github.com/digma-ai/OpenTelemetry.Instrumentation.Digma). 
-* [GOLang](https://github.com/digma-ai/otel-go-instrumentation).
-
-More guides will be updated soon.
-
-That's it! As you start using you application and accumulating trace data, Digma will start showing insights in the IDE sidepane.
-
-<img width="485" alt="image" src="https://user-images.githubusercontent.com/93863/170363819-8343fc49-3791-4c9b-afee-a4af9d55e11d.png">
-
-
-## Do you have any example applications I can clone?
-
-We have a few listed here, we are working on adding more!
-
-* [DotNet Sample Application](https://github.com/digma-ai/otel-sample-application-dotnet)
-* [Django Sample Application](https://github.com/digma-ai/otel-sample-django-application)
-* [FastAPI Sample Application](https://github.com/doppleware/gringotts-vault-api)
 
 ## How can I learn more about Digma?
 
@@ -121,19 +115,6 @@ We started publishing some more detailed blog posts explaining what we are tryin
 
 We are committed to making Digma an Open Source platform. However, we are just getting started, and some of the code is not yet finalized enough yet to accept contributors. Currently we've made our [vscode plugin repo](https://github.com/digma-ai/digma-vscode-plugin)
 public with an MIT license. We'll continue to add the additional repos as they become formalized enough to start working on them jointly.
-
-## ⏲️ In the meantime...
-### Consider :star: this repo! It helps us know you care!
-
-### Join our community :classical_building:	
-
-We are still debating where we want to host our community and which platform to use. In the meanwhile, if you want to get involved in the discussion please message us at community@digma.ai and we'll be happy to include you in some of our early discussion forums.
-
-### Join as a contributor :octocat:	
-
-If you are interested in being a contributor at this time, drop us a line!
-We'll definitely be interested in talking to you and see how to get you more involved!
-
 
 ## FAQ
 
