@@ -24,7 +24,7 @@ The Digma IDE plugin provides code-level insights related to performance, errors
 
 
 ### 1. Install the IDE Plugin
-Get the Digma plugin from the vsCode [marketplace](https://marketplace.visualstudio.com/items?itemName=digma.digma), additional IDEs support coming soon.
+Get the Digma plugin from the vscode [marketplace](https://marketplace.visualstudio.com/items?itemName=digma.digma), or from the Jetbrains [marketplace](https://plugins.jetbrains.com/plugin/19470-digma-continuous-feedback) for Rider. Additional IDEs support coming soon.
 
 ### 2. Start the Digma backend locally via the Docker Compose file
 Already using OpenTelemetry? Awesome! We'll fit right into your stack. Otherwise - don't worry! everything you need is included in the quick setup.
