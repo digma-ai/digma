@@ -10,6 +10,12 @@
 [![Twitter Badge](https://badgen.net/badge/icon/twitter?icon=twitter&label)](https://twitter.com/doppleware)
 [![made with love by digma-ai](https://img.shields.io/badge/made%20with%20%E2%99%A5%20by-digma-ff1414.svg?style=flat-square)](https://github.com/digma-ai)
 
+<p align="center">
+  <a href="https://bit.ly/3bKtdxU" target="_blank">
+   <img src="https://img.shields.io/badge/Slack-4A154B?logo=slack&color=black&logoColor=white&style=for-the-badge alt="Join our Slack!" width="80" height="30">
+  </a> 
+</p>
+
 ## :raised_eyebrow:	What is Digma
 
 Digma is a Continuous Feedback pipeline, comprised of an analysis backend and an IDE plugin with the goal of continually analyzing observability sources and providing feedback during development. 
