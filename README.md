@@ -37,7 +37,7 @@ Already using OpenTelemetry? Awesome! We'll fit right into your stack. Otherwise
 
 Run the following from terminal/commmand line:
 
-_Linux & MacOS:_ `curl https://get.digma.ai/  --output docker-compose.yml`  
+_Linux & MacOS:_ `curl -L https://get.digma.ai/  --output docker-compose.yml`  
 _Windows (PowerShell):_ `iwr https://get.digma.ai/  -outfile docker-compose.yml`
 
 Then run: `docker compose up -d` to start the Digma backend. (You'll need [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/) installed)
