@@ -1,8 +1,8 @@
-<p align="center">
-<img src="/images/bg.jpg" >
+<p style="text-align: center;">
+  <img src="/images/bg.jpg" >
 </p>
-<h1 align="center">
- Continuous Feedback for Developers
+<h1 style="text-align: center;">
+  Continuous Feedback for Developers
 </h1>
 
 <!-- Place this tag in your head or just before your close body tag. -->
@@ -10,7 +10,7 @@
 [![Twitter Badge](https://badgen.net/badge/icon/twitter?icon=twitter&label)](https://twitter.com/doppleware)
 [![made with love by digma-ai](https://img.shields.io/badge/made%20with%20%E2%99%A5%20by-digma-ff1414.svg?style=flat-square)](https://github.com/digma-ai)
 
-<p align="center">
+<p style="text-align: center;">
   <a href="https://bit.ly/3bKtdxU" target="_blank">
    <img src="https://img.shields.io/badge/Slack-4A154B?logo=slack&color=black&logoColor=white&style=for-the-badge alt="Join our Slack!" width="80" height="30">
   </a> 
@@ -61,7 +61,7 @@ If continuous feedback is something you'd like to try but don't want to set up e
 We understand that Digma may sound abstract :art: 
 We have created a short video that demonstrates what the product does which you can find here:
 
-<p align="center">
+<p style="text-align: center;">
 
 [![Digma in practice](/images/video-s.png)](https://youtu.be/oXSpZ4Jrya8 "Digma in Practice")
 
@@ -92,7 +92,7 @@ Well we don't compete with any tool existing today because... There isn't any to
 
 At the time of this writing, most of the data Digma collects is OpenTelemetry based. In the future we will definitely be able to ingest data from other technologies as well such as eBPF or even CloudWatch.
 
-<p align="center">
+<p style="text-align: center;">
 <img src="/images/digmaloveotel.png" width="500" height="200">
 </p>
 
@@ -119,9 +119,7 @@ public with an MIT license. We'll continue to add the additional repos as they b
 * **Can I use Digma right now?** We haven't opened the flood gates just yet, but you are welcome to sign on to our beta program (via [this link](https://wwww.digma.ai)) or drop us a line if you want to be a part of the alpha.
 * **Which platforms/stacks do you currently support?** We have a limited set of language specific components, but, for the sake of focus, we currently support [**.NET**](https://dotnet.microsoft.com/en-us/), [**GoLang**](https://go.dev/) and [**Python**](https://www.python.org/) over [**Visual Studio Code**](https://code.visualstudio.com/). Over the next month, we'll add [**Jetbrains IDEs**](https://www.jetbrains.com/) and [NodeJS](https://nodejs.org/en/) which are already in progress. If you're using other stacks you wish to see supported, please sign on to the beta and fill our survey - we're definitely taking your responses into consideration.
 
-<br>
-
-<p align="center">
+<p style="text-align: center; margin-top: 2em;">
 <img src="/images/digma_logo_wingz.png" width="400" height="486">
 </p>
 
