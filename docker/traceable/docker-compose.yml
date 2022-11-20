@@ -1,7 +1,7 @@
 version: '3.6'
 services:
   rabbitmq:
-    image: rabbitmq:3-management-alpine
+    image: rabbitmq:3.11.2-management-alpine
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq/
       - rabbitmq_log:/var/log/rabbitmq/
@@ -10,7 +10,7 @@ services:
       - RABBITMQ_DEFAULT_PASS=admin
 
   postgres:
-    image: postgres
+    image: postgres:14.5
     volumes:
       - postgres_data:/var/lib/postgresql/data
     environment:
@@ -21,12 +21,12 @@ services:
       - "5432:5432"
 
   redis:
-    image: redis:alpine
+    image: redis:7.0.5-alpine
     volumes:
       - redis_data:/data
 
   influxdb:
-    image: influxdb:latest
+    image: influxdb:2.5.0
     volumes:
       - influxdb_data:/var/lib/influxdb2
       - influxdb_config:/etc/influxdb2
