@@ -79,6 +79,15 @@ services:
       - postgres
       - rabbitmq
 
+  # collects OTLP traces (on default port 4317) and forward them to 5050 (Digma Collector)
+  configured-otel-collector:
+    image: digmatic/configured-otel-collector:latest
+    command: ["--config=/otel-local-config.yaml"]
+    ports:
+      - "0.0.0.0:4317:4317" # OTLP receiver
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
 volumes:
   rabbitmq_data:
   rabbitmq_log:
