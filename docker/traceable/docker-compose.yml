@@ -85,7 +85,7 @@ services:
       - rabbitmq
 
   jaeger:
-    image: jaegertracing/all-in-one:latest
+    image: jaegertracing/all-in-one:1.38.1
     container_name: jaeger
     ports:
       - "16686:16686"
@@ -127,7 +127,7 @@ services:
 
   apm-server:
     container_name: elastic-apm-server
-    image: 'docker.elastic.co/apm/apm-server:7.13.0'
+    image: 'docker.elastic.co/apm/apm-server:7.17.7'
     cap_add:
       - CHOWN
       - DAC_OVERRIDE
@@ -153,7 +153,7 @@ services:
 
   elasticsearch:
     container_name: elasticsearch
-    image: 'docker.elastic.co/elasticsearch/elasticsearch:7.13.0'
+    image: 'docker.elastic.co/elasticsearch/elasticsearch:7.17.7'
     ports:
       - '9200:9200'
     volumes:
@@ -166,7 +166,7 @@ services:
 
   kibana:
     container_name: kibana
-    image: 'docker.elastic.co/kibana/kibana:7.13.0'
+    image: 'docker.elastic.co/kibana/kibana:7.17.7'
     ports:
       - '5601:5601'
     depends_on:
