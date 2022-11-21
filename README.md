@@ -50,13 +50,14 @@ Check out these simple instructions for your tech stack:
 - [GOLang](https://github.com/digma-ai/otel-go-instrumentation)
 - [Node.js](https://github.com/digma-ai/otel-js-instrumentation)
 - [Express](https://github.com/digma-ai/digma-instrumentation-express) (also requires the Node.js instrumentation)
+- [Java](https://github.com/digma-ai/otel-java-instrumentation)
 
 **That's it!**  :tada:  As you start using your application and accumulating trace data, Digma will start showing insights in the IDE sidepane.
 
 ### Once you're up and running:
 * #### Consider :star: this repo! It helps us know you care!
 * Having issues? Questions? Want to suggest new ideas or discuss Digma with us? Join the [Digma community](https://community.digma.ai)
-* Try one of the sample projects we've already set up with data. You can find samples for [.NET](https://github.com/digma-ai/otel-sample-application-dotnet), [Golang](https://github.com/digma-ai/otel-sample-application-go), [Python](https://github.com/doppleware/gringotts-vault-api) and [JavaScript](https://github.com/digma-ai/otel-sample-application-js), with more coming soon.
+* Try one of the sample projects we've already set up with data. You can find samples for [.NET](https://github.com/digma-ai/otel-sample-application-dotnet), [Golang](https://github.com/digma-ai/otel-sample-application-go), [Python](https://github.com/doppleware/gringotts-vault-api), [JavaScript](https://github.com/digma-ai/otel-sample-application-js) and [Java with SpringBoot](https://github.com/digma-ai/java-sample-app-spring-petclinic) with more coming soon.
 
 ### Join the Digma Cloud waitlist! 
 If continuous feedback is something you'd like to try but don't want to set everything up yourself, [sign up](https://digma.ai/get-digma/#kt-layout-id_396c59-91) for the Digma Cloud beta program.
