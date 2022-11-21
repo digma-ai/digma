@@ -51,6 +51,7 @@ services:
       - RabbitMq__Host=${RabbitMq_Host:-rabbitmq}
       - RabbitMq__Username=${RabbitMq_Username:-admin}
       - RabbitMq__Password=${RabbitMq_Password:-admin}
+      - OtlpExporterUrl=""
     depends_on:
       - redis
       - influxdb
@@ -64,6 +65,7 @@ services:
       - CacheSettings__RedisConnection=${REDIS_CONNECTION:-redis}
       - influx2__Url=http://${INFLUXDB_URL:-influxdb}:8086
       - AnalyticsUrl=http://${ANALYTICS_URL:-digma-analytics}:5052
+      - OtlpExporterUrl=""
 
   digma-analytics:
     image: digmatic/digma-analytics
@@ -74,6 +76,39 @@ services:
       - RabbitMq__Username=${RabbitMq_Username:-admin}
       - RabbitMq__Password=${RabbitMq_Password:-admin}
       - CacheSettings__RedisConnection=${REDIS_CONNECTION:-redis}
+      - OtlpExporterUrl=""
+    depends_on:
+      - influxdb
+      - postgres
+      - rabbitmq
+  digma-measurement-analysis:
+    image: ${REGISTRY:-digma}/measurement-analysis:${TAG:-latest}
+    environment:
+      - influx2__Url=http://${INFLUXDB_URL:-influxdb}:8086
+      - RabbitMq__Host=${RabbitMq_Host:-rabbitmq}
+      - RabbitMq__Username=${RabbitMq_Username:-admin}
+      - RabbitMq__Password=${RabbitMq_Password:-admin}
+      - CacheSettings__RedisConnection=${REDIS_CONNECTION:-redis}
+      - OtlpExporterUrl=""
+    build:
+      context: .
+      dockerfile: Services/Analytics/Digma.Measurement.Analysis/Dockerfile
+    depends_on:
+      - influxdb
+      - rabbitmq
+  digma-insight-analysis:
+    image: ${REGISTRY:-digma}/insight-analysis:${TAG:-latest}
+    environment:
+      - influx2__Url=http://${INFLUXDB_URL:-influxdb}:8086
+      - ConnectionStrings__Postgres=Server=${POSTGRES_SERVER:-postgres};Port=${POSTGRES_SERVER_PORT:-5432};Database=digma_analytics;User Id=${POSTGRES_USER:-postgres};Password=${POSTGRES_PWD:-postgres};
+      - RabbitMq__Host=${RabbitMq_Host:-rabbitmq}
+      - RabbitMq__Username=${RabbitMq_Username:-admin}
+      - RabbitMq__Password=${RabbitMq_Password:-admin}
+      - CacheSettings__RedisConnection=${REDIS_CONNECTION:-redis}
+      - OtlpExporterUrl=""
+    build:
+      context: .
+      dockerfile: Services/Analytics/Digma.Insight.Analysis/Dockerfile
     depends_on:
       - influxdb
       - postgres
