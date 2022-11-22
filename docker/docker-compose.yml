@@ -40,7 +40,7 @@ services:
       - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=${INFLUXDB_ADMIN_TOKEN:-dc61908e-05bc-411a-9fe2-e3356b8dc7c0}
 
   digma-collector-api:
-    image: digmatic/digma-collector:0.2.9
+    image: digmatic/digma-collector:0.2.12
     ports:
       - "5049:5049"
       - "5050:5050"
@@ -58,7 +58,7 @@ services:
       - rabbitmq
 
   digma-plugin-api:
-    image: digmatic/digma-plugin-api:0.2.9
+    image: digmatic/digma-plugin-api:0.2.12
     ports:
       - "5051:5051"
     environment:
@@ -68,7 +68,7 @@ services:
       - OtlpExporterUrl=""
 
   digma-analytics:
-    image: digmatic/digma-analytics:0.2.9
+    image: digmatic/digma-analytics:0.2.12
     environment:
       - influx2__Url=http://${INFLUXDB_URL:-influxdb}:8086
       - ConnectionStrings__Postgres=Server=${POSTGRES_SERVER:-postgres};Port=${POSTGRES_SERVER_PORT:-5432};Database=digma_analytics;User Id=${POSTGRES_USER:-postgres};Password=${POSTGRES_PWD:-postgres};
@@ -82,7 +82,7 @@ services:
       - postgres
       - rabbitmq
   digma-measurement-analysis:
-    image: digmatic/digma-measurement-analysis:0.2.9
+    image: digmatic/digma-measurement-analysis:0.2.12
     environment:
       - influx2__Url=http://${INFLUXDB_URL:-influxdb}:8086
       - RabbitMq__Host=${RabbitMq_Host:-rabbitmq}
@@ -97,7 +97,7 @@ services:
       - influxdb
       - rabbitmq
   digma-insight-analysis:
-    image: digmatic/digma-insight-analysis:0.2.9
+    image: digmatic/digma-insight-analysis:0.2.12
     environment:
       - influx2__Url=http://${INFLUXDB_URL:-influxdb}:8086
       - ConnectionStrings__Postgres=Server=${POSTGRES_SERVER:-postgres};Port=${POSTGRES_SERVER_PORT:-5432};Database=digma_analytics;User Id=${POSTGRES_USER:-postgres};Password=${POSTGRES_PWD:-postgres};
