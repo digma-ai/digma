@@ -90,9 +90,6 @@ services:
       - RabbitMq__Password=${RabbitMq_Password:-admin}
       - CacheSettings__RedisConnection=${REDIS_CONNECTION:-redis}
       - OtlpExporterUrl=""
-    build:
-      context: .
-      dockerfile: Services/Analytics/Digma.Measurement.Analysis/Dockerfile
     depends_on:
       - influxdb
       - rabbitmq
@@ -106,9 +103,6 @@ services:
       - RabbitMq__Password=${RabbitMq_Password:-admin}
       - CacheSettings__RedisConnection=${REDIS_CONNECTION:-redis}
       - OtlpExporterUrl=""
-    build:
-      context: .
-      dockerfile: Services/Analytics/Digma.Insight.Analysis/Dockerfile
     depends_on:
       - influxdb
       - postgres
