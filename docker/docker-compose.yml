@@ -11,14 +11,14 @@ services:
 
   postgres:
     image: postgres:14.5
+    expose:
+      - "5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     environment:
       - POSTGRES_NAME=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-    ports:
-      - "5432:5432"
  
   redis:
     image: redis:7.0.5-alpine
@@ -27,6 +27,8 @@ services:
 
   influxdb:
     image: influxdb:2.5.0
+    expose:
+      - "8086"
     volumes:
       - influxdb_data:/var/lib/influxdb2
       - influxdb_config:/etc/influxdb2
@@ -42,7 +44,6 @@ services:
   digma-collector-api:
     image: digmatic/digma-collector:0.2.24
     ports:
-      - "5049:5049"
       - "5050:5050"
     environment:
       - CacheSettings__RedisConnection=${REDIS_CONNECTION:-redis}
@@ -84,6 +85,7 @@ services:
       - influxdb
       - postgres
       - rabbitmq
+
   digma-measurement-analysis:
     image: digmatic/digma-measurement-analysis:0.2.24
     environment:
@@ -97,6 +99,7 @@ services:
     depends_on:
       - influxdb
       - rabbitmq
+
   digma-insight-analysis:
     image: digmatic/digma-insight-analysis:0.2.24
     environment:

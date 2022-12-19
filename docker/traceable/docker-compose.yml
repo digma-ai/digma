@@ -11,14 +11,14 @@ services:
 
   postgres:
     image: postgres:14.5
+    expose:
+      - "5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     environment:
       - POSTGRES_NAME=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-    ports:
-      - "5432:5432"
 
   redis:
     image: redis:7.0.5-alpine
@@ -27,6 +27,8 @@ services:
 
   influxdb:
     image: influxdb:2.5.0
+    expose:
+      - "8086"
     volumes:
       - influxdb_data:/var/lib/influxdb2
       - influxdb_config:/etc/influxdb2
@@ -38,13 +40,10 @@ services:
       - DOCKER_INFLUXDB_INIT_BUCKET=${INFLUXDB_BUCKET:-errors}
       - DOCKER_INFLUXDB_INIT_RETENTION=${INFLUXDB_BUCKET_RETENTION:-24w}
       - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=${INFLUXDB_ADMIN_TOKEN:-dc61908e-05bc-411a-9fe2-e3356b8dc7c0}
-    ports:
-      - '8086:8086'
-      
+
   digma-collector-api:
     image: digmatic/digma-collector
     ports:
-      - "5049:5049"
       - "5050:5050"
     environment:
       - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT:-Development}
@@ -72,7 +71,7 @@ services:
   digma-analytics:
     image: digmatic/digma-analytics
     environment:
-      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT:-Development}
+      # - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT:-Development}
       - influx2__Url=http://${INFLUXDB_URL:-influxdb}:8086
       - ConnectionStrings__Postgres=Server=${POSTGRES_SERVER:-postgres};Port=${POSTGRES_SERVER_PORT:-5432};Database=digma_analytics;User Id=${POSTGRES_USER:-postgres};Password=${POSTGRES_PWD:-postgres};
       - RabbitMq__Host=${RabbitMq_Host:-rabbitmq}
@@ -84,11 +83,39 @@ services:
       - postgres
       - rabbitmq
 
+  digma-measurement-analysis:
+    image: digmatic/digma-measurement-analysis:0.2.15
+    environment:
+      - influx2__Url=http://${INFLUXDB_URL:-influxdb}:8086
+      - RabbitMq__Host=${RabbitMq_Host:-rabbitmq}
+      - RabbitMq__Username=${RabbitMq_Username:-admin}
+      - RabbitMq__Password=${RabbitMq_Password:-admin}
+      - CacheSettings__RedisConnection=${REDIS_CONNECTION:-redis}
+      - OtlpExporterUrl=""
+    depends_on:
+      - influxdb
+      - rabbitmq
+
+  digma-insight-analysis:
+    image: digmatic/digma-insight-analysis:0.2.15
+    environment:
+      - influx2__Url=http://${INFLUXDB_URL:-influxdb}:8086
+      - ConnectionStrings__Postgres=Server=${POSTGRES_SERVER:-postgres};Port=${POSTGRES_SERVER_PORT:-5432};Database=digma_analytics;User Id=${POSTGRES_USER:-postgres};Password=${POSTGRES_PWD:-postgres};
+      - RabbitMq__Host=${RabbitMq_Host:-rabbitmq}
+      - RabbitMq__Username=${RabbitMq_Username:-admin}
+      - RabbitMq__Password=${RabbitMq_Password:-admin}
+      - CacheSettings__RedisConnection=${REDIS_CONNECTION:-redis}
+      - OtlpExporterUrl=""
+    depends_on:
+      - influxdb
+      - postgres
+      - rabbitmq
+
   jaeger:
     image: jaegertracing/all-in-one:1.38.1
     container_name: jaeger
     ports:
-      - "16686:16686"
+      - "16686"
       - "14250"
       - "0.0.0.0:14268:14268"
 
@@ -99,16 +126,18 @@ services:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: admin
     ports:
-      - "8080:80"
+      - "80"
     volumes:
       - pgadmin_data:/var/lib/pgadmin
+    depends_on:
+      - postgres
 
   redis-commander:
     image: rediscommander/redis-commander:latest
     environment:
       - REDIS_HOSTS=${REDIS_CONNECTION:-redis}
     ports:
-      - 8081:8081
+      - "8081"
     depends_on:
       - redis
 
@@ -135,8 +164,8 @@ services:
       - SETUID
     cap_drop:
       - ALL
-    ports:
-      - '8200:8200'
+    # ports:
+    #   - '8200:8200'
     command: |
       apm-server -e
         -E apm-server.rum.enabled=true
@@ -154,8 +183,10 @@ services:
   elasticsearch:
     container_name: elasticsearch
     image: 'docker.elastic.co/elasticsearch/elasticsearch:7.17.7'
-    ports:
-      - '9200:9200'
+    expose:
+      - "9200"
+    # ports:
+    #   - '9200:9200'
     volumes:
       - 'elasticsearch-data:/usr/share/elasticsearch/data'
     environment:
@@ -168,7 +199,7 @@ services:
     container_name: kibana
     image: 'docker.elastic.co/kibana/kibana:7.17.7'
     ports:
-      - '5601:5601'
+      - "5601"
     depends_on:
       - elasticsearch
     environment:
