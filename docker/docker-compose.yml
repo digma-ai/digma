@@ -8,6 +8,7 @@ services:
     environment:
       - RABBITMQ_DEFAULT_USER=admin
       - RABBITMQ_DEFAULT_PASS=admin
+    restart: unless-stopped
 
   postgres:
     image: postgres:14.5
@@ -19,11 +20,13 @@ services:
       - POSTGRES_NAME=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+    restart: unless-stopped
  
   redis:
     image: redis:7.0.5-alpine
     volumes:
       - redis_data:/data
+    restart: unless-stopped
 
   influxdb:
     image: influxdb:2.5.0
@@ -40,6 +43,7 @@ services:
       - DOCKER_INFLUXDB_INIT_BUCKET=${INFLUXDB_BUCKET:-errors}
       - DOCKER_INFLUXDB_INIT_RETENTION=${INFLUXDB_BUCKET_RETENTION:-24w}
       - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=${INFLUXDB_ADMIN_TOKEN:-dc61908e-05bc-411a-9fe2-e3356b8dc7c0}
+    restart: unless-stopped
 
   digma-collector-api:
     image: digmatic/digma-collector:0.2.24
@@ -58,6 +62,7 @@ services:
       - redis
       - influxdb
       - rabbitmq
+    restart: unless-stopped
 
   digma-plugin-api:
     image: digmatic/digma-plugin-api:0.2.24
@@ -69,6 +74,7 @@ services:
       - AnalyticsUrl=http://${ANALYTICS_URL:-digma-analytics}:5052
       - OtlpExporterUrl=""
       - ApplicationVersion="0.2.24"
+    restart: unless-stopped
 
   digma-analytics:
     image: digmatic/digma-analytics:0.2.24
@@ -85,6 +91,7 @@ services:
       - influxdb
       - postgres
       - rabbitmq
+    restart: unless-stopped
 
   digma-measurement-analysis:
     image: digmatic/digma-measurement-analysis:0.2.24
@@ -99,6 +106,7 @@ services:
     depends_on:
       - influxdb
       - rabbitmq
+    restart: unless-stopped
 
   digma-insight-analysis:
     image: digmatic/digma-insight-analysis:0.2.24
@@ -115,6 +123,7 @@ services:
       - influxdb
       - postgres
       - rabbitmq
+    restart: unless-stopped
 
 volumes:
   rabbitmq_data:

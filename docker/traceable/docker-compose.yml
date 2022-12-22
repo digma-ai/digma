@@ -8,6 +8,7 @@ services:
     environment:
       - RABBITMQ_DEFAULT_USER=admin
       - RABBITMQ_DEFAULT_PASS=admin
+    restart: unless-stopped
 
   postgres:
     image: postgres:14.5
@@ -19,11 +20,13 @@ services:
       - POSTGRES_NAME=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+    restart: unless-stopped
 
   redis:
     image: redis:7.0.5-alpine
     volumes:
       - redis_data:/data
+    restart: unless-stopped
 
   influxdb:
     image: influxdb:2.5.0
@@ -40,6 +43,7 @@ services:
       - DOCKER_INFLUXDB_INIT_BUCKET=${INFLUXDB_BUCKET:-errors}
       - DOCKER_INFLUXDB_INIT_RETENTION=${INFLUXDB_BUCKET_RETENTION:-24w}
       - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=${INFLUXDB_ADMIN_TOKEN:-dc61908e-05bc-411a-9fe2-e3356b8dc7c0}
+    restart: unless-stopped
 
   digma-collector-api:
     image: digmatic/digma-collector
@@ -57,6 +61,7 @@ services:
       - redis
       - influxdb
       - rabbitmq
+    restart: unless-stopped
 
   digma-plugin-api:
     image: digmatic/digma-plugin-api
@@ -67,6 +72,7 @@ services:
       - CacheSettings__RedisConnection=${REDIS_CONNECTION:-redis}
       - influx2__Url=http://${INFLUXDB_URL:-influxdb}:8086
       - AnalyticsUrl=http://${ANALYTICS_URL:-digma-analytics}:5052
+    restart: unless-stopped
 
   digma-analytics:
     image: digmatic/digma-analytics
@@ -82,6 +88,7 @@ services:
       - influxdb
       - postgres
       - rabbitmq
+    restart: unless-stopped
 
   digma-measurement-analysis:
     image: digmatic/digma-measurement-analysis:0.2.15
@@ -95,6 +102,7 @@ services:
     depends_on:
       - influxdb
       - rabbitmq
+    restart: unless-stopped
 
   digma-insight-analysis:
     image: digmatic/digma-insight-analysis:0.2.15
@@ -110,6 +118,7 @@ services:
       - influxdb
       - postgres
       - rabbitmq
+    restart: unless-stopped
 
   jaeger:
     image: jaegertracing/all-in-one:1.38.1
@@ -118,10 +127,10 @@ services:
       - "16686"
       - "14250"
       - "0.0.0.0:14268:14268"
+    restart: unless-stopped
 
   pgadmin:
     image: dpage/pgadmin4
-    restart: unless-stopped
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: admin
@@ -131,6 +140,7 @@ services:
       - pgadmin_data:/var/lib/pgadmin
     depends_on:
       - postgres
+    restart: unless-stopped
 
   redis-commander:
     image: rediscommander/redis-commander:latest
@@ -140,6 +150,7 @@ services:
       - "8081"
     depends_on:
       - redis
+    restart: unless-stopped
 
   collector:
     image: digmatic/configured-otel-collector:latest
@@ -153,6 +164,7 @@ services:
       - OTLP_EXPORTER_DIGMA_COLLECTOR_API=host.docker.internal:5060
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    restart: unless-stopped
 
   apm-server:
     container_name: elastic-apm-server
@@ -179,6 +191,7 @@ services:
       retries: 12
       test: >-
         curl --write-out 'HTTP %{http_code}' --fail --silent --output /dev/null http://elasticsearch:8200/
+    restart: unless-stopped
 
   elasticsearch:
     container_name: elasticsearch
@@ -194,6 +207,7 @@ services:
       - xpack.watcher.enabled=false
       - ES_JAVA_OPTS=-Xms512m -Xmx512m
       - discovery.type=single-node
+    restart: unless-stopped
 
   kibana:
     container_name: kibana
@@ -205,6 +219,7 @@ services:
     environment:
       - 'ELASTICSEARCH_URL=http://localhost:9200'
       - xpack.apm.enabled=false
+    restart: unless-stopped
 
 volumes:
   rabbitmq_data:
