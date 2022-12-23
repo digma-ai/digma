@@ -60,7 +60,7 @@ Check out these simple instructions for your tech stack:
 * Try one of the sample projects we've already set up with data. You can find samples for [.NET](https://github.com/digma-ai/otel-sample-application-dotnet), [Golang](https://github.com/digma-ai/otel-sample-application-go), [Python](https://github.com/doppleware/gringotts-vault-api), [JavaScript](https://github.com/digma-ai/otel-sample-application-js) and [Java with SpringBoot](https://github.com/digma-ai/java-sample-app-spring-petclinic) with more coming soon.
 
 ### Join the Digma Cloud waitlist! 
-If continuous feedback is something you'd like to try but don't want to set everything up yourself, [sign up](https://digma.ai/get-digma/) for the Digma Cloud beta program.
+If continuous feedback is something you'd like to try but don't want to set everything up yourself, [sign up](https://digma.ai/get-digma/) and get Digma.
 
 ## What does Digma look like?
 
@@ -119,7 +119,7 @@ We are committed to making Digma an Open Source platform. However, we are just g
 
 * **Is this going to instrument my code and change it in creepy ways in production?** Absolutely not! We rely on the OpenTelemetry vanilla instrumentation with a few added attributes of our own. We leave your code untouched.
 * **Do I need to make code changes to use Digma?** If you're already using OpenTelemetry, you're good to go. If you are not yet using it, we should be a part of your stack if you're considering adding observability to your code!
-* **Can I use Digma right now?** We haven't opened the flood gates just yet, but you are welcome to [sign up for our beta program](https://wwww.digma.ai/get-digma/#sign_up) or drop us a line if you want to be a part of the alpha.
+* **Can I use Digma right now?** We haven't opened the flood gates just yet, but you are welcome to [sign up for our beta program](https://wwww.digma.ai/get-digma/) or drop us a line if you want to be a part of the alpha.
 * **Which platforms/stacks do you currently support?** We have a limited set of language specific components, but, for the sake of focus, we currently support [**.NET**](https://dotnet.microsoft.com/en-us/), [**GoLang**](https://go.dev/), [**Python**](https://www.python.org/) and [**Node.js**](https://nodejs.org/en/) (and [**Express**](https://expressjs.com/)) on [**Visual Studio Code**](https://code.visualstudio.com/). We also support the [**Rider IDE**](https://www.jetbrains.com/rider/) and support for the other [**Jetbrains IDEs**](https://www.jetbrains.com/) is already in progress. If you're using other stacks you wish to see supported, please sign up for the beta and fill out our survey - we're definitely taking your responses into consideration.
 
 <p style="text-align: center; margin-top: 2em;">
