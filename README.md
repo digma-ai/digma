@@ -60,7 +60,7 @@ Check out these simple instructions for your tech stack:
 * Try one of the sample projects we've already set up with data. You can find samples for [.NET](https://github.com/digma-ai/otel-sample-application-dotnet), [Golang](https://github.com/digma-ai/otel-sample-application-go), [Python](https://github.com/doppleware/gringotts-vault-api), [JavaScript](https://github.com/digma-ai/otel-sample-application-js) and [Java with SpringBoot](https://github.com/digma-ai/java-sample-app-spring-petclinic) with more coming soon.
 
 ### Join the Digma Cloud waitlist! 
-If continuous feedback is something you'd like to try but don't want to set everything up yourself, [sign up](https://digma.ai/get-digma/#kt-layout-id_396c59-91) for the Digma Cloud beta program.
+If continuous feedback is something you'd like to try but don't want to set everything up yourself, [sign up](https://digma.ai/get-digma/) for the Digma Cloud beta program.
 
 ## What does Digma look like?
 
