@@ -97,6 +97,7 @@ services:
     image: digmatic/digma-measurement-analysis:0.2.40
     environment:
       - influx2__Url=http://${INFLUXDB_URL:-influxdb}:8086
+      - ConnectionStrings__Postgres=Server=${POSTGRES_SERVER:-postgres};Port=${POSTGRES_SERVER_PORT:-5432};Database=digma_analytics;User Id=${POSTGRES_USER:-postgres};Password=${POSTGRES_PWD:-postgres};
       - RabbitMq__Host=${RabbitMq_Host:-rabbitmq}
       - RabbitMq__Username=${RabbitMq_Username:-admin}
       - RabbitMq__Password=${RabbitMq_Password:-admin}
@@ -105,6 +106,7 @@ services:
       - ApplicationVersion="0.2.40"
     depends_on:
       - influxdb
+      - postgres
       - rabbitmq
     restart: unless-stopped
 
