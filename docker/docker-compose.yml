@@ -21,6 +21,8 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     restart: unless-stopped
+    command: postgres -c 'max_connections=315'
+
 
   redis:
     image: redis:7.0.5-alpine
