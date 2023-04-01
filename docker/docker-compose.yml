@@ -11,7 +11,7 @@ services:
     restart: unless-stopped
 
   postgres:
-    image: postgres:15.1
+    image: postgres:15.2
     expose:
       - "5432"
     volumes:
@@ -25,13 +25,13 @@ services:
 
 
   redis:
-    image: redis:7.0.5-alpine
+    image: redis:7.0.9-alpine
     volumes:
       - redis_data:/data
     restart: unless-stopped
 
   influxdb:
-    image: influxdb:2.5.0
+    image: influxdb:2.6.1
     expose:
       - "8086"
     volumes:
@@ -45,8 +45,6 @@ services:
       - DOCKER_INFLUXDB_INIT_BUCKET=${INFLUXDB_BUCKET:-errors}
       - DOCKER_INFLUXDB_INIT_RETENTION=${INFLUXDB_BUCKET_RETENTION:-24w}
       - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=${INFLUXDB_ADMIN_TOKEN:-dc61908e-05bc-411a-9fe2-e3356b8dc7c0}
-      - INFLUXD_QUERY_CONCURRENCY=${INFLUXD_QUERY_CONCURRENCY:-15}
-      - INFLUXD_QUERY_QUEUE_SIZE=${INFLUXD_QUERY_QUEUE_SIZE:-50}
     restart: unless-stopped
 
   digma-collector-api:
