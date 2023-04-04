@@ -1,4 +1,4 @@
-version: '3.6'
+version: "3.6"
 services:
   rabbitmq:
     image: rabbitmq:3.11.2-management-alpine
@@ -21,8 +21,7 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     restart: unless-stopped
-    command: postgres -c 'max_connections=315'
-
+    command: postgres -c 'max_connections=315' -c 'shared_buffers=256MB'
 
   redis:
     image: redis:7.0.9-alpine
@@ -45,6 +44,8 @@ services:
       - DOCKER_INFLUXDB_INIT_BUCKET=${INFLUXDB_BUCKET:-errors}
       - DOCKER_INFLUXDB_INIT_RETENTION=${INFLUXDB_BUCKET_RETENTION:-24w}
       - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=${INFLUXDB_ADMIN_TOKEN:-dc61908e-05bc-411a-9fe2-e3356b8dc7c0}
+      - INFLUXD_QUERY_CONCURRENCY=15
+      - INFLUXD_QUERY_QUEUE_SIZE=200
     restart: unless-stopped
 
   digma-collector-api:
@@ -146,7 +147,7 @@ volumes:
   redis_data:
   influxdb_data:
   influxdb_config:
-    
+
 networks:
   default:
     name: digma-network
