@@ -51,7 +51,7 @@ services:
   jaeger:
     image: jaegertracing/all-in-one:1.44.0
     ports:
-      - "16686:16686"
+      - "17686:16686"
       - "5317:4317"
     command: |
       --query.additional-headers "Access-Control-Allow-Origin: *"
