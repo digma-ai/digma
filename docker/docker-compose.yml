@@ -48,6 +48,24 @@ services:
       - INFLUXD_QUERY_QUEUE_SIZE=200
     restart: unless-stopped
 
+  jaeger:
+    image: jaegertracing/all-in-one:1.44.0
+    ports:
+      - "17686:16686"
+      - "5317:4317"
+    command: |
+      --query.additional-headers "Access-Control-Allow-Origin: *"
+    volumes:
+      - "jaeger_data:/badger"
+    environment:
+      - SPAN_STORAGE_TYPE=badger
+      - COLLECTOR_OTLP_ENABLED=true
+      - BADGER_EPHEMERAL=false
+      - BADGER_DIRECTORY_VALUE=/badger/data
+      - BADGER_DIRECTORY_KEY=/badger/key
+      - BADGER_SPAN_STORE_TTL=336h0m0s
+    restart: unless-stopped
+
   digma-collector-api:
     image: digmatic/digma-collector:0.2.80
     ports:
@@ -90,6 +108,7 @@ services:
       - influxdb
       - postgres
     restart: unless-stopped
+
   digma-scheduler:
     image: digmatic/digma-scheduler:0.2.80
     environment:
@@ -106,6 +125,7 @@ services:
       - postgres
       - rabbitmq
     restart: unless-stopped
+
   digma-measurement-analysis:
     image: digmatic/digma-measurement-analysis:0.2.80
     environment:
@@ -121,6 +141,7 @@ services:
       - influxdb
       - postgres
       - rabbitmq
+      - jaeger
     restart: unless-stopped
 
   digma-insight-analysis:
@@ -138,6 +159,7 @@ services:
       - influxdb
       - postgres
       - rabbitmq
+      - jaeger
     restart: unless-stopped
 
 volumes:
@@ -147,6 +169,7 @@ volumes:
   redis_data:
   influxdb_data:
   influxdb_config:
+  jaeger_data:
 
 networks:
   default:
