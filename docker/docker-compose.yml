@@ -93,6 +93,7 @@ services:
       - CacheSettings__RedisConnection=${REDIS_CONNECTION:-redis}
       - AnalyticsUrl=http://${ANALYTICS_URL:-digma-analytics}:5052
       - OtlpExporterUrl=""
+      - BACKEND_DEPLOYMENT_TYPE=DockerCompose
       - ApplicationVersion="0.2.80"
     restart: unless-stopped
 
