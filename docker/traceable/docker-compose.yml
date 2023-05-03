@@ -101,7 +101,7 @@ services:
       - RabbitMq__Username=${RabbitMq_Username:-admin}
       - RabbitMq__Password=${RabbitMq_Password:-admin}
       - CacheSettings__RedisConnection=${REDIS_CONNECTION:-redis}
-      - OtlpExporterUrl=""
+      - OtlpExporterUrl=
     depends_on:
       - influxdb
       - rabbitmq
@@ -116,7 +116,7 @@ services:
       - RabbitMq__Username=${RabbitMq_Username:-admin}
       - RabbitMq__Password=${RabbitMq_Password:-admin}
       - CacheSettings__RedisConnection=${REDIS_CONNECTION:-redis}
-      - OtlpExporterUrl=""
+      - OtlpExporterUrl=
     depends_on:
       - influxdb
       - postgres

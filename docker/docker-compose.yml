@@ -77,8 +77,8 @@ services:
       - RabbitMq__Host=${RabbitMq_Host:-rabbitmq}
       - RabbitMq__Username=${RabbitMq_Username:-admin}
       - RabbitMq__Password=${RabbitMq_Password:-admin}
-      - OtlpExporterUrl=""
-      - ApplicationVersion="0.2.87"
+      - OtlpExporterUrl=
+      - ApplicationVersion=0.2.87
       - Jaeger__OtlpUrl=http://jaeger:4317
     depends_on:
       - redis
@@ -93,9 +93,9 @@ services:
     environment:
       - CacheSettings__RedisConnection=${REDIS_CONNECTION:-redis}
       - AnalyticsUrl=http://${ANALYTICS_URL:-digma-analytics}:5052
-      - OtlpExporterUrl=""
+      - OtlpExporterUrl=
       - BACKEND_DEPLOYMENT_TYPE=DockerCompose
-      - ApplicationVersion="0.2.87"
+      - ApplicationVersion=0.2.87
     restart: unless-stopped
 
   digma-analytics:
@@ -104,8 +104,8 @@ services:
       - influx2__Url=http://${INFLUXDB_URL:-influxdb}:8086
       - ConnectionStrings__Postgres=Server=${POSTGRES_SERVER:-postgres};Port=${POSTGRES_SERVER_PORT:-5432};Database=digma_analytics;User Id=${POSTGRES_USER:-postgres};Password=${POSTGRES_PWD:-postgres};
       - CacheSettings__RedisConnection=${REDIS_CONNECTION:-redis}
-      - OtlpExporterUrl=""
-      - ApplicationVersion="0.2.87"
+      - OtlpExporterUrl=
+      - ApplicationVersion=0.2.87
     depends_on:
       - influxdb
       - postgres
@@ -120,8 +120,8 @@ services:
       - RabbitMq__Username=${RabbitMq_Username:-admin}
       - RabbitMq__Password=${RabbitMq_Password:-admin}
       - CacheSettings__RedisConnection=${REDIS_CONNECTION:-redis}
-      - OtlpExporterUrl=""
-      - ApplicationVersion="0.2.87"
+      - OtlpExporterUrl=
+      - ApplicationVersion=0.2.87
     depends_on:
       - influxdb
       - postgres
@@ -137,8 +137,8 @@ services:
       - RabbitMq__Username=${RabbitMq_Username:-admin}
       - RabbitMq__Password=${RabbitMq_Password:-admin}
       - CacheSettings__RedisConnection=${REDIS_CONNECTION:-redis}
-      - OtlpExporterUrl=""
-      - ApplicationVersion="0.2.87"
+      - OtlpExporterUrl=
+      - ApplicationVersion=0.2.87
     depends_on:
       - influxdb
       - postgres
@@ -155,8 +155,8 @@ services:
       - RabbitMq__Username=${RabbitMq_Username:-admin}
       - RabbitMq__Password=${RabbitMq_Password:-admin}
       - CacheSettings__RedisConnection=${REDIS_CONNECTION:-redis}
-      - OtlpExporterUrl=""
-      - ApplicationVersion="0.2.87"
+      - OtlpExporterUrl=
+      - ApplicationVersion=0.2.87
       - Jaeger__OtlpUrl=http://jaeger:4317
     depends_on:
       - influxdb
