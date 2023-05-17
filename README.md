@@ -26,41 +26,18 @@ Digma makes observability relevant in dev, empowering developers to own their co
 
 The Digma IDE plugin provides code-level insights related to performance, errors and usage, available as you edit your code. The insights are continually generated from your OpenTelemetry traces and metrics which are collected and analyzed by the Digma backend.
 
-## 🚀 Getting started in three steps
+## 🚀 Getting started
 
 ### 1. Install the IDE Plugin
-Get the Digma plugin from the [vscode marketplace](https://marketplace.visualstudio.com/items?itemName=digma.digma), or from the [JetBrains marketplace](https://plugins.jetbrains.com/plugin/19470-digma-continuous-feedback) for Rider. Support for additional IDEs is coming soon.
+Get the Digma plugin from the [JetBrains marketplace](https://plugins.jetbrains.com/plugin/19470-digma-continuous-feedback). We currently support Pycharm and IntelliJ, support for additional IDEs is coming soon.
 
-### 2. Start the Digma backend locally using the Docker Compose file
-Already using OpenTelemetry? Awesome! We'll fit right into your stack. Otherwise - don't worry! everything you need is included in the quick setup.
-
-Run the following command in your terminal/commmand line:
-
-- _Linux & MacOS:_ `curl -L https://get.digma.ai/ --output docker-compose.yml`
-
-- _Windows (PowerShell):_ `iwr https://get.digma.ai/ -outfile docker-compose.yml`
-
-Then run `docker compose up -d` to start the Digma backend. (You'll have to install [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/) first, if you haven't installed them yet.)
-
-### 3. Add a few lines of code to instrument Digma.
-
-Check out these simple instructions for your tech stack:
-- [Python](https://github.com/digma-ai/opentelemetry-instrumentation-digma)
-- [.NET](https://github.com/digma-ai/OpenTelemetry.Instrumentation.Digma)
-- [GOLang](https://github.com/digma-ai/otel-go-instrumentation)
-- [Node.js](https://github.com/digma-ai/otel-js-instrumentation)
-- [Express](https://github.com/digma-ai/digma-instrumentation-express) (also requires the Node.js instrumentation)
-- [Java](https://github.com/digma-ai/otel-java-instrumentation)
+### 2. Follow the installation instructions in the plugin to get Digma up and running
 
 **That's it!**  :tada:  As you start using your application and accumulating trace data, Digma will start showing insights in the IDE sidepane.
 
 ### Once you're up and running:
 * #### Consider :star: this repo! It helps us know you care!
-* Having issues? Questions? Want to suggest new ideas or discuss Digma with us? Join the [Digma community](https://community.digma.ai)
-* Try one of the sample projects we've already set up with data. You can find samples for [.NET](https://github.com/digma-ai/otel-sample-application-dotnet), [Golang](https://github.com/digma-ai/otel-sample-application-go), [Python](https://github.com/doppleware/gringotts-vault-api), [JavaScript](https://github.com/digma-ai/otel-sample-application-js) and [Java with SpringBoot](https://github.com/digma-ai/java-sample-app-spring-petclinic) with more coming soon.
-
-### Join the Digma Cloud waitlist! 
-If continuous feedback is something you'd like to try but don't want to set everything up yourself, [sign up](https://digma.ai/get-digma/) and get Digma.
+* Having issues? Questions? Want to suggest new ideas or discuss Digma with us? Join the [Digma community]([https://community.digma.ai](https://join.slack.com/t/continuous-feedback/shared_invite/zt-1hk5rbjow-yXOIxyyYOLSXpCZ4RXstgA))
 
 ## What does Digma look like?
 
@@ -113,7 +90,7 @@ We started publishing some more detailed blog posts explaining what we are tryin
 
 ## How do I contribute or get involved, and are you guys even open-sourcing this?
 
-We are committed to making Digma an Open Source platform. However, we are just getting started, and some of the code is not yet finalized enough to accept contributors. We've made our [vscode plugin repo](https://github.com/digma-ai/digma-vscode-plugin) public with an MIT license. We'll continue to add repos as they become formalized enough to start working on them jointly.
+We are committed to making Digma a platform that is free for developers. However, we are just getting started, and some of the code is not yet finalized enough to accept contributors. We've made our [vscode plugin repo](https://github.com/digma-ai/digma-vscode-plugin) public with an MIT license. We'll continue to add repos as they become formalized enough to start working on them jointly.
 
 ## FAQ
 
