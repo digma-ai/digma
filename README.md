@@ -46,7 +46,7 @@ Check it out:
 
 <p style="text-align: center;">
 
-  [![Digma in practice](/images/video-s.png)](https://youtu.be/oXSpZ4Jrya8 "Watch the demo video &quot;Digma in Practice&quot;")
+  [![Digma in practice](/images/video-s.png)]([https://youtu.be/oXSpZ4Jrya8](https://youtu.be/s3n5uNPQX0M) "Watch the demo video &quot;Digma in Practice&quot;")
 
 </p>
 
