@@ -41,14 +41,7 @@ Get the Digma plugin from the [JetBrains marketplace](https://plugins.jetbrains.
 
 ## What does Digma look like?
 
-We understand that Digma might sound a bit abstract :art:, so we created a short demonstration video to show you what it does.
-Check it out:
-
-<p style="text-align: center;">
-
-  [![Digma in practice](/images/video-s.png)]([https://youtu.be/oXSpZ4Jrya8](https://youtu.be/s3n5uNPQX0M) "Watch the demo video &quot;Digma in Practice&quot;")
-
-</p>
+You can check out some videos and more info on our [website](https://digma.ai)! 
 
 In short, we can use existing logs, traces and metrics to answer questions such as:
 
