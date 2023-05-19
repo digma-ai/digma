@@ -37,7 +37,7 @@ Get the Digma plugin from the [JetBrains marketplace](https://plugins.jetbrains.
 
 ### Once you're up and running:
 * #### Consider :star: this repo! It helps us know you care!
-* Having issues? Questions? Want to suggest new ideas or discuss Digma with us? Join the [Digma community](https://community.digma.ai](https://join.slack.com/t/continuous-feedback/shared_invite/zt-1hk5rbjow-yXOIxyyYOLSXpCZ4RXstgA)
+* Having issues? Questions? Want to suggest new ideas or discuss Digma with us? Join the [Digma community](https://join.slack.com/t/continuous-feedback/shared_invite/zt-1hk5rbjow-yXOIxyyYOLSXpCZ4RXstgA)
 
 ## What does Digma look like?
 
