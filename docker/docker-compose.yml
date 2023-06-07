@@ -24,13 +24,13 @@ services:
     command: postgres -c 'max_connections=315' -c 'shared_buffers=256MB'
 
   redis:
-    image: redis:7.0.9-alpine
+    image: redis:7.0.11-alpine
     volumes:
       - redis_data:/data
     restart: unless-stopped
 
   influxdb:
-    image: influxdb:2.6.1
+    image: influxdb:2.7.1
     expose:
       - "8086"
     volumes:
@@ -67,9 +67,22 @@ services:
     restart: unless-stopped
 
   digma-collector-api:
-    image: digmatic/digma-collector:0.2.95
+    image: digmatic/digma-collector:0.2.98
     ports:
       - "5050:5050"
+    environment:
+      - CacheSettings__RedisConnection=${REDIS_CONNECTION:-redis}
+      - RabbitMq__Host=${RabbitMq_Host:-rabbitmq}
+      - RabbitMq__Username=${RabbitMq_Username:-admin}
+      - RabbitMq__Password=${RabbitMq_Password:-admin}
+      - OtlpExporterUrl=
+      - ApplicationVersion=0.2.98
+    depends_on:
+      - rabbitmq
+    restart: unless-stopped
+
+  digma-collector-worker:
+    image: digmatic/digma-collector-worker:0.2.98
     environment:
       - CacheSettings__RedisConnection=${REDIS_CONNECTION:-redis}
       - ConnectionStrings__Postgres=Server=${POSTGRES_SERVER:-postgres};Port=${POSTGRES_SERVER_PORT:-5432};Database=digma_analytics;User Id=${POSTGRES_USER:-postgres};Password=${POSTGRES_PWD:-postgres};
@@ -78,16 +91,14 @@ services:
       - RabbitMq__Username=${RabbitMq_Username:-admin}
       - RabbitMq__Password=${RabbitMq_Password:-admin}
       - OtlpExporterUrl=
-      - ApplicationVersion=0.2.95
+      - ApplicationVersion=0.2.98
       - Jaeger__OtlpUrl=http://jaeger:4317
     depends_on:
       - redis
       - influxdb
       - rabbitmq
-    restart: unless-stopped
-
   digma-plugin-api:
-    image: digmatic/digma-plugin-api:0.2.95
+    image: digmatic/digma-plugin-api:0.2.98
     ports:
       - "5051:5051"
     environment:
@@ -95,24 +106,24 @@ services:
       - AnalyticsUrl=http://${ANALYTICS_URL:-digma-analytics}:5052
       - OtlpExporterUrl=
       - BACKEND_DEPLOYMENT_TYPE=DockerCompose
-      - ApplicationVersion=0.2.95
+      - ApplicationVersion=0.2.98
     restart: unless-stopped
 
   digma-analytics:
-    image: digmatic/digma-analytics:0.2.95
+    image: digmatic/digma-analytics:0.2.98
     environment:
       - influx2__Url=http://${INFLUXDB_URL:-influxdb}:8086
       - ConnectionStrings__Postgres=Server=${POSTGRES_SERVER:-postgres};Port=${POSTGRES_SERVER_PORT:-5432};Database=digma_analytics;User Id=${POSTGRES_USER:-postgres};Password=${POSTGRES_PWD:-postgres};
       - CacheSettings__RedisConnection=${REDIS_CONNECTION:-redis}
       - OtlpExporterUrl=
-      - ApplicationVersion=0.2.95
+      - ApplicationVersion=0.2.98
     depends_on:
       - influxdb
       - postgres
     restart: unless-stopped
 
   digma-scheduler:
-    image: digmatic/digma-scheduler:0.2.95
+    image: digmatic/digma-scheduler:0.2.98
     environment:
       - influx2__Url=http://${INFLUXDB_URL:-influxdb}:8086
       - ConnectionStrings__Postgres=Server=${POSTGRES_SERVER:-postgres};Port=${POSTGRES_SERVER_PORT:-5432};Database=digma_analytics;User Id=${POSTGRES_USER:-postgres};Password=${POSTGRES_PWD:-postgres};
@@ -121,7 +132,7 @@ services:
       - RabbitMq__Password=${RabbitMq_Password:-admin}
       - CacheSettings__RedisConnection=${REDIS_CONNECTION:-redis}
       - OtlpExporterUrl=
-      - ApplicationVersion=0.2.95
+      - ApplicationVersion=0.2.98
     depends_on:
       - influxdb
       - postgres
@@ -129,7 +140,7 @@ services:
     restart: unless-stopped
 
   digma-measurement-analysis:
-    image: digmatic/digma-measurement-analysis:0.2.95
+    image: digmatic/digma-measurement-analysis:0.2.98
     environment:
       - influx2__Url=http://${INFLUXDB_URL:-influxdb}:8086
       - ConnectionStrings__Postgres=Server=${POSTGRES_SERVER:-postgres};Port=${POSTGRES_SERVER_PORT:-5432};Database=digma_analytics;User Id=${POSTGRES_USER:-postgres};Password=${POSTGRES_PWD:-postgres};
@@ -138,7 +149,7 @@ services:
       - RabbitMq__Password=${RabbitMq_Password:-admin}
       - CacheSettings__RedisConnection=${REDIS_CONNECTION:-redis}
       - OtlpExporterUrl=
-      - ApplicationVersion=0.2.95
+      - ApplicationVersion=0.2.98
     depends_on:
       - influxdb
       - postgres
@@ -147,7 +158,7 @@ services:
     restart: unless-stopped
 
   digma-insight-analysis:
-    image: digmatic/digma-insight-analysis:0.2.95
+    image: digmatic/digma-insight-analysis:0.2.98
     environment:
       - influx2__Url=http://${INFLUXDB_URL:-influxdb}:8086
       - ConnectionStrings__Postgres=Server=${POSTGRES_SERVER:-postgres};Port=${POSTGRES_SERVER_PORT:-5432};Database=digma_analytics;User Id=${POSTGRES_USER:-postgres};Password=${POSTGRES_PWD:-postgres};
@@ -156,7 +167,7 @@ services:
       - RabbitMq__Password=${RabbitMq_Password:-admin}
       - CacheSettings__RedisConnection=${REDIS_CONNECTION:-redis}
       - OtlpExporterUrl=
-      - ApplicationVersion=0.2.95
+      - ApplicationVersion=0.2.98
       - Jaeger__OtlpUrl=http://jaeger:4317
     depends_on:
       - influxdb
