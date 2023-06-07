@@ -71,7 +71,6 @@ services:
     ports:
       - "5050:5050"
     environment:
-      - CacheSettings__RedisConnection=${REDIS_CONNECTION:-redis}
       - RabbitMq__Host=${RabbitMq_Host:-rabbitmq}
       - RabbitMq__Username=${RabbitMq_Username:-admin}
       - RabbitMq__Password=${RabbitMq_Password:-admin}
@@ -93,6 +92,7 @@ services:
       - OtlpExporterUrl=
       - ApplicationVersion=0.2.98
       - Jaeger__OtlpUrl=http://jaeger:4317
+      - BACKEND_DEPLOYMENT_TYPE=DockerCompose
     depends_on:
       - redis
       - influxdb
@@ -133,6 +133,7 @@ services:
       - CacheSettings__RedisConnection=${REDIS_CONNECTION:-redis}
       - OtlpExporterUrl=
       - ApplicationVersion=0.2.98
+      - BACKEND_DEPLOYMENT_TYPE=DockerCompose
     depends_on:
       - influxdb
       - postgres
