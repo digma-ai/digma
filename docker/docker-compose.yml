@@ -106,6 +106,7 @@ services:
     environment:
       - CacheSettings__RedisConnection=${REDIS_CONNECTION:-redis}
       - AnalyticsUrl=http://${ANALYTICS_URL:-digma-analytics}:5052
+      - CollectorUrl=http://${COLLECTOR_URL:-digma-collector-api}:5049
       - OtlpExporterUrl=
       - BACKEND_DEPLOYMENT_TYPE=DockerCompose
       - GlobalExceptionSettings__ExposeInternalDetails=true
