@@ -70,7 +70,7 @@ services:
     restart: unless-stopped
 
   jaeger:
-    image: jaegertracing/all-in-one:1.44.0
+    image: jaegertracing/all-in-one:1.45.0
     ports:
       - "17686:16686"
       - "5317:4317"
