@@ -116,6 +116,10 @@ services:
       - Jaeger__OtlpUrl=http://jaeger:4317
       - BACKEND_DEPLOYMENT_TYPE=DockerCompose
       - Kafka__Urls__0=kafka:9092
+      - ThresholdOptions__RecentActivityUpdateThresholdSeconds=5
+      - ThresholdOptions__UpsertEndpointThresholdSeconds=5
+      - ThresholdOptions__UpsertSpanFlowMetadataThresholdSeconds=5
+      - ThresholdOptions__UpsertSpansThresholdSeconds=5
     depends_on:
       - redis
       - influxdb
