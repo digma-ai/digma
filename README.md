@@ -18,7 +18,7 @@
 
 ## :raised_eyebrow:	What is Digma
 
-Digma is a Continuous Feedback pipeline, comprised of an analysis backend and an IDE plugin with the goal of continually analyzing observability sources and providing feedback during development.
+Digma is a Continuous Feedback platform, comprised of an analysis backend and an IDE plugin with the goal of continually analyzing observability sources and providing feedback during development.
 
 Digma makes observability relevant in dev, empowering developers to own their code all the way to production, improving code quality and preventing critical issues before they escalate.
 
@@ -29,7 +29,7 @@ The Digma IDE plugin provides code-level insights related to performance, errors
 ## 🚀 Getting started
 
 ### 1. Install the IDE Plugin
-Get the Digma plugin from the [JetBrains marketplace](https://plugins.jetbrains.com/plugin/19470-digma-continuous-feedback). We currently support Pycharm and IntelliJ, support for additional IDEs is coming soon.
+Get the Digma plugin from the [JetBrains marketplace](https://plugins.jetbrains.com/plugin/19470-digma-continuous-feedback). We currently support IntelliJ and Java, support for additional IDEs is coming soon.
 
 ### 2. Follow the installation instructions in the plugin to get Digma up and running
 
@@ -41,13 +41,14 @@ Get the Digma plugin from the [JetBrains marketplace](https://plugins.jetbrains.
 
 ## What does Digma look like?
 
-You can check out some videos and more info on our [website](https://digma.ai)! 
+You can check out some videos and more info on our [Youtube Channel]([https://digma.ai](https://www.youtube.com/channel/UCEIvE7BBynMll4tEUL5eKfA))! 
 
-In short, we can use existing logs, traces and metrics to answer questions such as:
+In short, we can use existing logs, traces, and metrics to answer questions such as:
 
 * Where is this function called from? Is it even used?
-* Is this a problematic area of the code? Where are my bottlenecks? 
+* Is this a problematic area of the code? Where are the bottlenecks? 
 * What type of errors does this code raise during run time? Which issues are escalating? Which are affecting the end users?
+* Is this code scalable?
 
 More importantly, all of these insights should be directly accessible in the IDE so we can use them while coding. 
 
@@ -59,13 +60,13 @@ We believe that understanding code, real-world requirements and behavior is crit
 
 There are many observability tools out there, However, we feel they have managed to miss what developers care about when writing their code. Their focus is on dashboards, whereas we think observability should be integrated into the dev process itself.
 
-Our goal is to create an **open platform** for interpreting and analyzing the information collected via observability. Traces, logs, metrics are great! But additional effort is needed in order to take them that last mile and make them impactful.
+Our goal is to create an **developer platform** for interpreting and analyzing the information collected via observability. Traces, logs, metrics are great! But additional effort is needed in order to take them that last mile and make them impactful.
 
 ## How are you different from...
 
-Well we don't compete with any tool existing today because... There isn't any tool that aims to generate this type of feedback. We do work very well together with other tools looking at the same data, like Jaeger, Prometheus, even traditional observability tools like Datadog or Splunk. There are plenty of tools that try to offer troubleshooting/debugging capabilities (once an issue is already identified) or give some raw realtime data. This is not where our headspace is at.
+Well we don't compete with any tool existing today because... There isn't any tool that aims to generate this type of feedback. We do work very well together with other tools looking at the same data, like Jaeger, Prometheus, even traditional observability APMs like Datadog or Splunk. There are plenty of tools that try to offer troubleshooting/debugging capabilities (once an issue is already identified) or give some raw realtime data. This is not where our headspace is at.
 
-At the time of this writing, most of the data Digma collects is based on OpenTelemetry. In the future we will definitely be able to ingest data from other technologies as well (such as eBPF or CloudWatch).
+At the time of this writing, most of the data Digma collects is based on OpenTelemetry. In the future, we will definitely be able to ingest data from other technologies as well (such as eBPF or CloudWatch).
 
 <p style="text-align: center;">
   <img src="/images/digmaloveotel.png" width="500" height="200">
@@ -75,22 +76,21 @@ At the time of this writing, most of the data Digma collects is based on OpenTel
 
 We started publishing some more detailed blog posts explaining what we are trying to accomplish. Here are a few examples:
 
-- [CI/CD/CF? — The DevOps toolchain’s “missing-link”](https://levelup.gitconnected.com/ci-cd-cf-the-devops-toolchains-missing-link-b5c88caf6282)
+- [CI/CD/CF? — The DevOps toolchain’s “missing-link”](https://digma.ai/blog/ci-cd-cf-the-devops-toolchains-missing-link-continuous-feedback/)
 
-- [You're never done. By definition.](https://betterprogramming.pub/youre-never-done-by-definition-c04ac77c616b)
+- [Effective Java Observability](https://digma.ai/blog/coding-with-java-observability/))
 
-- [The Observant Developer](https://betterprogramming.pub/the-observant-developer-part-1-1939d53fd5a4)
+- [The Observant Developer](https://digma.ai/blog/the-observant-developer-part-1/)
 
 ## How do I contribute or get involved, and are you guys even open-sourcing this?
 
-We are committed to making Digma a platform that is free for developers. However, we are just getting started, and some of the code is not yet finalized enough to accept contributors. We've made our [vscode plugin repo](https://github.com/digma-ai/digma-vscode-plugin) public with an MIT license. We'll continue to add repos as they become formalized enough to start working on them jointly.
+We are committed to making Digma a platform that is free for developers. We've made much of our code open-source including our [vscode plugin repo](https://github.com/digma-ai/digma-vscode-plugin) (still under development) and our [Jetbrains plugin repo](https://github.com/digma-ai/digma-intellij-plugin) with an MIT license. 
 
 ## FAQ
 
 * **Is this going to instrument my code and change it in creepy ways in production?** Absolutely not! We rely on the OpenTelemetry vanilla instrumentation with a few added attributes of our own. We leave your code untouched.
-* **Do I need to make code changes to use Digma?** If you're already using OpenTelemetry, you're good to go. If you are not yet using it, we should be a part of your stack if you're considering adding observability to your code!
-* **Can I use Digma right now?** We haven't opened the flood gates just yet, but you are welcome to [sign up for our beta program](https://www.digma.ai/get-digma/) or drop us a line if you want to be a part of the alpha.
-* **Which platforms/stacks do you currently support?** We have a limited set of language specific components, but, for the sake of focus, we currently support [**.NET**](https://dotnet.microsoft.com/en-us/), [**GoLang**](https://go.dev/), [**Python**](https://www.python.org/) and [**Node.js**](https://nodejs.org/en/) (and [**Express**](https://expressjs.com/)) on [**Visual Studio Code**](https://code.visualstudio.com/). We also support the [**Rider IDE**](https://www.jetbrains.com/rider/) and support for the other [**Jetbrains IDEs**](https://www.jetbrains.com/) is already in progress. If you're using other stacks you wish to see supported, please sign up for the beta and fill out our survey - we're definitely taking your responses into consideration.
+* **Do I need to make code changes to use Digma?** No! Digma will take care of collecting the observability data without any code changes.
+* **Which platforms/stacks do you currently support?** We currently focus on [Java](https://www.java.com/en/) and [IntelliJ](https://www.jetbrains.com/idea/). Support for [**.NET**](https://dotnet.microsoft.com/en-us/) using [**Rider IDE**](https://www.jetbrains.com/rider/) is currently in early access mode. We'll expand to additional IDEs and languages later this year. If you'd like to be informed when Digma is available for your Stack the best way to do so is to [sign up](https://digma.ai/get-digma/) on our website for notification. 
 
 <p style="text-align: center; margin-top: 2em;">
   <img src="/images/digma_logo_wingz.png" width="400" height="486">
