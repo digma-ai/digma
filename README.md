@@ -11,7 +11,7 @@
 [![made with love by digma-ai](https://img.shields.io/badge/made%20with%20%E2%99%A5%20by-digma-ff1414.svg?style=flat-square)](https://github.com/digma-ai)
 
 <p style="text-align: center;">
-  <a href="https://bit.ly/3bKtdxU" target="_blank">
+  <a href="https://join.slack.com/t/continuous-feedback/shared_invite/zt-1hk5rbjow-yXOIxyyYOLSXpCZ4RXstgA" target="_blank">
     <img src="https://img.shields.io/badge/Slack-4A154B?logo=slack&color=black&logoColor=white&style=for-the-badge alt="Join our Slack!" width="80" height="30">
   </a> 
 </p>
@@ -56,7 +56,7 @@ More importantly, all of these insights should be directly accessible in the IDE
 
 ## The story behind Digma: :man_technologist::woman_technologist:
 
-We believe that understanding code, real-world requirements and behavior is critical to making better software. It empowers developers to own their code all the way to production. 
+We believe that understanding code, real-world requirements, and behavior is critical to making better software. It empowers developers to own their code all the way to production. 
 
 There are many observability tools out there, However, we feel they have managed to miss what developers care about when writing their code. Their focus is on dashboards, whereas we think observability should be integrated into the dev process itself.
 
@@ -64,7 +64,7 @@ Our goal is to create an **developer platform** for interpreting and analyzing t
 
 ## How are you different from...
 
-Well we don't compete with any tool existing today because... There isn't any tool that aims to generate this type of feedback. We do work very well together with other tools looking at the same data, like Jaeger, Prometheus, even traditional observability APMs like Datadog or Splunk. There are plenty of tools that try to offer troubleshooting/debugging capabilities (once an issue is already identified) or give some raw realtime data. This is not where our headspace is at.
+Well, we don't compete with any tool existing today because... There isn't any tool that aims to generate this type of feedback. We do work very well together with other tools looking at the same data, like Jaeger, Prometheus, and even traditional observability APMs like Datadog or Splunk. There are plenty of tools that try to offer troubleshooting/debugging capabilities (once an issue is already identified) or give some raw real-time data. This is not where our headspace is at.
 
 At the time of this writing, most of the data Digma collects is based on OpenTelemetry. In the future, we will definitely be able to ingest data from other technologies as well (such as eBPF or CloudWatch).
 
