@@ -78,7 +78,7 @@ We started publishing some more detailed blog posts explaining what we are tryin
 
 - [CI/CD/CF? — The DevOps toolchain’s “missing-link”](https://digma.ai/blog/ci-cd-cf-the-devops-toolchains-missing-link-continuous-feedback/)
 
-- [Effective Java Observability](https://digma.ai/blog/coding-with-java-observability/))
+- [Effective Java Observability](https://digma.ai/blog/coding-with-java-observability/)
 
 - [The Observant Developer](https://digma.ai/blog/the-observant-developer-part-1/)
 
