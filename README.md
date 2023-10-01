@@ -41,7 +41,7 @@ Get the Digma plugin from the [JetBrains marketplace](https://plugins.jetbrains.
 
 ## What does Digma look like?
 
-You can check out some videos and more info on our [Youtube Channel]([https://digma.ai](https://www.youtube.com/channel/UCEIvE7BBynMll4tEUL5eKfA))! 
+You can check out some videos and more info on our [YouTube Channel](https://www.youtube.com/@digma1769/videos)! 
 
 In short, we can use existing logs, traces, and metrics to answer questions such as:
 
