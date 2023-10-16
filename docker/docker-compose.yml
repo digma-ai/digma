@@ -1,5 +1,15 @@
 version: "3.6"
 services:
+  digma-ui:
+    image: digmaai/digma-ui:1.0.1
+    ports:
+      - "5280:80"
+    environment:
+      - PLUGIN_API_URL=https://${PLUGIN_API_URL:-digma-plugin-api}:5051
+    depends_on:
+      - digma-plugin-api
+    restart: unless-stopped
+
   kafka:
     image: bitnami/kafka:3.5.1
     volumes:
