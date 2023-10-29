@@ -91,6 +91,8 @@ services:
     environment:
       - SPAN_STORAGE_TYPE=badger
       - COLLECTOR_OTLP_ENABLED=true
+      - COLLECTOR_QUEUE_SIZE=50
+      - COLLECTOR_NUM_WORKERS=3
       - BADGER_EPHEMERAL=false
       - BADGER_DIRECTORY_VALUE=/badger/data
       - BADGER_DIRECTORY_KEY=/badger/key
