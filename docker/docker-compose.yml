@@ -97,6 +97,8 @@ services:
       - BADGER_DIRECTORY_VALUE=/badger/data
       - BADGER_DIRECTORY_KEY=/badger/key
       - BADGER_SPAN_STORE_TTL=336h0m0s
+      - BADGER_MAINTENANCE_INTERVAL=12h0m0s
+      - BADGER_METRICS_UPDATE_INTERVAL=15m0s
     restart: unless-stopped
 
 
