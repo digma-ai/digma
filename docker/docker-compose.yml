@@ -5,9 +5,9 @@ services:
     ports:
       - "5280:80"
     environment:
-      - PLUGIN_API_URL=https://${PLUGIN_API_URL:-digma-analytics}:5051
+      - PLUGIN_API_URL=https://${PLUGIN_API_URL:-digma-compound}:5051
     depends_on:
-      - digma-analytics
+      - digma-compound
     restart: unless-stopped
 
   kafka:
@@ -98,123 +98,39 @@ services:
     restart: unless-stopped
 
   digma-ds:
-    image: digmaai/ds:0.0.12
+    image: digmatic/ds:0.0.18
     restart: unless-stopped
 
-  digma-collector-api:
-    image: digmatic/digma-collector:0.2.166
+  digma-compound:
+    image: digmatic/digma-compound:0.2.169
     ports:
+      - "5049:5049"
       - "5050:5050"
+      - "5051:5051"
     environment:
-      - CacheSettings__RedisConnection=${REDIS_CONNECTION:-redis}
-      - ConnectionStrings__Postgres=Server=${POSTGRES_SERVER:-postgres};Port=${POSTGRES_SERVER_PORT:-5432};Database=digma_analytics;User Id=${POSTGRES_USER:-postgres};Password=${POSTGRES_PWD:-postgres};
-      - RabbitMq__Host=${RabbitMq_Host:-rabbitmq}
-      - RabbitMq__Username=${RabbitMq_Username:-admin}
-      - RabbitMq__Password=${RabbitMq_Password:-admin}
-      - OtlpExporterUrl=
-      - ApplicationVersion=0.2.166
-    depends_on:
-      - rabbitmq
-    restart: unless-stopped
-
-  digma-collector-worker:
-    image: digmatic/digma-collector-worker:0.2.166
-    environment:
-      - CacheSettings__RedisConnection=${REDIS_CONNECTION:-redis}
-      - ConnectionStrings__Postgres=Server=${POSTGRES_SERVER:-postgres};Port=${POSTGRES_SERVER_PORT:-5432};Database=digma_analytics;User Id=${POSTGRES_USER:-postgres};Password=${POSTGRES_PWD:-postgres};
-      - influx2__Url=http://${INFLUXDB_URL:-influxdb}:8086
-      - RabbitMq__Host=${RabbitMq_Host:-rabbitmq}
-      - RabbitMq__Username=${RabbitMq_Username:-admin}
-      - RabbitMq__Password=${RabbitMq_Password:-admin}
-      - OtlpExporterUrl=
-      - ApplicationVersion=0.2.166
-      - Jaeger__OtlpUrl=http://jaeger:4317
       - BACKEND_DEPLOYMENT_TYPE=DockerCompose
+      - CacheSettings__RedisConnection=${REDIS_CONNECTION:-redis}
+      - ConnectionStrings__Postgres=Server=${POSTGRES_SERVER:-postgres};Port=${POSTGRES_SERVER_PORT:-5432};Database=digma_analytics;User Id=${POSTGRES_USER:-postgres};Password=${POSTGRES_PWD:-postgres};
+      - RabbitMq__Host=${RabbitMq_Host:-rabbitmq}
+      - RabbitMq__Username=${RabbitMq_Username:-admin}
+      - RabbitMq__Password=${RabbitMq_Password:-admin}
+      - influx2__Url=http://${INFLUXDB_URL:-influxdb}:8086
+      - Ds__Url=http://${DS_URL:-digma-ds}:5054
+      - OtlpExporterUrl=
       - Kafka__Urls__0=kafka:9092
+      - Jaeger__OtlpUrl=http://jaeger:4317
       - ThresholdOptions__RecentActivityUpdateThresholdSeconds=5
       - ThresholdOptions__UpsertEndpointThresholdSeconds=5
       - ThresholdOptions__UpsertSpanFlowMetadataThresholdSeconds=5
       - ThresholdOptions__UpsertSpansThresholdSeconds=5
-    depends_on:
-      - redis
-      - influxdb
-      - rabbitmq
-    restart: unless-stopped
-
-  digma-analytics:
-    image: digmatic/digma-analytics:0.2.166
-    ports:
-      - "5051:5051"
-    environment:
-      - influx2__Url=http://${INFLUXDB_URL:-influxdb}:8086
-      - CollectorUrl=http://${COLLECTOR_URL:-digma-collector-api}:5049
-      - ConnectionStrings__Postgres=Server=${POSTGRES_SERVER:-postgres};Port=${POSTGRES_SERVER_PORT:-5432};Database=digma_analytics;User Id=${POSTGRES_USER:-postgres};Password=${POSTGRES_PWD:-postgres};
-      - CacheSettings__RedisConnection=${REDIS_CONNECTION:-redis}
-      - OtlpExporterUrl=
-      - BACKEND_DEPLOYMENT_TYPE=DockerCompose
       - GlobalExceptionSettings__ExposeInternalDetails=true
-      - ApplicationVersion=0.2.166
+      - ApplicationVersion=0.2.169
     depends_on:
       - redis
-      - influxdb
-      - postgres
-    restart: unless-stopped
-
-  digma-scheduler:
-    image: digmatic/digma-scheduler:0.2.166
-    environment:
-      - influx2__Url=http://${INFLUXDB_URL:-influxdb}:8086
-      - ConnectionStrings__Postgres=Server=${POSTGRES_SERVER:-postgres};Port=${POSTGRES_SERVER_PORT:-5432};Database=digma_analytics;User Id=${POSTGRES_USER:-postgres};Password=${POSTGRES_PWD:-postgres};
-      - RabbitMq__Host=${RabbitMq_Host:-rabbitmq}
-      - RabbitMq__Username=${RabbitMq_Username:-admin}
-      - RabbitMq__Password=${RabbitMq_Password:-admin}
-      - CacheSettings__RedisConnection=${REDIS_CONNECTION:-redis}
-      - OtlpExporterUrl=
-      - ApplicationVersion=0.2.166
-      - BACKEND_DEPLOYMENT_TYPE=DockerCompose
-    depends_on:
-      - influxdb
-      - postgres
       - rabbitmq
-    restart: unless-stopped
-
-  digma-measurement-analysis:
-    image: digmatic/digma-measurement-analysis:0.2.166
-    environment:
-      - influx2__Url=http://${INFLUXDB_URL:-influxdb}:8086
-      - ConnectionStrings__Postgres=Server=${POSTGRES_SERVER:-postgres};Port=${POSTGRES_SERVER_PORT:-5432};Database=digma_analytics;User Id=${POSTGRES_USER:-postgres};Password=${POSTGRES_PWD:-postgres};
-      - RabbitMq__Host=${RabbitMq_Host:-rabbitmq}
-      - RabbitMq__Username=${RabbitMq_Username:-admin}
-      - RabbitMq__Password=${RabbitMq_Password:-admin}
-      - CacheSettings__RedisConnection=${REDIS_CONNECTION:-redis}
-      - OtlpExporterUrl=
-      - ApplicationVersion=0.2.166
-      - Kafka__Urls__0=kafka:9092
-      - Ds__Url=http://${DS_URL:-digma-ds}:5054
-    depends_on:
-      - influxdb
       - postgres
-      - rabbitmq
-      - jaeger
-    restart: unless-stopped
-
-  digma-insight-analysis:
-    image: digmatic/digma-insight-analysis:0.2.166
-    environment:
-      - influx2__Url=http://${INFLUXDB_URL:-influxdb}:8086
-      - ConnectionStrings__Postgres=Server=${POSTGRES_SERVER:-postgres};Port=${POSTGRES_SERVER_PORT:-5432};Database=digma_analytics;User Id=${POSTGRES_USER:-postgres};Password=${POSTGRES_PWD:-postgres};
-      - RabbitMq__Host=${RabbitMq_Host:-rabbitmq}
-      - RabbitMq__Username=${RabbitMq_Username:-admin}
-      - RabbitMq__Password=${RabbitMq_Password:-admin}
-      - CacheSettings__RedisConnection=${REDIS_CONNECTION:-redis}
-      - OtlpExporterUrl=
-      - ApplicationVersion=0.2.166
-      - Jaeger__OtlpUrl=http://jaeger:4317
-    depends_on:
       - influxdb
-      - postgres
-      - rabbitmq
-      - jaeger
+      - kafka
     restart: unless-stopped
 
 volumes:
