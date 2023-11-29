@@ -1,14 +1,5 @@
 version: "3.6"
 services:
-  digma-ui:
-    image: digmaai/digma-ui:1.0.1
-    ports:
-      - "5280:80"
-    environment:
-      - PLUGIN_API_URL=https://${PLUGIN_API_URL:-digma-compound}:5051
-    depends_on:
-      - digma-compound
-    restart: unless-stopped
 
   postgres:
     image: postgres:15.2
@@ -82,6 +73,7 @@ services:
       - ConnectionStrings__Postgres=Server=${POSTGRES_SERVER:-postgres};Port=${POSTGRES_SERVER_PORT:-5432};Database=digma_analytics;User Id=${POSTGRES_USER:-postgres};Password=${POSTGRES_PWD:-postgres};
       - influx2__Url=http://${INFLUXDB_URL:-influxdb}:8086
       - Ds__Url=http://${DS_URL:-digma-ds}:5054
+      - Ds__TimeoutInSeconds=0.2
       - OtlpExporterUrl=
       - Jaeger__OtlpUrl=http://jaeger:4317
       - ThresholdOptions__RecentActivityUpdateThresholdSeconds=5
@@ -89,7 +81,7 @@ services:
       - ThresholdOptions__UpsertSpanFlowMetadataThresholdSeconds=5
       - ThresholdOptions__UpsertSpansThresholdSeconds=5
       - GlobalExceptionSettings__ExposeInternalDetails=true
-      - ApplicationVersion=0.2.169
+      - ApplicationVersion=0.2.176
     depends_on:
       - redis
       - postgres
