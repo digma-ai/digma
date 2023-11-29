@@ -92,7 +92,7 @@ services:
     restart: unless-stopped
 
   digma-compound:
-    image: digmatic/digma-compound:0.2.174
+    image: digmatic/digma-compound:0.2.176
     ports:
       - "5049:5049"
       - "5050:5050"
@@ -115,7 +115,7 @@ services:
       - ThresholdOptions__UpsertSpanFlowMetadataThresholdSeconds=5
       - ThresholdOptions__UpsertSpansThresholdSeconds=5
       - GlobalExceptionSettings__ExposeInternalDetails=true
-      - ApplicationVersion=0.2.174
+      - ApplicationVersion=0.2.176
     depends_on:
       - redis
       - rabbitmq
