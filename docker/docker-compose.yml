@@ -10,37 +10,6 @@ services:
       - digma-compound
     restart: unless-stopped
 
-  kafka:
-    image: bitnami/kafka:3.5.1
-    volumes:
-      - kafka_data:/bitnami/kafka
-    environment:
-      - ALLOW_PLAINTEXT_LISTENER=yes
-      - KAFKA_KRAFT_CLUSTER_ID=NTNlOGNmNjlkZjY4NDkxOT
-      - KAFKA_HEAP_OPTS=-Xms128m -Xmx256m
-      - KAFKA_CFG_LOG_ROLL_HOURS=1
-      - KAFKA_CFG_LOG_RETENTION_HOURS=1
-      - KAFKA_CFG_LOG_RETENTION_CHECK_INTERVAL_MS=300000
-      - KAFKA_CFG_NODE_ID=1
-      - KAFKA_CFG_BROKER_ID=1
-      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@kafka:9093
-      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,INTERNAL:PLAINTEXT
-      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
-      - KAFKA_CFG_PROCESS_ROLES=broker,controller
-      - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=INTERNAL
-      - KAFKA_CFG_LISTENERS=INTERNAL://:9092,CONTROLLER://:9093
-      - KAFKA_CFG_ADVERTISED_LISTENERS=INTERNAL://kafka:9092
-    restart: unless-stopped
-
-  rabbitmq:
-    image: rabbitmq:3.11.2-management-alpine
-    volumes:
-      - rabbitmq_data:/var/lib/rabbitmq/
-      - rabbitmq_log:/var/log/rabbitmq/
-    environment:
-      - RABBITMQ_DEFAULT_USER=admin
-      - RABBITMQ_DEFAULT_PASS=admin
-    restart: unless-stopped
   postgres:
     image: postgres:15.2
     expose:
@@ -102,7 +71,7 @@ services:
     restart: unless-stopped
 
   digma-compound:
-    image: digmatic/digma-compound:0.2.169
+    image: digmatic/digma-compound:0.2.176-pipeline.3
     ports:
       - "5049:5049"
       - "5050:5050"
@@ -111,13 +80,9 @@ services:
       - BACKEND_DEPLOYMENT_TYPE=DockerCompose
       - CacheSettings__RedisConnection=${REDIS_CONNECTION:-redis}
       - ConnectionStrings__Postgres=Server=${POSTGRES_SERVER:-postgres};Port=${POSTGRES_SERVER_PORT:-5432};Database=digma_analytics;User Id=${POSTGRES_USER:-postgres};Password=${POSTGRES_PWD:-postgres};
-      - RabbitMq__Host=${RabbitMq_Host:-rabbitmq}
-      - RabbitMq__Username=${RabbitMq_Username:-admin}
-      - RabbitMq__Password=${RabbitMq_Password:-admin}
       - influx2__Url=http://${INFLUXDB_URL:-influxdb}:8086
       - Ds__Url=http://${DS_URL:-digma-ds}:5054
       - OtlpExporterUrl=
-      - Kafka__Urls__0=kafka:9092
       - Jaeger__OtlpUrl=http://jaeger:4317
       - ThresholdOptions__RecentActivityUpdateThresholdSeconds=5
       - ThresholdOptions__UpsertEndpointThresholdSeconds=5
@@ -127,21 +92,16 @@ services:
       - ApplicationVersion=0.2.169
     depends_on:
       - redis
-      - rabbitmq
       - postgres
       - influxdb
-      - kafka
     restart: unless-stopped
 
 volumes:
-  rabbitmq_data:
-  rabbitmq_log:
   postgres_data:
   redis_data:
   influxdb_data:
   influxdb_config:
   jaeger_data:
-  kafka_data:
 
 networks:
   default:
