@@ -62,7 +62,7 @@ services:
     restart: unless-stopped
 
   digma-compound:
-    image: digmatic/digma-compound:0.2.178
+    image: digmatic/digma-compound:0.2.179
     ports:
       - "5049:5049"
       - "5050:5050"
