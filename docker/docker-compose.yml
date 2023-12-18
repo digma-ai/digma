@@ -1,44 +1,31 @@
 version: "3.6"
+name: digma-docker
 services:
-
-  postgres:
-    image: postgres:15.2
+  digma-persistance:
+    image: digmatic/digma-persistence:1.1
     expose:
       - "5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_NAME=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-    restart: unless-stopped
-    command: postgres -c 'max_connections=315' -c 'shared_buffers=256MB'
-
-  redis:
-    image: redis:7.0.11-alpine
-    volumes:
-      - redis_data:/data
-    restart: unless-stopped
-
-  influxdb:
-    image: influxdb:2.7.1
-    expose:
+      - "6379"
       - "8086"
     volumes:
-      - influxdb_data:/var/lib/influxdb2
-      - influxdb_config:/etc/influxdb2
+      - postgres_data:/var/lib/postgresql/data-pg
+      - redis_data:/var/lib/redis
+      - influxdb_data:/root/.influxdbv2/engine/data
+      - influxdb_config:/root/.influxdbv2
     environment:
       - DOCKER_INFLUXDB_INIT_MODE=setup
       - DOCKER_INFLUXDB_INIT_USERNAME=${INFLUXDB_USERNAME:-admin}
-      - DOCKER_INFLUXDB_INIT_PASSWORD=${INFLUXDB_PASSWORD:-12345678}
+      - DOCKER_INFLUXDB_INIT_PASSWORD=${INFLUXDB_PASSWORD:-12345678}}
       - DOCKER_INFLUXDB_INIT_ORG=${INFLUXDB_ORG:-digma}
       - DOCKER_INFLUXDB_INIT_BUCKET=${INFLUXDB_BUCKET:-errors}
       - DOCKER_INFLUXDB_INIT_RETENTION=${INFLUXDB_BUCKET_RETENTION:-24w}
       - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=${INFLUXDB_ADMIN_TOKEN:-dc61908e-05bc-411a-9fe2-e3356b8dc7c0}
       - INFLUXD_QUERY_CONCURRENCY=15
       - INFLUXD_QUERY_QUEUE_SIZE=200
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_NAME=postgres ##
     restart: unless-stopped
-
   jaeger:
     image: jaegertracing/all-in-one:1.45.0
     ports:
@@ -69,9 +56,9 @@ services:
       - "5051:5051"
     environment:
       - BACKEND_DEPLOYMENT_TYPE=DockerCompose
-      - CacheSettings__RedisConnection=${REDIS_CONNECTION:-redis}
-      - ConnectionStrings__Postgres=Server=${POSTGRES_SERVER:-postgres};Port=${POSTGRES_SERVER_PORT:-5432};Database=digma_analytics;User Id=${POSTGRES_USER:-postgres};Password=${POSTGRES_PWD:-postgres};
-      - influx2__Url=http://${INFLUXDB_URL:-influxdb}:8086
+      - CacheSettings__RedisConnection=${REDIS_CONNECTION:-digma-persistance}
+      - ConnectionStrings__Postgres=Server=${POSTGRES_SERVER:-digma-persistance};Port=${POSTGRES_SERVER_PORT:-5432};Database=digma_analytics;User Id=${POSTGRES_USER:-postgres};Password=${POSTGRES_PWD:-postgres};
+      - influx2__Url=http://${INFLUXDB_URL:-digma-persistance}:8086
       - Ds__Url=http://${DS_URL:-digma-ds}:5054
       - Ds__TimeoutInSeconds=0.2
       - OtlpExporterUrl=
@@ -83,9 +70,7 @@ services:
       - GlobalExceptionSettings__ExposeInternalDetails=true
       - ApplicationVersion=0.2.185
     depends_on:
-      - redis
-      - postgres
-      - influxdb
+      - digma-persistance
     restart: unless-stopped
 
 volumes:
