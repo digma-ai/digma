@@ -1,7 +1,7 @@
 version: "3.6"
 name: digma-docker
 services:
-  digma-persistance:
+  digma-persistence:
     image: digmatic/digma-persistence:1.2
     expose:
       - "5432"
@@ -56,9 +56,9 @@ services:
       - "5051:5051"
     environment:
       - BACKEND_DEPLOYMENT_TYPE=DockerCompose
-      - CacheSettings__RedisConnection=${REDIS_CONNECTION:-digma-persistance}
-      - ConnectionStrings__Postgres=Server=${POSTGRES_SERVER:-digma-persistance};Port=${POSTGRES_SERVER_PORT:-5432};Database=digma_analytics;User Id=${POSTGRES_USER:-postgres};Password=${POSTGRES_PWD:-postgres};
-      - influx2__Url=http://${INFLUXDB_URL:-digma-persistance}:8086
+      - CacheSettings__RedisConnection=${REDIS_CONNECTION:-digma-persistence}
+      - ConnectionStrings__Postgres=Server=${POSTGRES_SERVER:-digma-persistence};Port=${POSTGRES_SERVER_PORT:-5432};Database=digma_analytics;User Id=${POSTGRES_USER:-postgres};Password=${POSTGRES_PWD:-postgres};
+      - influx2__Url=http://${INFLUXDB_URL:-digma-persistence}:8086
       - Ds__Url=http://${DS_URL:-digma-ds}:5054
       - Ds__TimeoutInSeconds=0.2
       - OtlpExporterUrl=
@@ -70,7 +70,7 @@ services:
       - GlobalExceptionSettings__ExposeInternalDetails=true
       - ApplicationVersion=0.2.185
     depends_on:
-      - digma-persistance
+      - digma-persistence
     restart: unless-stopped
 
 volumes:
