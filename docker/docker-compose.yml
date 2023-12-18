@@ -2,7 +2,7 @@ version: "3.6"
 name: digma-docker
 services:
   digma-persistance:
-    image: digmatic/digma-persistence:1.1
+    image: digmatic/digma-persistence:1.2
     expose:
       - "5432"
       - "6379"
