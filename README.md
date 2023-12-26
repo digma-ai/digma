@@ -29,7 +29,7 @@ The Digma IDE plugin provides code-level insights related to performance, errors
 ## 🚀 Getting started
 
 ### 1. Install the IDE Plugin
-Get the Digma plugin from the [JetBrains marketplace](https://plugins.jetbrains.com/plugin/19470-digma-continuous-feedback). We currently support IntelliJ and Java, support for additional IDEs is coming soon.
+Get the Digma plugin from the [JetBrains marketplace](https://plugins.jetbrains.com/plugin/19470-digma-continuous-feedback). We currently support IntelliJ with either Java or Kotlin, support for additional IDEs is coming soon.
 
 ### 2. Follow the installation instructions in the plugin to get Digma up and running
 
@@ -90,7 +90,7 @@ We are committed to making Digma a platform that is free for developers. We've m
 
 * **Is this going to instrument my code and change it in creepy ways in production?** Absolutely not! We rely on the OpenTelemetry vanilla instrumentation with a few added attributes of our own. We leave your code untouched.
 * **Do I need to make code changes to use Digma?** No! Digma will take care of collecting the observability data without any code changes.
-* **Which platforms/stacks do you currently support?** We currently focus on [Java](https://www.java.com/en/) and [IntelliJ](https://www.jetbrains.com/idea/). Support for [**.NET**](https://dotnet.microsoft.com/en-us/) using [**Rider IDE**](https://www.jetbrains.com/rider/) is currently in early access mode. We'll expand to additional IDEs and languages later this year. If you'd like to be informed when Digma is available for your Stack the best way to do so is to [sign up](https://digma.ai/get-digma/) on our website for notification. 
+* **Which platforms/stacks do you currently support?** We currently focus on [Java](https://www.java.com/en/) and [Kotlin](https://kotlinlang.org/) with [IntelliJ](https://www.jetbrains.com/idea/). Support for [**.NET**](https://dotnet.microsoft.com/en-us/) using [**Rider IDE**](https://www.jetbrains.com/rider/) is currently in early access mode. We'll expand to additional IDEs and languages later this year. If you'd like to be informed when Digma is available for your Stack the best way to do so is to [sign up](https://digma.ai/get-digma/) on our website for notification. 
 
 <p style="text-align: center; margin-top: 2em;">
   <img src="/images/digma_logo_wingz.png" width="400" height="486">
