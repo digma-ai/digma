@@ -7,10 +7,10 @@ services:
       - "6379"
       - "8086"
     volumes:
-      - postgres_data:/var/lib/postgresql/data-pg
-      - redis_data:/var/lib/redis
-      - influxdb_data:/root/.influxdbv2/engine/data
-      - influxdb_config:/root/.influxdbv2
+      - postgres_data_v1:/etc/lib/postgresql/data-pg
+      - redis_data_v1:/var/lib/redis
+      - influxdb_data_v1:/root/.influxdbv2/engine/data
+      - influxdb_config_v1:/root/.influxdbv2
     environment:
       - DOCKER_INFLUXDB_INIT_MODE=setup
       - DOCKER_INFLUXDB_INIT_USERNAME=${INFLUXDB_USERNAME:-admin}
@@ -48,7 +48,7 @@ services:
     restart: unless-stopped
 
   digma-compound:
-    image: digmatic/digma-compound:0.2.192
+    image: digmatic/digma-compound:0.2.196
     ports:
       - "5049:5049"
       - "5050:5050"
@@ -67,16 +67,16 @@ services:
       - ThresholdOptions__UpsertSpanFlowMetadataThresholdSeconds=5
       - ThresholdOptions__UpsertSpansThresholdSeconds=5
       - GlobalExceptionSettings__ExposeInternalDetails=true
-      - ApplicationVersion=0.2.192
+      - ApplicationVersion=0.2.196
     depends_on:
       - digma-persistence
     restart: unless-stopped
 
 volumes:
-  postgres_data:
-  redis_data:
-  influxdb_data:
-  influxdb_config:
+  postgres_data_v1:
+  redis_data_v1:
+  influxdb_data_v1:
+  influxdb_config_v1:
   jaeger_data:
 
 networks:
