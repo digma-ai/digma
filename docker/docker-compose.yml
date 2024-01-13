@@ -50,7 +50,6 @@ services:
   digma-compound:
     image: digmatic/digma-compound:0.2.196
     ports:
-      - "5049:5049"
       - "5050:5050"
       - "5051:5051"
     environment:
