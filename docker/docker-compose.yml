@@ -29,7 +29,6 @@ services:
     image: jaegertracing/all-in-one:1.45.0
     ports:
       - "17686:16686"
-      - "5317:4317"
     command: |
       --query.additional-headers "Access-Control-Allow-Origin: *"
     volumes:
