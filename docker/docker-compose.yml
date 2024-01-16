@@ -27,9 +27,10 @@ services:
     restart: unless-stopped
   jaeger:
     image: jaegertracing/all-in-one:1.45.0
+    expose:
+      - "5317:4317"
     ports:
       - "17686:16686"
-      - "5317:4317"
     command: |
       --query.additional-headers "Access-Control-Allow-Origin: *"
     volumes:
@@ -50,7 +51,6 @@ services:
   digma-compound:
     image: digmatic/digma-compound:0.2.196
     ports:
-      - "5049:5049"
       - "5050:5050"
       - "5051:5051"
     environment:
