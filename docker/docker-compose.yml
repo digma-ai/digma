@@ -28,7 +28,7 @@ services:
   jaeger:
     image: jaegertracing/all-in-one:1.45.0
     expose:
-      - "5317:4317"
+      - "5317"
     ports:
       - "17686:16686"
     command: |
@@ -42,6 +42,7 @@ services:
       - BADGER_DIRECTORY_VALUE=/badger/data
       - BADGER_DIRECTORY_KEY=/badger/key
       - BADGER_SPAN_STORE_TTL=336h0m0s
+      - COLLECTOR_GRPC_PORT=5317
     restart: unless-stopped
 
   digma-ds:
