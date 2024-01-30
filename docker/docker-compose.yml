@@ -46,7 +46,7 @@ services:
     restart: unless-stopped
 
   digma-ds:
-    image: digmatic/ds:0.0.21
+    image: digmatic/ds:0.0.22
     restart: unless-stopped
 
   digma-compound:
