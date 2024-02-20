@@ -51,7 +51,7 @@ services:
     restart: unless-stopped
 
   digma-compound:
-    image: digmatic/digma-compound:0.2.300
+    image: digmatic/digma-compound:0.2.230
     ports:
       - "5050:5050"
       - "5051:5051"
@@ -69,7 +69,7 @@ services:
       - ThresholdOptions__UpsertSpanFlowMetadataThresholdSeconds=5
       - ThresholdOptions__UpsertSpansThresholdSeconds=5
       - GlobalExceptionSettings__ExposeInternalDetails=true
-      - ApplicationVersion=0.2.300
+      - ApplicationVersion=0.2.230
     depends_on:
       - digma-persistence
     restart: unless-stopped
