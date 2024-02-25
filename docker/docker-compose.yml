@@ -70,7 +70,7 @@ services:
       - ThresholdOptions__UpsertSpansThresholdSeconds=5
       - GlobalExceptionSettings__ExposeInternalDetails=true
       - Kafka__PipelineWorkerCG__Workers=2
-      - PipelineExecution_NodeExecutionParallelism=1
+      - PipelineExecution__NodeExecutionParallelism=1
       - ApplicationVersion=0.2.231
     depends_on:
       - digma-persistence
