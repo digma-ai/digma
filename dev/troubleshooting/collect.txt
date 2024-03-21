@@ -1,0 +1,1 @@
+./collect.sh [NAMESPACE] [ANALYTICS_URL] [TOKEN]
