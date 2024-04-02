@@ -12,10 +12,10 @@ docker run --name backup_digma_volumes \
     -v ${prefix}_influxdb_data_v1:/backup-influxdb-data \
     -v ${prefix}_influxdb_config_v1:/backup-influxdb-config \
     busybox sh -c 'mkdir -p /backup && \
-    tar -zcvf /backup/postgres_data.tar.gz /backup-postgres-data && \
-    tar -zcvf /backup/redis_data.tar.gz /backup-redis-data && \
-    tar -zcvf /backup/influxdb_data.tar.gz /backup-influxdb-data && \
-    tar -zcvf /backup/influxdb_config.tar.gz /backup-influxdb-config'
+    tar -zcvf /backup/postgres_data.tar.gz -C /backup-postgres-data . && \
+    tar -zcvf /backup/redis_data.tar.gz -C /backup-redis-data . && \
+    tar -zcvf /backup/influxdb_data.tar.gz -C /backup-influxdb-data . && \
+    tar -zcvf /backup/influxdb_config.tar.gz -C /backup-influxdb-config .'
 
 # Move backup files to the desired directory
 mkdir -p ./digma-volumes/
