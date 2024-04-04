@@ -4,9 +4,9 @@
   "backendLatestVersion": "0.2.254",// Plugin 2.0.313  MinBackend 0.2.248   Current backend 0.2.250  BackenMinPlugin 2.0.315
   "versionMatrix": [],
   "forceUpdates":{
-    "plugin":{
-      "minimumVersion":"2.0.317" 
-    },
+   // "plugin":{
+    //  "minimumVersion":"2.0.317" 
+   // },
     "backend":{
       "minimumVersion":"0.2.250"
     }
