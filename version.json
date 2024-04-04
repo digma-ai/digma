@@ -8,7 +8,7 @@
     //  "minimumVersion":"2.0.317" 
    // },
     "backend":{
-      "minimumVersion":"0.2.250"
+      "minimumVersion":"0.2.251"
     }
   }
 }
