@@ -5,10 +5,10 @@
   "versionMatrix": [],
   "forceUpdates":{
     "plugin":{
-      "minimumVersion":"2.0.313" 
+      "minimumVersion":"2.0.315" 
     },
     "backend":{
-      "minimumVersion":"0.2.251"
+      "minimumVersion":"0.2.281"
     }
   }
 }
