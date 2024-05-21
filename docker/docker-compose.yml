@@ -1,4 +1,3 @@
-version: "3.6"
 services:
   digma-persistence:
     image: digmatic/digma-persistence:1.2
