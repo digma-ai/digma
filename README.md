@@ -84,6 +84,3 @@ If you're interested in the specific capabilities, product features, and technic
 * **Does Digma send data to the cloud** No! We purposely run everything locally to avoid any issues with compliance policies.
 * **Which platforms/stacks do you currently support?** We currently focus on [Java](https://www.java.com/en/) and [Kotlin](https://kotlinlang.org/) with [IntelliJ](https://www.jetbrains.com/idea/). Support for [**.NET**](https://dotnet.microsoft.com/en-us/) using [**Rider IDE**](https://www.jetbrains.com/rider/) is currently in early access mode. We'll expand to additional IDEs and languages later this year. 
 
-<p style="text-align: center; margin-top: 2em;">
-  <img src="/images/digma_logo_wingz.png" width="400" height="486">
-</p>
