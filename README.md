@@ -75,6 +75,8 @@ We started publishing some more detailed blog posts explaining what we are tryin
 
 For the full list, you can check out our [website blog](https://digma.ai/blog/)
 
+If you're interested in the specific capabilities, product features, and technical specifications - check out our [docs](https://docs.digma.ai/)!
+
 ## FAQ
 
 * **Is this going to instrument my code and change it in creepy ways in production?** Absolutely not! We rely on the OpenTelemetry vanilla instrumentation with a few added attributes of our own. We leave your code untouched.
