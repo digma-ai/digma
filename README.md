@@ -2,7 +2,7 @@
   <img src="/images/bg.jpg" >
 </p>
 <h1 style="text-align: center;">
-  Continuous Feedback for Developers
+  Continuously identify performance issues without leaving the IDE
 </h1>
 
 <!-- Place this tag in your head or just before your close body tag. -->
@@ -18,13 +18,11 @@
 
 ## :raised_eyebrow:	What is Digma
 
-Digma is a Continuous Feedback platform, comprised of an analysis backend and an IDE plugin with the goal of continually analyzing observability sources and providing feedback during development.
-
-Digma makes observability relevant in dev, empowering developers to own their code all the way to production, improving code quality and preventing critical issues before they escalate.
+Digma is a tool that profiles your application execution in runtime and identifies critical performance issues. Digma is comprised of an analysis backend (running locally on containers) and an IDE plugin as the main front end (Jetbrains only for now). The plugin provides code-level insights related to performance, query issues, bottlenecks scaling problems, and more. 
 
 ## :gear: How Digma works
 
-The Digma IDE plugin provides code-level insights related to performance, errors and usage, available as you edit your code. The insights are continually generated from your OpenTelemetry traces and metrics which are collected and analyzed by the Digma backend.
+Digma's backend receives OTEL data from your application (collected automatically when you run it locally), analyzes it, and identifies specific issues in the code execution. All of the data is handled locally in order to support compliance requirements and no code changes are required. Digma cam profile data from multiple environments, including dev, test, staging, production etc.
 
 ## 🚀 Getting started
 
@@ -33,11 +31,11 @@ Get the Digma plugin from the [JetBrains marketplace](https://plugins.jetbrains.
 
 ### 2. Follow the installation instructions in the plugin to get Digma up and running
 
-**That's it!**  :tada:  As you start using your application and accumulating trace data, Digma will start showing insights in the IDE sidepane.
+**That's it!**  :tada:  As you start using your application and running your code, Digma will provide feedback and highlight issues over the code itself.
 
 ### Once you're up and running:
 * #### Consider :star: this repo! It helps us know you care!
-* Having issues? Questions? Want to suggest new ideas or discuss Digma with us? Join the [Digma community](https://join.slack.com/t/continuous-feedback/shared_invite/zt-1hk5rbjow-yXOIxyyYOLSXpCZ4RXstgA)
+* Having issues? Questions? Want to suggest new ideas or discuss Digma with us? Join the [Digma community](https://continuous-feedback.slack.com/join/shared_invite/zt-2ebkq5qxs-Hpep2BFMfpxYTE9xq45w8A#/shared-invite/email)
 
 ## What does Digma look like?
 
@@ -45,10 +43,10 @@ You can check out some videos and more info on our [YouTube Channel](https://www
 
 In short, we can use existing logs, traces, and metrics to answer questions such as:
 
-* Where is this function called from? Is it even used?
-* Is this a problematic area of the code? Where are the bottlenecks? 
-* What type of errors does this code raise during run time? Which issues are escalating? Which are affecting the end users?
-* Is this code scalable?
+* What are the top bottlenecks slowing this code down?
+* How will this function scale?
+* Which slow queries have the most impact on my application performance?
+* Are there any issues introduced by the ORMs or 3rd party libraries
 
 More importantly, all of these insights should be directly accessible in the IDE so we can use them while coding. 
 
@@ -56,21 +54,14 @@ More importantly, all of these insights should be directly accessible in the IDE
 
 ## The story behind Digma: :man_technologist::woman_technologist:
 
-We believe that understanding code, real-world requirements, and behavior is critical to making better software. It empowers developers to own their code all the way to production. 
-
-There are many observability tools out there, However, we feel they have managed to miss what developers care about when writing their code. Their focus is on dashboards, whereas we think observability should be integrated into the dev process itself.
-
-Our goal is to create an **developer platform** for interpreting and analyzing the information collected via observability. Traces, logs, metrics are great! But additional effort is needed in order to take them that last mile and make them impactful.
+We believe that unless the application profiling is **continuous** and **automatic** - much like testing it won't be effective. There are many observability tools out there, however, they all require actively and manually spending time, attention, and expertise to get results. It is not surprising that they are used only reactively when something terrible happens. The end goal of observability should not be creating dashboards but improving our application and code. 
 
 ## How are you different from...
 
-Well, we don't compete with any tool existing today because... There isn't any tool that aims to generate this type of feedback. We do work very well together with other tools looking at the same data, like Jaeger, Prometheus, and even traditional observability APMs like Datadog or Splunk. There are plenty of tools that try to offer troubleshooting/debugging capabilities (once an issue is already identified) or give some raw real-time data. This is not where our headspace is at.
+Well, we don't compete with any tool existing today because... There isn't any tool that aims to generate this type of feedback. We do work very well together with other tools looking at the same data, like Jaeger, Prometheus, and even traditional observability APMs like Datadog or Splunk. 
 
-At the time of this writing, most of the data Digma collects is based on OpenTelemetry. In the future, we will definitely be able to ingest data from other technologies as well (such as eBPF or CloudWatch).
+We are also not a static analysis tool. We profile the application execution in runtime rather than looking at the code and generating a ton of styling and rule-based issues.
 
-<p style="text-align: center;">
-  <img src="/images/digmaloveotel.png" width="500" height="200">
-</p>
 
 ## How can I learn more about Digma?
 
@@ -82,15 +73,14 @@ We started publishing some more detailed blog posts explaining what we are tryin
 
 - [The Observant Developer](https://digma.ai/blog/the-observant-developer-part-1/)
 
-## How do I contribute or get involved, and are you guys even open-sourcing this?
-
-We are committed to making Digma a platform that is free for developers. We've made much of our code open-source including our [vscode plugin repo](https://github.com/digma-ai/digma-vscode-plugin) (still under development) and our [Jetbrains plugin repo](https://github.com/digma-ai/digma-intellij-plugin) with an MIT license. 
+For the full list, you can check out our [website blog](https://digma.ai/blog/)
 
 ## FAQ
 
 * **Is this going to instrument my code and change it in creepy ways in production?** Absolutely not! We rely on the OpenTelemetry vanilla instrumentation with a few added attributes of our own. We leave your code untouched.
 * **Do I need to make code changes to use Digma?** No! Digma will take care of collecting the observability data without any code changes.
-* **Which platforms/stacks do you currently support?** We currently focus on [Java](https://www.java.com/en/) and [Kotlin](https://kotlinlang.org/) with [IntelliJ](https://www.jetbrains.com/idea/). Support for [**.NET**](https://dotnet.microsoft.com/en-us/) using [**Rider IDE**](https://www.jetbrains.com/rider/) is currently in early access mode. We'll expand to additional IDEs and languages later this year. If you'd like to be informed when Digma is available for your Stack the best way to do so is to [sign up](https://digma.ai/get-digma/) on our website for notification. 
+* **Does Digma send data to the cloud** No! We purposely run everything locally to avoid any issues with compliance policies.
+* **Which platforms/stacks do you currently support?** We currently focus on [Java](https://www.java.com/en/) and [Kotlin](https://kotlinlang.org/) with [IntelliJ](https://www.jetbrains.com/idea/). Support for [**.NET**](https://dotnet.microsoft.com/en-us/) using [**Rider IDE**](https://www.jetbrains.com/rider/) is currently in early access mode. We'll expand to additional IDEs and languages later this year. 
 
 <p style="text-align: center; margin-top: 2em;">
   <img src="/images/digma_logo_wingz.png" width="400" height="486">
