@@ -1,3 +1,5 @@
+### Make sure to close your Idea first!
+
 To run this script:
 
 For Windows Users:
