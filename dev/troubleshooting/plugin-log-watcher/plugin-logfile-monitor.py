@@ -15,7 +15,7 @@ def get_selected_idea_path():
     elif platform == "darwin":
         idepath = os.path.join(os.path.expanduser('~'), 'Library/Logs/JetBrains')
     elif platform == "win32":
-        idepath = f'{os.getenv("APPDATA")}\JetBrains'
+        idepath = f'{os.getenv("LOCALAPPDATA")}\JetBrains'
         additional_folder = 'log'
     dir_names = []
     for dir_name in os.listdir(idepath):
