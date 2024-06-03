@@ -5,13 +5,14 @@ import os
 from sys import platform
 from typing import Dict
 
-search_terms = ["UI was frozen for", "Digma: Api call"]
+search_terms = ["UI was frozen for", "Digma: Api call", "Digma: Exception"]
 
 def get_selected_idea_path():
     idepath = ''
     additional_folder =''
     if platform == "linux" or platform == "linux2":
-        idepath = os.path.join(os.path.expanduser('~'), '.config/JetBrains')
+        idepath = os.path.join(os.path.expanduser('~'), '.cache/JetBrains')
+        additional_folder = 'log'
     elif platform == "darwin":
         idepath = os.path.join(os.path.expanduser('~'), 'Library/Logs/JetBrains')
     elif platform == "win32":
