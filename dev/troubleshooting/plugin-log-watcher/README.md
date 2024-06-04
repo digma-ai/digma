@@ -1,6 +1,6 @@
 ### This script monitors a log file for specific text patterns and prints out matching lines.
 Update the `search_terms` list in the script with the text patterns you want to monitor for.
-The current search terms are : "UI was frozen for", "Digma: Api call"
+The current search terms are : "UI was frozen for", "Digma: Api call", "Digma: Exception"
 
 To run this script:
 
