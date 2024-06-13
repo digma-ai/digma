@@ -1,6 +1,7 @@
 services:
   digma-persistence:
     image: digmatic/digma-persistence:1.2
+    shm_size: "256MB"
     expose:
       - "5432"
       - "6379"
