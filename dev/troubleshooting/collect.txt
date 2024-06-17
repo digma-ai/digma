@@ -1,1 +1,1 @@
-./collect.sh [NAMESPACE] [ANALYTICS_URL] [TOKEN]
+./collect.sh [NAMESPACE] [ANALYTICS_URL] [TOKEN] [USER] [PWD]
