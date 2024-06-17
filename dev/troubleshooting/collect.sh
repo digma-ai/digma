@@ -1,38 +1,56 @@
 #!/bin/bash
-namespace=$1
-analytics_url=$2
-token=$3
+namespace="$1"
+analytics_url="$2"
+token="$3"
+user="$4"
+pwd="$5"
 
 echo namespace=$namespace
 echo analytics_url=$analytics_url
 echo token=$token
-
-echo "collecting logs..."
+echo user=$user
+echo pwd=***
 
 curr_datetime=$(date +'%Y-%m-%d_%H-%M-%S')
 folder=logs/$curr_datetime
 mkdir -p $folder
 
-http_status=$(curl -k -sS -w "%{http_code}" --location "$analytics_url/about" --header "Authorization: Token $token" -o "$folder/about.json")
+echo "collecting logs to $folder"
+
+http_status=$(curl -k -sS -w "%{http_code}" --location "$analytics_url/about" --header "Digma-Access-Token: Token $token" -o "$folder/about.json")
 if [ "$http_status" != "200" ]; then
     echo "Connection error $analytics_url ($http_status)"
     exit 1
 fi
 
+
+response=$(curl -k -X 'POST' \
+  "$analytics_url/Authentication/login" \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json-patch+json' \
+  -H "Digma-Access-Token: Token $token" \
+  -d "{
+  \"username\": \"$user\",
+  \"password\": \"$pwd\"
+}")
+
+accessToken=$(echo "$response" | jq -r '.accessToken')
+
+
 curl -k -s -o "$folder/topics-throttling-state.json"  --location "$analytics_url/PerformanceMetrics/topics-throttling-state" \
---header "Authorization: Token $token" 
+--header "Digma-Access-Token: Token $token" --header "Authorization: Bearer $accessToken"
 
 curl -k -s -o "$folder/topics-lag.json"  --location "$analytics_url/PerformanceMetrics/topics-lag" \
---header "Authorization: Token $token"
+--header "Digma-Access-Token: Token $token" --header "Authorization: Bearer $accessToken"
 
 curl -k -s -o "$folder/performance-metrics.json"  --location "$analytics_url/PerformanceMetrics" \
---header "Authorization: Token $token"
+--header "Digma-Access-Token: Token $token" --header "Authorization: Bearer $accessToken"
 
 curl -k -s -o "$folder/load-status.json"  --location "$analytics_url/load-status" \
---header "Authorization: Token $token"
+--header "Digma-Access-Token: Token $token" --header "Authorization: Bearer $accessToken"
 
 curl -k -s -o "$folder/usage-stats.json" -X POST  --location "$analytics_url/CodeAnalytics/user/usage_stats" \
---header "Authorization: Token $token" --header 'Content-Type: application/json' -d '{}'
+--header "Digma-Access-Token: Token $token" --header "Authorization: Bearer $accessToken" --header 'Content-Type: application/json' -d '{}'
 
 
 # Get the list of pods in the namespace
