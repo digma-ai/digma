@@ -33,9 +33,8 @@ response=$(curl -k -X 'POST' \
   \"username\": \"$user\",
   \"password\": \"$pwd\"
 }")
-
+echo $response
 accessToken=$(echo "$response" | jq -r '.accessToken')
-
 
 curl -k -s -o "$folder/topics-throttling-state.json"  --location "$analytics_url/PerformanceMetrics/topics-throttling-state" \
 --header "Digma-Access-Token: Token $token" --header "Authorization: Bearer $accessToken"
@@ -52,22 +51,25 @@ curl -k -s -o "$folder/load-status.json"  --location "$analytics_url/load-status
 curl -k -s -o "$folder/usage-stats.json" -X POST  --location "$analytics_url/CodeAnalytics/user/usage_stats" \
 --header "Digma-Access-Token: Token $token" --header "Authorization: Bearer $accessToken" --header 'Content-Type: application/json' -d '{}'
 
+if [[ -n "$namespace" ]]; then
+  # Get the list of pods in the namespace
+  pods=$(kubectl get pods -n "$namespace" -o jsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}')
+  total_pods=$(echo "$pods" | wc -l)
+  total_pods="${total_pods// /}"
 
-# Get the list of pods in the namespace
-pods=$(kubectl get pods -n "$namespace" -o jsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}')
-total_pods=$(echo "$pods" | wc -l)
-total_pods="${total_pods// /}"
+  progress=0
+  # Loop through each pod and download logs
+  for pod in $pods; do
+    ((progress++))
+      echo "Downloading logs from pod $pod... $progress/$total_pods"
+      output_file="${pod}_logs.txt"
+      kubectl logs "$pod" -n "$namespace" > "$folder/$output_file"
+      if [ $? -ne 0 ]; then
+        echo "Error: Failed to download logs from pod $pod."
+      fi
+  done
+fi
 
-progress=0
-# Loop through each pod and download logs
-for pod in $pods; do
-   ((progress++))
-    echo "Downloading logs from pod $pod... $progress/$total_pods"
-    output_file="${pod}_logs.txt"
-    kubectl logs "$pod" -n "$namespace" > "$folder/$output_file"
-    if [ $? -ne 0 ]; then
-       echo "Error: Failed to download logs from pod $pod."
-    fi
-done
+
 
 zip -r "$folder.zip" "$folder"
