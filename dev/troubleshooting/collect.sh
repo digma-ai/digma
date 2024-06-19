@@ -52,6 +52,9 @@ curl -k -s -o "$folder/usage-stats.json" -X POST  --location "$analytics_url/Cod
 --header "Digma-Access-Token: Token $token" --header "Authorization: Bearer $accessToken" --header 'Content-Type: application/json' -d '{}'
 
 if [[ -n "$namespace" ]]; then
+
+  kubectl get deployments -n "$namespace" -o jsonpath='{range .items[*]}{"Deployment: "}{.metadata.name}{"\n"}{range .spec.template.spec.containers[*]}{"Container: "}{.name}{"\n"}{range .env[*]}{.name}{"="}{.value}{"\n"}{end}{"\n"}{end}{end}' > "$folder/deployment_env_vars.txt"
+  kubectl get pods -n "$namespace" --no-headers -o custom-columns="POD:metadata.name,RESTARTS:status.containerStatuses[*].restartCount" > "$folder/pod_restarts.txt"
   # Get the list of pods in the namespace
   pods=$(kubectl get pods -n "$namespace" -o jsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}')
   total_pods=$(echo "$pods" | wc -l)
@@ -63,13 +66,18 @@ if [[ -n "$namespace" ]]; then
     ((progress++))
       echo "Downloading logs from pod $pod... $progress/$total_pods"
       output_file="${pod}_logs.txt"
-      kubectl logs "$pod" -n "$namespace" > "$folder/$output_file"
+      cpu_usage=$(kubectl get pod $pod -n $namespace -o jsonpath='{.status.containerStatuses[*].usage.cpu}')
+      memory_usage=$(kubectl get pod $pod -n $namespace -o jsonpath='{.status.containerStatuses[*].usage.memory}')
+
+      echo "CPU Usage: $cpu_usage" >> "$folder/$output_file"
+      echo "Memory Usage: $memory_usage" >> "$folder/$output_file"
+      echo "Output->" >> "$folder/$output_file"
+      kubectl logs "$pod" -n "$namespace" >> "$folder/$output_file"
       if [ $? -ne 0 ]; then
         echo "Error: Failed to download logs from pod $pod."
       fi
   done
 fi
 
-
-
 zip -r "$folder.zip" "$folder"
+rm -rf "$folder"
