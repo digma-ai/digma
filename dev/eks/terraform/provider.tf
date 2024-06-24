@@ -10,6 +10,11 @@ terraform {
       version = ">= 2.21"
     }
   }
+   backend "s3" {
+    bucket = "terraform-digma-state"
+    key    = "terraform.tfstate"
+    region = var.aws_region
+  }
 }
 
 provider "aws" {
