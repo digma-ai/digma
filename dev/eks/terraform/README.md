@@ -17,8 +17,11 @@ This project contains Terraform scripts to deploy a Kubernetes cluster on AWS.
 ### Step 1: Customize Variables
 Customize the variables in the terraform.tfvars for your deployment.
 
+Configure Terraform Backend specify the backend configuration to use S3
+- update region in provider.tf where your bucket is located.
 ### Step 2: Initialize Terraform
 Initialize the Terraform working directory. This step downloads the necessary providers and sets up the environment:
+
 ```
 terraform init
 ```
