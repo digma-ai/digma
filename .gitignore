@@ -1,2 +1,8 @@
 .vscode/
 .idea/
+logs/
+.terraform/
+.terraform.*
+terraform.tfstate
+terraform.tfstate.*
+.DS_Store
