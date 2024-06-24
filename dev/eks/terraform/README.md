@@ -4,7 +4,11 @@ This project contains Terraform scripts to deploy a Kubernetes cluster on AWS.
 
 ## Prerequisites
 
-1. [Terraform](https://www.terraform.io/downloads.html) installed on your local machine.
+1. Installed on your local machine.
+- [Terraform](https://www.terraform.io/downloads.html)
+- [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
+- [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
+
 2. AWS CLI configured with appropriate permissions.
 3. An AWS account.
 
@@ -36,8 +40,13 @@ terraform apply
 ### Step 5: Access the Kubernetes Cluster
 Once the deployment is complete, you can configure your kubectl to access the cluster. The necessary kubeconfig file can be found in the outputs of the Terraform apply.
 
+Instruction -  how to configures kubectl to interact with the new EKS cluster, run the following command:
+
 ```
-aws eks --region <your-aws-region> update-kubeconfig --name <your-cluster-name>
+terraform output configure_kubectl
+
+# or use:
+#aws eks --region <your-aws-region> update-kubeconfig --name <your-cluster-name>
 
 ```
 Replace \<your-aws-region> and \<your-cluster-name> with the appropriate values.
