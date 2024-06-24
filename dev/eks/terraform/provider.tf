@@ -13,12 +13,12 @@ terraform {
    backend "s3" {
     bucket = "terraform-digma-state"
     key    = "terraform.tfstate"
-    region = var.aws_region
+    region = "eu-west-1"
   }
 }
 
 provider "aws" {
-  region = var.aws_region
+  region = "eu-west-1"
 }
 
 provider "kubernetes" {
