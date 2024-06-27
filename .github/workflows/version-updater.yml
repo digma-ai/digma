@@ -7,7 +7,7 @@ on:
         description: 'The application version to update'
         required: true
 jobs:
-  update_yaml:
+  update_docker_compose:
     runs-on: ubuntu-latest
     env:
       BRANCH_NAME: bump_${{ github.event.inputs.app_version }}
