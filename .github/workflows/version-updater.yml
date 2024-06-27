@@ -1,0 +1,39 @@
+name: Update Docker-Compose Version
+
+on:
+  workflow_dispatch:
+    inputs:
+      app_version:
+        description: 'The application version to update'
+        required: true
+jobs:
+  update_yaml:
+    runs-on: ubuntu-latest
+    env:
+      BRANCH_NAME: bump_${{ github.event.inputs.app_version }}
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install ruamel.yaml  
+      - name: Create Branch
+        run: |
+          git checkout -b ${{ env.BRANCH_NAME }}
+      - name: Run Python script
+        run: |
+          python .github/scripts/version_updater.py "${{ github.event.inputs.app_version }}" 'docker/docker-compose.yml'
+      - name: Commit and Push
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add .
+          git commit -m "Update docker-compose app version to ${{ github.event.inputs.app_version }}"
+          git push origin ${{ env.BRANCH_NAME }}
+          gh pr create --base main --head ${{ env.BRANCH_NAME }} --title 'Update docker-compose app version ${{ github.event.inputs.app_version }}' --body 'This PR updates the docker-compose app version to ${{ github.event.inputs.app_version }}'
