@@ -54,9 +54,10 @@ module "eks" {
     digma-app-nodes = {
       node_group_name = var.node_group_name
       instance_types  = var.instance_types
+      ami_type        = var.ami_type
       ebs_optimized   = true
       min_size     = 1
-      max_size     = 2
+      max_size     = 3
       desired_size = 2
       subnet_ids   = module.vpc.private_subnets
     }
