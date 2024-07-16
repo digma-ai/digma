@@ -1,7 +1,7 @@
 {
   "apiVersion": "v1",
   "pluginLatestVersion": "2.0.359",
-  "backendLatestVersion": "0.3.73",
+  "backendLatestVersion": "0.3.75",
   "versionMatrix": [],
   "forceUpdates":{
     "plugin":{
