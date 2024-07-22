@@ -51,6 +51,10 @@ curl -k -s -o "$folder/load-status.json"  --location "$analytics_url/load-status
 curl -k -s -o "$folder/usage-stats.json" -X POST  --location "$analytics_url/CodeAnalytics/user/usage_stats" \
 --header "Digma-Access-Token: Token $token" --header "Authorization: Bearer $accessToken" --header 'Content-Type: application/json' -d '{}'
 
+curl -k -s -o "$folder/diagnostic-log.json"  --location "$analytics_url/api/Diagnostic/logs" \
+--header "Digma-Access-Token: Token $token" --header "Authorization: Bearer $accessToken"
+
+
 if [[ -n "$namespace" ]]; then
 
   kubectl get deployments -n "$namespace" -o jsonpath='{range .items[*]}{"Deployment: "}{.metadata.name}{"\n"}{range .spec.template.spec.containers[*]}{"Container: "}{.name}{"\n"}{range .env[*]}{.name}{"="}{.value}{"\n"}{end}{"\n"}{end}{end}' > "$folder/deployment_env_vars.txt"
