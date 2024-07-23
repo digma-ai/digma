@@ -23,4 +23,3 @@ select item in "${pids[@]}"; do
         echo "Invalid selection. Please try again."
     fi
 done
-

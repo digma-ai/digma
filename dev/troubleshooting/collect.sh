@@ -11,18 +11,18 @@ echo token=$token
 echo user=$user
 echo pwd=***
 
+
 curr_datetime=$(date +'%Y-%m-%d_%H-%M-%S')
 folder=logs/$curr_datetime
 mkdir -p $folder
 
 echo "collecting logs to $folder"
-
-http_status=$(curl -k -sS -w "%{http_code}" --location "$analytics_url/about" --header "Digma-Access-Token: Token $token" -o "$folder/about.json")
-if [ "$http_status" != "200" ]; then
-    echo "Connection error $analytics_url ($http_status)"
-    exit 1
-fi
-
+if [[ -n "$analytics_url" ]]; then
+  http_status=$(curl -k -sS -w "%{http_code}" --location "$analytics_url/about" --header "Digma-Access-Token: Token $token" -o "$folder/about.json")
+  if [ "$http_status" != "200" ]; then
+      echo "Connection error $analytics_url ($http_status)"
+      exit 1
+  fi
 
 response=$(curl -k -X 'POST' \
   "$analytics_url/Authentication/login" \
@@ -54,6 +54,7 @@ curl -k -s -o "$folder/usage-stats.json" -X POST  --location "$analytics_url/Cod
 curl -k -s -o "$folder/diagnostic-log.json"  --location "$analytics_url/api/Diagnostic/logs" \
 --header "Digma-Access-Token: Token $token" --header "Authorization: Bearer $accessToken"
 
+fi
 
 if [[ -n "$namespace" ]]; then
 
