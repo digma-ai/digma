@@ -11,47 +11,49 @@ echo token=$token
 echo user=$user
 echo pwd=***
 
-
 curr_datetime=$(date +'%Y-%m-%d_%H-%M-%S')
 folder=logs/$curr_datetime
 mkdir -p $folder
 
 echo "collecting logs to $folder"
-if [[ -n "$analytics_url" ]]; then
-  http_status=$(curl -k -sS -w "%{http_code}" --location "$analytics_url/about" --header "Digma-Access-Token: Token $token" -o "$folder/about.json")
-  if [ "$http_status" != "200" ]; then
-      echo "Connection error $analytics_url ($http_status)"
-      exit 1
-  fi
 
-
-  response=$(curl -k -X 'POST' \
-    "$analytics_url/Authentication/login" \
-    -H 'accept: */*' \
-    -H 'Content-Type: application/json-patch+json' \
-    -H "Digma-Access-Token: Token $token" \
-    -d "{
-    \"username\": \"$user\",
-    \"password\": \"$pwd\"
-  }")
-  echo $response
-  accessToken=$(echo "$response" | jq -r '.accessToken')
-
-  curl -k -s -o "$folder/topics-throttling-state.json"  --location "$analytics_url/PerformanceMetrics/topics-throttling-state" \
-  --header "Digma-Access-Token: Token $token" --header "Authorization: Bearer $accessToken"
-
-  curl -k -s -o "$folder/topics-lag.json"  --location "$analytics_url/PerformanceMetrics/topics-lag" \
-  --header "Digma-Access-Token: Token $token" --header "Authorization: Bearer $accessToken"
-
-  curl -k -s -o "$folder/performance-metrics.json"  --location "$analytics_url/PerformanceMetrics" \
-  --header "Digma-Access-Token: Token $token" --header "Authorization: Bearer $accessToken"
-
-  curl -k -s -o "$folder/load-status.json"  --location "$analytics_url/load-status" \
-  --header "Digma-Access-Token: Token $token" --header "Authorization: Bearer $accessToken"
-
-  curl -k -s -o "$folder/usage-stats.json" -X POST  --location "$analytics_url/CodeAnalytics/user/usage_stats" \
-  --header "Digma-Access-Token: Token $token" --header "Authorization: Bearer $accessToken" --header 'Content-Type: application/json' -d '{}'
+http_status=$(curl -k -sS -w "%{http_code}" --location "$analytics_url/about" --header "Digma-Access-Token: Token $token" -o "$folder/about.json")
+if [ "$http_status" != "200" ]; then
+    echo "Connection error $analytics_url ($http_status)"
+    exit 1
 fi
+
+
+response=$(curl -k -X 'POST' \
+  "$analytics_url/Authentication/login" \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json-patch+json' \
+  -H "Digma-Access-Token: Token $token" \
+  -d "{
+  \"username\": \"$user\",
+  \"password\": \"$pwd\"
+}")
+echo $response
+accessToken=$(echo "$response" | jq -r '.accessToken')
+
+curl -k -s -o "$folder/topics-throttling-state.json"  --location "$analytics_url/PerformanceMetrics/topics-throttling-state" \
+--header "Digma-Access-Token: Token $token" --header "Authorization: Bearer $accessToken"
+
+curl -k -s -o "$folder/topics-lag.json"  --location "$analytics_url/PerformanceMetrics/topics-lag" \
+--header "Digma-Access-Token: Token $token" --header "Authorization: Bearer $accessToken"
+
+curl -k -s -o "$folder/performance-metrics.json"  --location "$analytics_url/PerformanceMetrics" \
+--header "Digma-Access-Token: Token $token" --header "Authorization: Bearer $accessToken"
+
+curl -k -s -o "$folder/load-status.json"  --location "$analytics_url/load-status" \
+--header "Digma-Access-Token: Token $token" --header "Authorization: Bearer $accessToken"
+
+curl -k -s -o "$folder/usage-stats.json" -X POST  --location "$analytics_url/CodeAnalytics/user/usage_stats" \
+--header "Digma-Access-Token: Token $token" --header "Authorization: Bearer $accessToken" --header 'Content-Type: application/json' -d '{}'
+
+curl -k -s -o "$folder/diagnostic-log.json"  --location "$analytics_url/api/Diagnostic/logs" \
+--header "Digma-Access-Token: Token $token" --header "Authorization: Bearer $accessToken"
+
 
 if [[ -n "$namespace" ]]; then
 
