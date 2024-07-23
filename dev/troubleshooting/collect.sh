@@ -24,33 +24,36 @@ if [[ -n "$analytics_url" ]]; then
       exit 1
   fi
 
+response=$(curl -k -X 'POST' \
+  "$analytics_url/Authentication/login" \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json-patch+json' \
+  -H "Digma-Access-Token: Token $token" \
+  -d "{
+  \"username\": \"$user\",
+  \"password\": \"$pwd\"
+}")
+echo $response
+accessToken=$(echo "$response" | jq -r '.accessToken')
 
-  response=$(curl -k -X 'POST' \
-    "$analytics_url/Authentication/login" \
-    -H 'accept: */*' \
-    -H 'Content-Type: application/json-patch+json' \
-    -H "Digma-Access-Token: Token $token" \
-    -d "{
-    \"username\": \"$user\",
-    \"password\": \"$pwd\"
-  }")
-  echo $response
-  accessToken=$(echo "$response" | jq -r '.accessToken')
+curl -k -s -o "$folder/topics-throttling-state.json"  --location "$analytics_url/PerformanceMetrics/topics-throttling-state" \
+--header "Digma-Access-Token: Token $token" --header "Authorization: Bearer $accessToken"
 
-  curl -k -s -o "$folder/topics-throttling-state.json"  --location "$analytics_url/PerformanceMetrics/topics-throttling-state" \
-  --header "Digma-Access-Token: Token $token" --header "Authorization: Bearer $accessToken"
+curl -k -s -o "$folder/topics-lag.json"  --location "$analytics_url/PerformanceMetrics/topics-lag" \
+--header "Digma-Access-Token: Token $token" --header "Authorization: Bearer $accessToken"
 
-  curl -k -s -o "$folder/topics-lag.json"  --location "$analytics_url/PerformanceMetrics/topics-lag" \
-  --header "Digma-Access-Token: Token $token" --header "Authorization: Bearer $accessToken"
+curl -k -s -o "$folder/performance-metrics.json"  --location "$analytics_url/PerformanceMetrics" \
+--header "Digma-Access-Token: Token $token" --header "Authorization: Bearer $accessToken"
 
-  curl -k -s -o "$folder/performance-metrics.json"  --location "$analytics_url/PerformanceMetrics" \
-  --header "Digma-Access-Token: Token $token" --header "Authorization: Bearer $accessToken"
+curl -k -s -o "$folder/load-status.json"  --location "$analytics_url/load-status" \
+--header "Digma-Access-Token: Token $token" --header "Authorization: Bearer $accessToken"
 
-  curl -k -s -o "$folder/load-status.json"  --location "$analytics_url/load-status" \
-  --header "Digma-Access-Token: Token $token" --header "Authorization: Bearer $accessToken"
+curl -k -s -o "$folder/usage-stats.json" -X POST  --location "$analytics_url/CodeAnalytics/user/usage_stats" \
+--header "Digma-Access-Token: Token $token" --header "Authorization: Bearer $accessToken" --header 'Content-Type: application/json' -d '{}'
 
-  curl -k -s -o "$folder/usage-stats.json" -X POST  --location "$analytics_url/CodeAnalytics/user/usage_stats" \
-  --header "Digma-Access-Token: Token $token" --header "Authorization: Bearer $accessToken" --header 'Content-Type: application/json' -d '{}'
+curl -k -s -o "$folder/diagnostic-log.json"  --location "$analytics_url/api/Diagnostic/logs" \
+--header "Digma-Access-Token: Token $token" --header "Authorization: Bearer $accessToken"
+
 fi
 
 if [[ -n "$namespace" ]]; then
