@@ -1,6 +1,4 @@
 #!/bin/bash
-#!/bin/bash
-
 # Parse command-line arguments
 AUTO="false"
 while [[ "$#" -gt 0 ]]; do
@@ -81,11 +79,8 @@ export_service_traces(){
     --data-urlencode "lookback=$LOOPBACK" > $file
 }
 
-
-
 if [ "$AUTO" = "true" ]; then
     start_collecting_jaeger_traces "$ANALYTICS_URL" "$ACCESS_TOKEN"
-    exit 1
     echo "Waiting for 5 minutes..."
     sleep 300  # Wait for 300 seconds (5 minutes)
     echo "5 minutes have passed."
