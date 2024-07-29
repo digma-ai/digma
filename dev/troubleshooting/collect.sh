@@ -54,6 +54,12 @@ curl -k -s -o "$folder/usage-stats.json" -X POST  --location "$analytics_url/Cod
 curl -k -s -o "$folder/diagnostic-log.json"  --location "$analytics_url/api/Diagnostic/logs" \
 --header "Digma-Access-Token: Token $token" --header "Authorization: Bearer $accessToken"
 
+curl -k -s -o "$folder/large-trace.json"  --location "$analytics_url/api/Diagnostic/large-trace" \
+--header "Digma-Access-Token: Token $token" --header "Authorization: Bearer $accessToken"
+
+curl -k -s -o "$folder/ignored-spans.json"  --location "$analytics_url/api/Diagnostic/ignored-spans" \
+--header "Digma-Access-Token: Token $token" --header "Authorization: Bearer $accessToken"
+
 fi
 
 if [[ -n "$namespace" ]]; then
