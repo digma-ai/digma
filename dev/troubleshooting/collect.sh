@@ -57,8 +57,8 @@ curl -k -s -o "$folder/diagnostic-log.json"  --location "$analytics_url/api/Diag
 curl -k -s -o "$folder/large-trace.json"  --location "$analytics_url/api/Diagnostic/large-trace" \
 --header "Digma-Access-Token: Token $token" --header "Authorization: Bearer $accessToken"
 
-curl -k -s -o "$folder/ignored-spans.json"  --location "$analytics_url/api/Diagnostic/ignored-spans" \
---header "Digma-Access-Token: Token $token" --header "Authorization: Bearer $accessToken"
+#curl -k -s -o "$folder/ignored-spans.json"  --location "$analytics_url/api/Diagnostic/ignored-spans" \
+#--header "Digma-Access-Token: Token $token" --header "Authorization: Bearer $accessToken"
 
 fi
 
