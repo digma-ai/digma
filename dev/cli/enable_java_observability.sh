@@ -1,19 +1,18 @@
 #!/bin/bash
 
 # Default values
-DIGMA_URL="https://localhost:5050"
+DIGMA_URL="http://localhost:5050"
 ENV_NAME="Local"
 ENV_TYPE="Private"
 DIGMA_DEPLOYMENT="Local"
-
 USER_ID=""
 
 # Function to display help
 show_help() {
-    echo "Usage: ./setup_otel.sh --service_name <SERVICE_NAME> [options]"
+    echo "Usage: source setup_otel.sh --service_name <SERVICE_NAME> [options]"
     echo ""
     echo "Mandatory arguments:"
-    echo "  --service_name            The name of the your application service (Required)"
+    echo "  --service_name            The name of your application service (Required)"
     echo ""
     echo "Optional arguments:"
     echo "  --digma_collector_url     URL for the Digma collector (default: https://localhost:5050)"
@@ -22,9 +21,9 @@ show_help() {
     echo "  --user_id                 User ID (required for Private environment in centralized deployments)"
     echo "                            You can find your user_id value by selecting the 'How to setup'"
     echo "                            option in the environment tab menu in the observability panel."
-    echo "  --digma_deployment        Digma deployment type: can be 'Local' or 'Central' (default: 'Local')"
+    echo "  --digma_deployment_type   Digma deployment type: can be 'Local' or 'Central' (default: 'Local')"
     echo "  --help                    Show this help message"
-    exit 0
+    return 0
 }
 
 # Parse arguments
@@ -36,8 +35,8 @@ while [[ "$#" -gt 0 ]]; do
         --public_env) ENV_TYPE="Public";;
         --user_id) USER_ID="$2"; shift ;;
         --digma_deployment_type) DIGMA_DEPLOYMENT="$2"; shift ;;
-        --help) show_help ;;
-        *) echo "Unknown parameter passed: $1"; show_help ;;
+        --help) show_help; return 0 ;;
+        *) echo "Unknown parameter passed: $1"; return 1 ;;
     esac
     shift
 done
@@ -46,17 +45,20 @@ done
 if [ -z "$SERVICE_NAME" ]; then
     echo "Error: --service_name is required."
     show_help
+    return 1
 fi
 
-if [ "$ENV_TYPE" = "Private" ] && "$DIGMA_DEPLOYMENT" = "Central" ] && [ -z "$USER_ID" ]; then
+if [ "$ENV_TYPE" = "Private" ] && [ "$DIGMA_DEPLOYMENT" = "Central" ] && [ -z "$USER_ID" ]; then
     echo "Error: --user_id is required when --env_name is Local and --digma_deployment is Central."
     echo "You can find your user_id value by selecting the 'How to setup'"
     echo "option in the environment tab menu in the observability panel."
-    show_help
+    return 1
 fi
 
 # Download agent files if they don't already exist
 echo "Downloading the agent files if needed..."
+
+mkdir -p /tmp/otel
 
 if [ ! -f /tmp/otel/opentelemetry-javaagent.jar ]; then
     curl -s --create-dirs -O -L --output-dir /tmp/otel https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/download/v2.1.0/opentelemetry-javaagent.jar
