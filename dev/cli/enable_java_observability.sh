@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Default values
-DIGMA_URL="https://localhost:5050"
+DIGMA_URL="http://localhost:5050"
 ENV_NAME="Local"
 ENV_TYPE="Private"
 DIGMA_DEPLOYMENT="Local"
