@@ -25,17 +25,18 @@ function Show-Help {
 }
 
 # Parse arguments
-foreach ($arg in $args) {
-    switch -Regex ($arg) {
-        '-ServiceName' { $ServiceName = $args[$args.IndexOf($arg) + 1] }
-        '-DigmaCollectorUrl' { $DIGMA_URL = $args[$args.IndexOf($arg) + 1] }
-        '-EnvName' { $ENV_NAME = $args[$args.IndexOf($arg) + 1] }
-        '-PublicEnv' { $ENV_TYPE = "Public" }
-        '-UserId' { $USER_ID = $args[$args.IndexOf($arg) + 1] }
-        '-DigmaDeploymentType' { $DIGMA_DEPLOYMENT = $args[$args.IndexOf($arg) + 1] }
-        '-Help' { Show-Help }
-        default { Write-Host "Unknown parameter passed: $arg"; Show-Help }
-    }
+param (
+    [string]$ServiceName,
+    [string]$DigmaCollectorUrl = $DIGMA_URL,
+    [string]$EnvName = $ENV_NAME,
+    [switch]$PublicEnv,
+    [string]$UserId,
+    [string]$DigmaDeploymentType = $DIGMA_DEPLOYMENT,
+    [switch]$Help
+)
+
+if ($Help) {
+    Show-Help
 }
 
 # Check if mandatory parameters are provided
@@ -44,7 +45,11 @@ if (-not $ServiceName) {
     Show-Help
 }
 
-if ($ENV_TYPE -eq "Private" -and $DIGMA_DEPLOYMENT -eq "Central" -and -not $USER_ID) {
+if ($PublicEnv) {
+    $ENV_TYPE = "Public"
+}
+
+if ($ENV_TYPE -eq "Private" -and $DigmaDeploymentType -eq "Central" -and -not $UserId) {
     Write-Host "Error: -UserId is required when EnvName is Local and DigmaDeployment is Central."
     Write-Host "You can find your user_id value by selecting the 'How to setup'"
     Write-Host "option in the environment tab menu in the observability panel."
@@ -76,7 +81,7 @@ Write-Host "Setting observability environment variables..."
 $env:JAVA_TOOL_OPTIONS="-javaagent:$otelDir\digma-agent.jar `
 -javaagent:$otelDir\opentelemetry-javaagent.jar `
 -Dotel.javaagent.extensions=$otelDir\digma-otel-agent-extension.jar `
--Dotel.exporter.otlp.traces.endpoint=$DIGMA_URL `
+-Dotel.exporter.otlp.traces.endpoint=$DigmaCollectorUrl `
 -Dotel.traces.exporter=otlp -Dotel.exporter.otlp.protocol=grpc `
 -Dotel.metrics.exporter=none -Dotel.logs.exporter=none `
 -Dotel.instrumentation.common.experimental.controller.telemetry.enabled=true `
@@ -85,9 +90,9 @@ $env:JAVA_TOOL_OPTIONS="-javaagent:$otelDir\digma-agent.jar `
 -Dotel.instrumentation.jdbc-datasource.enabled=true"
 
 $env:OTEL_SERVICE_NAME=$ServiceName
-$env:OTEL_RESOURCE_ATTRIBUTES="digma.environment=$ENV_NAME,digma.environment.type=$ENV_TYPE"
+$env:OTEL_RESOURCE_ATTRIBUTES="digma.environment=$EnvName,digma.environment.type=$ENV_TYPE"
 
 Write-Host "Successfully configured this environment for observability"
-Write-Host "Traces will be sent to a $DIGMA_DEPLOYMENT Digma deployment at $DIGMA_URL"
+Write-Host "Traces will be sent to a $DigmaDeploymentType Digma deployment at $DigmaCollectorUrl"
 # Final message
 Write-Host "You can run your Java app normally and observability data will be analyzed by Digma."
