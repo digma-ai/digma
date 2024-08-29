@@ -2,13 +2,13 @@
 
 if [ -z "$1" ]; then
     echo "No project provided"
-    echo "restore_postgres_as_compound.sh <docker-compose-project-name> <backup-folder>"
+    echo "restore_docker.sh <docker-compose-project-name> <backup-folder>"
     project=$1
 fi
 
 if [ -z "$2" ]; then
     echo "No backup folder prefix provided"
-    echo "restore_postgres_as_compound.sh <docker-compose-project-name> <backup-folder>"
+    echo "restore_docker.sh <docker-compose-project-name> <backup-folder>"
     exit 1
 fi
 
