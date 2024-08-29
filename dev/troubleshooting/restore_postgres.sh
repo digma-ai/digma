@@ -6,7 +6,7 @@ else
     dump_file=$1
 fi
 
-persistence_container=$(docker ps --filter "name=$prefix-digma-persistence" --format "{{.Names}}")
+persistence_container=$(docker ps --filter "name=digma-persistence" --format "{{.Names}}")
 
 echo "Copying dump into volume"
 docker cp $dump_file $persistence_container:/etc/lib/postgresql/data-pg/dump
