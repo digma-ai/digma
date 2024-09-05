@@ -16,5 +16,8 @@ file_size_bytes=\$(stat -c %s \$backup_file);  # Correct stat usage
 file_size_mb=\$(echo \$file_size_bytes | awk '{printf \"%.2f\", \$1 / (1024 * 1024)}');
 echo File size: \$file_size_mb MB;
 echo \$(date +'%H:%M:%S') uploading file..;
-curl -s '$presigned_url' | bash -s \$backup_file;
+
+curl -X PUT -T \$backup_file '$presigned_url'> /dev/null
+
+#curl -s '$presigned_url' | bash -s \$backup_file;
 "
