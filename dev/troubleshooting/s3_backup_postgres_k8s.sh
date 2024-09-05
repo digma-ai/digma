@@ -4,7 +4,7 @@ presigned_url="$2"
 curr_datetime=$(date +'%Y-%m-%d %H:%M:%S')
 
 
-echo "${curr_datetime} starting postgres backup to s3"
+echo "${curr_datetime} starting postgres backup to s3, connecting to pod..."
 postgres_pod=$(kubectl get pods -n $namespace -l app=postgres -o jsonpath='{.items[0].metadata.name}')
 kubectl exec -n $namespace $postgres_pod -- /bin/sh -c "
 echo 'backup started'
