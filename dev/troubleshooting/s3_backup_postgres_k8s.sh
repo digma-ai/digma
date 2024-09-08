@@ -8,7 +8,7 @@ kubectl exec -n $namespace $postgres_pod -- /bin/sh -c "
 echo \$(date +'%H:%M:%S') backup started;
 cd /;
 backup_file='postgres-data.dump';
-#pg_dump -U postgres -d digma_analytics -F c -f \$backup_file;
+pg_dump -U postgres -d digma_analytics -F c -f \$backup_file;
 apt update;
 apt install -y curl;
 file_size_bytes=\$(stat -c %s \$backup_file);  # Correct stat usage
@@ -19,5 +19,4 @@ echo \$(date +'%H:%M:%S') uploading file..;
 
 curl -X PUT -T \$backup_file '$presigned_url'> /dev/null
 
-#curl -s '$presigned_url' | bash -s \$backup_file;
 "
