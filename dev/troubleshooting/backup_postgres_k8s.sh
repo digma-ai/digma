@@ -85,5 +85,5 @@ fi
 if [[ -n "$presigned_url" ]]; then
     echo $(date +'%H:%M:%S') uploading file to s3..;
     cd $local_folder
-    curl -X PUT -T $dump_file_name '$presigned_url'> /dev/null
+    curl -X PUT -T $dump_file_name $presigned_url> /dev/null
 fi
