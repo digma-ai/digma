@@ -3,7 +3,7 @@ namespace="$1"
 presigned_url="$2"
 SPLIT_SIZE_MB=50
 curr_datetime=$(date +'%Y-%m-%d_%H-%M-%S')
-local_folder=backups/$curr_datetime
+local_folder="backups/$curr_datetime"
 mkdir -p $local_folder
 
 echo $(date +'%H:%M:%S') Postgres backup to $local_folder
@@ -13,11 +13,12 @@ pod_backup_folder="backups/$curr_datetime"
 pod_backup_file_path="$pod_backup_folder/$dump_file_name"
 postgres_pod=$(kubectl get pods -n $namespace -l app=postgres -o jsonpath='{.items[0].metadata.name}')
 
-kubectl exec -n $namespace -it $postgres_pod -- sh -c "mkdir -p $pod_backup_folder;pg_dump -U postgres -d digma_analytics -F c -f $pod_backup_file_path"
 kubectl exec -n $namespace $postgres_pod -- /bin/sh -c "
 cd /;
-file_size_bytes=\$(stat -c %s $pod_backup_file_path);  # Correct stat usage
-# Calculate file size in MB using awk
+mkdir -p $pod_backup_folder;
+pg_dump -U postgres -d digma_analytics -F c -f $pod_backup_file_path;
+file_size_bytes=\$(stat -c %s $pod_backup_file_path);
+# Calculate file size in MB using awk;
 file_size_mb=\$(echo \$file_size_bytes | awk '{printf \"%.2f\", \$1 / (1024 * 1024)}');
 echo \$(date +'%H:%M:%S') Backup File size: \$file_size_mb MB;
 "
