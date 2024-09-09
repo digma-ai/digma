@@ -27,7 +27,7 @@ def run():
         idepath = f'{os.getenv("APPDATA")}\JetBrains'
     dir_names = []
     for dir_name in os.listdir(idepath):
-        if not dir_name.startswith('Idea') and not dir_name.startswith('Rider'):
+        if not dir_name.startswith('Idea') and not dir_name.startswith('Rider') and not dir_name.startswith('IntelliJIdea'):
             continue
         dir_names.append(dir_name)
     dir_names.sort()
