@@ -26,4 +26,7 @@ echo "Copying dump into $persistence_container"
 docker cp $dump_file $persistence_container:/dump
 
 echo "Retoring dump"
-docker exec -it $persistence_container sh -c 'pg_restore -c -U postgres -F c -d digma_analytics /dump'
+docker exec -it $persistence_container sh -c "psql -U postgres -c \"SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = 'digma_analytics';\""
+docker exec -it $persistence_container sh -c 'dropdb -U postgres digma_analytics'
+docker exec -it $persistence_container sh -c 'createdb -U postgres digma_analytics'
+docker exec -it $persistence_container sh -c 'pg_restore -U postgres -F c -d digma_analytics /dump'

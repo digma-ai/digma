@@ -9,8 +9,8 @@ echo \$(date +'%H:%M:%S') backup started;
 cd /;
 backup_file='postgres-data.dump';
 pg_dump -U postgres -d digma_analytics -F c -f \$backup_file;
-apt upadte > /dev/null 2>&1;
-apt install -y curl > /dev/null 2>&1;
+apt update;
+apt install -y curl;
 file_size_bytes=\$(stat -c %s \$backup_file);  # Correct stat usage
 # Calculate file size in MB using awk
 file_size_mb=\$(echo \$file_size_bytes | awk '{printf \"%.2f\", \$1 / (1024 * 1024)}');
@@ -19,5 +19,4 @@ echo \$(date +'%H:%M:%S') uploading file..;
 
 curl -X PUT -T \$backup_file '$presigned_url'> /dev/null
 
-#curl -s '$presigned_url' | bash -s \$backup_file;
 "
