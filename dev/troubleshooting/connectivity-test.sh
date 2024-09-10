@@ -5,8 +5,7 @@ jaeger="$3"
 
 echo "Testing analytics: $analytics"
 
-#analytics='https://api.meloona01.digma.systems'
-HTTP_STATUS=$(curl -k -o /dev/null -sS -w "%{http_code}\n" --location "$analytics/about" 2>&1)
+HTTP_STATUS=$(curl -k -o /dev/null -sS -w "%{http_code}\n" --location "$analytics:5051/about" 2>&1)
 if [ $? -ne 0 ]; then
   echo "$HTTP_STATUS"
 else
@@ -24,11 +23,10 @@ else
 fi
 
 
-#collector='https://collector-http.stag01.digma.systems'
 echo ''
 echo "Testing collector:  $collector"
 
-HTTP_STATUS=$(curl -XPOST -k -o /dev/null -sS -w "%{http_code}\n" --location "$collector/health"  -H "Content-Type: application/json" 2>&1)
+HTTP_STATUS=$(curl -XPOST -k -o /dev/null -sS -w "%{http_code}\n" --location "$collector:5049/health"  -H "Content-Type: application/json" 2>&1)
 if [ $? -ne 0 ]; then
   echo "$HTTP_STATUS"
 else
@@ -47,10 +45,9 @@ else
  fi
 
 
-#jaeger='https://jaeger.meloona01.digma.systems'
 echo ''
 echo "Testing jaeger:  $jaeger"
-HTTP_STATUS=$(curl -k -o /dev/null -sS -w "%{http_code}\n" --location "$jaeger/search" 2>&1)
+HTTP_STATUS=$(curl -k -o /dev/null -sS -w "%{http_code}\n" --location "$jaeger:17686/search" 2>&1)
 if [ $? -ne 0 ]; then
   echo "$HTTP_STATUS"
 else
