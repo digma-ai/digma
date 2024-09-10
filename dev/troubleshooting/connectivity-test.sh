@@ -3,9 +3,14 @@ analytics="$1"
 collector="$2"
 jaeger="$3"
 
-echo "Testing analytics: $analytics"
+if [[ "$collector" == *":5050" ]]; then
+  collector="${collector%:5050}"
+  collector=$collector:5049
+fi
 
-HTTP_STATUS=$(curl -k -o /dev/null -sS -w "%{http_code}\n" --location "$analytics:5051/about" 2>&1)
+echo "Testing analytics: $analytics/about"
+
+HTTP_STATUS=$(curl -k -o /dev/null -sS -w "%{http_code}\n" --location "$analytics/about" 2>&1)
 if [ $? -ne 0 ]; then
   echo "$HTTP_STATUS"
 else
@@ -24,9 +29,9 @@ fi
 
 
 echo ''
-echo "Testing collector:  $collector"
+echo "Testing collector: $collector/health"
 
-HTTP_STATUS=$(curl -XPOST -k -o /dev/null -sS -w "%{http_code}\n" --location "$collector:5049/health"  -H "Content-Type: application/json" 2>&1)
+HTTP_STATUS=$(curl -XPOST -k -o /dev/null -sS -w "%{http_code}\n" --location "$collector/health"  -H "Content-Type: application/json" 2>&1)
 if [ $? -ne 0 ]; then
   echo "$HTTP_STATUS"
 else
@@ -46,8 +51,8 @@ else
 
 
 echo ''
-echo "Testing jaeger:  $jaeger"
-HTTP_STATUS=$(curl -k -o /dev/null -sS -w "%{http_code}\n" --location "$jaeger:17686/search" 2>&1)
+echo "Testing jaeger:  $jaeger/search"
+HTTP_STATUS=$(curl -k -o /dev/null -sS -w "%{http_code}\n" --location "$jaeger/search" 2>&1)
 if [ $? -ne 0 ]; then
   echo "$HTTP_STATUS"
 else
