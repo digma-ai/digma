@@ -64,8 +64,5 @@ cd /;
 file='query_result.txt';
 psql -U postgres -d digma_analytics -c \"\$query\" > \$file;
 echo \$(date +'%H:%M:%S') uploading result..;
-echo ''
-echo \"$presigned_url\"
-echo ''
 curl -X PUT -T \"\$file\" \"$presigned_url\" > /dev/null;
 "
