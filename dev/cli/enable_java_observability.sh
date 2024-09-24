@@ -6,6 +6,7 @@ ENV_NAME="Local"
 ENV_TYPE="Private"
 DIGMA_DEPLOYMENT="Local"
 USER_ID=""
+FLAVOR="default"
 
 # Function to display help
 show_help() {
@@ -22,6 +23,7 @@ show_help() {
     echo "                            You can find your user_id value by selecting the 'How to setup'"
     echo "                            option in the environment tab menu in the observability panel."
     echo "  --digma_deployment_type   Digma deployment type: can be 'Local' or 'Central' (default: 'Local')"
+    echo "  --flavor                  Flavor of the setup: default or micronaut (default: default)"
     echo "  --help                    Show this help message"
     return 0
 }
@@ -35,6 +37,7 @@ while [[ "$#" -gt 0 ]]; do
         --public_env) ENV_TYPE="Public";;
         --user_id) USER_ID="$2"; shift ;;
         --digma_deployment_type) DIGMA_DEPLOYMENT="$2"; shift ;;
+        --flavor) FLAVOR="$2"; shift ;;
         --help) show_help; return 0 ;;
         *) echo "Unknown parameter passed: $1"; return 1 ;;
     esac
@@ -72,18 +75,44 @@ if [ ! -f /tmp/otel/digma-agent.jar ]; then
     curl -s --create-dirs -O -L --output-dir /tmp/otel https://github.com/digma-ai/digma-agent/releases/latest/download/digma-agent.jar
 fi
 
-# Set environment variables
+# Set environment variables based on the flavor
 echo "Setting observability environment variables..."
-export JAVA_TOOL_OPTIONS="-javaagent:/tmp/otel/digma-agent.jar \
--javaagent:/tmp/otel/opentelemetry-javaagent.jar \
--Dotel.javaagent.extensions=/tmp/otel/digma-otel-agent-extension.jar \
--Dotel.exporter.otlp.traces.endpoint=$DIGMA_URL \
--Dotel.traces.exporter=otlp -Dotel.exporter.otlp.protocol=grpc \
--Dotel.metrics.exporter=none -Dotel.logs.exporter=none \
--Dotel.instrumentation.common.experimental.controller.telemetry.enabled=true \
--Dotel.instrumentation.common.experimental.view.telemetry.enabled=true \
--Dotel.instrumentation.experimental.span-suppression-strategy=none \
--Dotel.instrumentation.jdbc-datasource.enabled=true"
+
+if [ "$FLAVOR" = "micronaut" ]; then
+    export JAVA_TOOL_OPTIONS="-Ddigma.flavor=Micronaut \
+    -Dotel.java.global-autoconfigure.enabled=true \
+    -Dotel.traces.exporter=otlp \
+    -Dotel.exporter.otlp.insecure=true \
+    -Dotel.exporter.otlp.compression=gzip \
+    -Dotel.exporter.experimental.exporter.otlp.retry.enabled=true \
+    -Dotel.exporter.otlp.endpoint=$DIGMA_URL \
+    -Dotel.service.name=default.main \
+    -Dotel.traces.exporter=otlp \
+    -Dotel.exporter.otlp.protocol=grpc \
+    -Dotel.metrics.exporter=none \
+    -Dotel.logs.exporter=none \
+    -Dotel.instrumentation.common.experimental.controller.telemetry.enabled=true \
+    -Dotel.instrumentation.common.experimental.view.telemetry.enabled=true \
+    -Dotel.instrumentation.experimental.span-suppression-strategy=none \
+    -Dotel.instrumentation.digma-methods.enabled=false \
+    -Dorg.digma.marker=true"
+elif [ "$FLAVOR" = "default" ] || [ -z "$FLAVOR" ]; then
+    export JAVA_TOOL_OPTIONS="-javaagent:/tmp/otel/digma-agent.jar \
+    -javaagent:/tmp/otel/opentelemetry-javaagent.jar \
+    -Dotel.javaagent.extensions=/tmp/otel/digma-otel-agent-extension.jar \
+    -Dotel.exporter.otlp.traces.endpoint=$DIGMA_URL \
+    -Dotel.traces.exporter=otlp \
+    -Dotel.exporter.otlp.protocol=grpc \
+    -Dotel.metrics.exporter=none \
+    -Dotel.logs.exporter=none \
+    -Dotel.instrumentation.common.experimental.controller.telemetry.enabled=true \
+    -Dotel.instrumentation.common.experimental.view.telemetry.enabled=true \
+    -Dotel.instrumentation.experimental.span-suppression-strategy=none \
+    -Dotel.instrumentation.jdbc-datasource.enabled=true"
+else
+    echo "Error: Invalid value for --flavor. Allowed values are 'default' or 'micronaut'."
+    return 1
+fi
 
 export OTEL_SERVICE_NAME=$SERVICE_NAME
 export OTEL_RESOURCE_ATTRIBUTES="digma.environment=$ENV_NAME,digma.environment.type=$ENV_TYPE"
