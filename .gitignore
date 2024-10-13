@@ -6,3 +6,4 @@ logs/
 terraform.tfstate
 terraform.tfstate.*
 .DS_Store
+results/
