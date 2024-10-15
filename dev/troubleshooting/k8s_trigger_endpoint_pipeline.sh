@@ -11,7 +11,7 @@ echo span_code_object_ids: $span_code_object_ids
 
 echo $(date +'%H:%M:%S') connecting to pod..
 pod=$(kubectl get pods -n $namespace -l app=digma-scheduler -o jsonpath='{.items[0].metadata.name}')
-kubectl exec -n $namespace $pod -- /bin/sh -c "
+kubectl exec -n $namespace $pod -- /bin/bash -c "
 
 apt-get update > /dev/null 2>&1;
 apt-get install -y curl > /dev/null 2>&1;
