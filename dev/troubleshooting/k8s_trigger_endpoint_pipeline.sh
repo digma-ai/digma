@@ -27,7 +27,7 @@ curl -sS -w \"%{http_code}\n\" -X 'POST' \
   \"pipelineType\": \"EndpointPipeline\",
   \"spanCodeObjectId\": \"$endpointSpanCodeObjectId\"
 }'
-
+echo Loop through each span_code_object_id and make the same HTTP call..
 # Loop through each span_code_object_id and make the same HTTP call
 IFS=',' read -ra span_ids <<< \"$span_code_object_ids\"
 for span_id in \"\${span_ids[@]}\"
