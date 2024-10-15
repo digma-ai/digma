@@ -3,6 +3,11 @@ namespace="$1"
 environment="$2"
 endpointSpanCodeObjectId="$3"
 span_code_object_ids="$4"
+echo namespace: $namespace
+echo environment: $environment
+echo endpointSpanCodeObjectId: $endpointSpanCodeObjectId
+echo span_code_object_ids: $span_code_object_ids
+
 
 echo $(date +'%H:%M:%S') connecting to pod..
 pod=$(kubectl get pods -n $namespace -l app=digma-scheduler -o jsonpath='{.items[0].metadata.name}')
