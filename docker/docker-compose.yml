@@ -1,76 +1,79 @@
+version: "3.6"
 services:
   digma-persistence:
     image: digmatic/digma-persistence:1.2
-    shm_size: 256MB
     expose:
-    - '5432'
-    - '6379'
-    - '8086'
+      - "5432"
+      - "6379"
+      - "8086"
     volumes:
-    - postgres_data_v1:/etc/lib/postgresql/data-pg
-    - redis_data_v1:/var/lib/redis
-    - influxdb_data_v1:/root/.influxdbv2/engine/data
-    - influxdb_config_v1:/root/.influxdbv2
+      - postgres_data_v1:/etc/lib/postgresql/data-pg
+      - redis_data_v1:/var/lib/redis
+      - influxdb_data_v1:/root/.influxdbv2/engine/data
+      - influxdb_config_v1:/root/.influxdbv2
     environment:
-    - DOCKER_INFLUXDB_INIT_MODE=setup
-    - DOCKER_INFLUXDB_INIT_USERNAME=${INFLUXDB_USERNAME:-admin}
-    - DOCKER_INFLUXDB_INIT_PASSWORD=${INFLUXDB_PASSWORD:-12345678}
-    - DOCKER_INFLUXDB_INIT_ORG=${INFLUXDB_ORG:-digma}
-    - DOCKER_INFLUXDB_INIT_BUCKET=${INFLUXDB_BUCKET:-errors}
-    - DOCKER_INFLUXDB_INIT_RETENTION=${INFLUXDB_BUCKET_RETENTION:-24w}
-    - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=${INFLUXDB_ADMIN_TOKEN:-dc61908e-05bc-411a-9fe2-e3356b8dc7c0}
-    - INFLUXD_QUERY_CONCURRENCY=15
-    - INFLUXD_QUERY_QUEUE_SIZE=200
-    - POSTGRES_USER=postgres
-    - POSTGRES_PASSWORD=postgres
-    - POSTGRES_NAME=postgres   ##
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=${INFLUXDB_USERNAME:-admin}
+      - DOCKER_INFLUXDB_INIT_PASSWORD=${INFLUXDB_PASSWORD:-12345678}
+      - DOCKER_INFLUXDB_INIT_ORG=${INFLUXDB_ORG:-digma}
+      - DOCKER_INFLUXDB_INIT_BUCKET=${INFLUXDB_BUCKET:-errors}
+      - DOCKER_INFLUXDB_INIT_RETENTION=${INFLUXDB_BUCKET_RETENTION:-24w}
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=${INFLUXDB_ADMIN_TOKEN:-dc61908e-05bc-411a-9fe2-e3356b8dc7c0}
+      - INFLUXD_QUERY_CONCURRENCY=15
+      - INFLUXD_QUERY_QUEUE_SIZE=200
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_NAME=postgres ##
     restart: unless-stopped
   jaeger:
     image: jaegertracing/all-in-one:1.45.0
     expose:
-    - '5317'
+      - "5317"
     ports:
-    - 17686:16686
+      - "17686:16686"
     command: |
       --query.additional-headers "Access-Control-Allow-Origin: *"
     volumes:
-    - jaeger_data:/badger
+      - "jaeger_data:/badger"
     environment:
-    - SPAN_STORAGE_TYPE=badger
-    - COLLECTOR_OTLP_ENABLED=true
-    - BADGER_EPHEMERAL=false
-    - BADGER_DIRECTORY_VALUE=/badger/data
-    - BADGER_DIRECTORY_KEY=/badger/key
-    - BADGER_SPAN_STORE_TTL=336h0m0s
-    - COLLECTOR_GRPC_PORT=5317
-    - COLLECTOR_OTLP_GRPC_MAX_MESSAGE_SIZE=41943040
+      - SPAN_STORAGE_TYPE=badger
+      - COLLECTOR_OTLP_ENABLED=true
+      - BADGER_EPHEMERAL=false
+      - BADGER_DIRECTORY_VALUE=/badger/data
+      - BADGER_DIRECTORY_KEY=/badger/key
+      - BADGER_SPAN_STORE_TTL=336h0m0s
+      - COLLECTOR_GRPC_PORT=5317
+      - COLLECTOR_OTLP_GRPC_MAX_MESSAGE_SIZE=41943040
+    restart: unless-stopped
+
+  digma-ds:
+    image: digmatic/ds:0.0.22
     restart: unless-stopped
 
   digma-compound:
-    image: digmatic/digma-compound:0.3.153
+    image: digmatic/digma-compound:0.2.231
     ports:
-    - 5049:5049
-    - 5050:5050
-    - 5051:5051
+      - "5050:5050"
+      - "5051:5051"
     environment:
-    - BACKEND_DEPLOYMENT_TYPE=DockerCompose
-    - CacheSettings__RedisConnection=${REDIS_CONNECTION:-digma-persistence}
-    - ExternalLogging__ConnectionString=${REDIS_CONNECTION:-digma-persistence}
-    - ConnectionStrings__Postgres=Server=${POSTGRES_SERVER:-digma-persistence};Port=${POSTGRES_SERVER_PORT:-5432};Database=digma_analytics;User
-      Id=${POSTGRES_USER:-postgres};Password=${POSTGRES_PWD:-postgres};
-    - influx2__Url=http://${INFLUXDB_URL:-digma-persistence}:8086
-    - OtlpExporterUrl=
-    - Jaeger__OtlpUrl=http://jaeger:4317
-    - ThresholdOptions__RecentActivityUpdateThresholdSeconds=5
-    - ThresholdOptions__UpsertEndpointThresholdSeconds=5
-    - ThresholdOptions__UpsertSpanFlowMetadataThresholdSeconds=5
-    - ThresholdOptions__UpsertSpansThresholdSeconds=5
-    - GlobalExceptionSettings__ExposeInternalDetails=true
-    - Kafka__PipelineWorkerCG__Workers=2
-    - PipelineExecution__NodeExecutionParallelism=1
-    - ApplicationVersion=0.3.153
+      - BACKEND_DEPLOYMENT_TYPE=DockerCompose
+      - CacheSettings__RedisConnection=${REDIS_CONNECTION:-digma-persistence}
+      - ConnectionStrings__Postgres=Server=${POSTGRES_SERVER:-digma-persistence};Port=${POSTGRES_SERVER_PORT:-5432};Database=digma_analytics;User Id=${POSTGRES_USER:-postgres};Password=${POSTGRES_PWD:-postgres};
+      - influx2__Url=http://${INFLUXDB_URL:-digma-persistence}:8086
+      - Ds__Url=http://${DS_URL:-digma-ds}:5054
+      - Ds__TimeoutInSeconds=0.2
+      - OtlpExporterUrl=
+      - Jaeger__OtlpUrl=http://jaeger:4317
+      - ThresholdOptions__RecentActivityUpdateThresholdSeconds=5
+      - ThresholdOptions__UpsertEndpointThresholdSeconds=5
+      - ThresholdOptions__UpsertSpanFlowMetadataThresholdSeconds=5
+      - ThresholdOptions__UpsertSpansThresholdSeconds=5
+      - GlobalExceptionSettings__ExposeInternalDetails=true
+      - Kafka__PipelineWorkerCG__Workers=2
+      - PipelineExecution__NodeExecutionParallelism=1
+      - ApplicationVersion=0.2.231
     depends_on:
-    - digma-persistence
+      - digma-persistence
     restart: unless-stopped
 
 volumes:
