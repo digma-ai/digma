@@ -1,16 +1,16 @@
 {
     "releases": {
         "1.0.0": {
-            "minJetbrainsPluginVersion": "2.0.0"
+            "minJetbrainsPluginVersion": "2.0.400"
         },
         "1.0.1": {
-            "minJetbrainsPluginVersion": "2.0.0"
+            "minJetbrainsPluginVersion": "2.0.400"
         },
         "1.0.3": {
-            "minJetbrainsPluginVersion": "2.0.3"
+            "minJetbrainsPluginVersion": "2.0.400"
         },
         "4.0.0": {
-            "minJetbrainsPluginVersion": "2.0.403"
+            "minJetbrainsPluginVersion": "2.0.402"
         }
     }
 }

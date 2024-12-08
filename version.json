@@ -6,6 +6,9 @@
   "forceUpdates":{
     "plugin":{
       "minimumVersion":"2.0.339" 
+    },
+    "ui":{
+      "minimumVersion":"1.0.3" 
     }
   }
 }
