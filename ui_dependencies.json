@@ -11,6 +11,9 @@
         },
         "4.0.0": {
             "minJetbrainsPluginVersion": "2.0.402"
+        },
+        "4.0.1": {
+            "minJetbrainsPluginVersion": "2.0.402"
         }
     }
 }
