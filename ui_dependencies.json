@@ -15,12 +15,12 @@
         "4.0.1": {
             "minJetbrainsPluginVersion": "2.0.403"
         },
-        "4.0.2": {
-            "minJetbrainsPluginVersion": "2.0.403"
-        },
-        "4.0.3": {
-            "minJetbrainsPluginVersion": "2.0.403"
-        },
+//        "4.0.2": {
+//            "minJetbrainsPluginVersion": "2.0.403"
+//        },
+//        "4.0.3": {
+//            "minJetbrainsPluginVersion": "2.0.403"
+//        },
 //        "4.0.4": {
 //            "minJetbrainsPluginVersion": "2.0.403"
 //        }
