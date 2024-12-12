@@ -24,7 +24,7 @@ jobs:
           | 
           echo '${{ toJson(github.event.client_payload) }}' > ./ui_dependencies_diff.json
           cd .github/scripts/update-ui
-          deno tasks start
+          deno task start
 
       - name: Commit, push changes and create PR
         run: |
