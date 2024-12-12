@@ -19,7 +19,7 @@ jobs:
         with:
           deno-version-file: ./.github/.scripts/update-ui/.dvmrc
 
-      - name: Create or update version file
+      - name: Update ui_dependencies.json
         run: 
           | 
           echo '${{ toJson(github.event.client_payload) }}' > ./ui_dependencies_diff.json
