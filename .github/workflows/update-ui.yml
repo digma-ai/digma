@@ -17,7 +17,7 @@ jobs:
 
       - uses: actions/setup-deno@v2
         with:
-          deno-version-file: ./.github/.scripts/update-ui/.dvmrc
+          deno-version-file: ./.github/scripts/update-ui/.dvmrc
 
       - name: Update ui_dependencies.json
         run: 
