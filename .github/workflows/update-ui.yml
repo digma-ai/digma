@@ -15,7 +15,7 @@ jobs:
         with:
           token: ${{ secrets.UPDATE_UI_PAT }}
 
-      - uses: actions/setup-deno@v2
+      - uses: denoland/setup-deno@v2
         with:
           deno-version-file: ./.github/.scripts/update-ui/.dvmrc
 
