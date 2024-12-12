@@ -1,0 +1,37 @@
+name: Update digma-ui releases
+
+on:
+  repository_dispatch:
+    types: [update-ui]
+
+jobs:
+  update-ui:
+    runs-on: ubuntu-latest
+    env:
+      BRANCH_NAME: update-ui
+      DEPENDENCIES_FILENAME: ui_dependencies.json
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.UPDATE_UI_PAT }}
+
+      - uses: actions/setup-deno@v2
+        with:
+          deno-version-file: ./.github/.scripts/update-ui/.dvmrc
+
+      - name: Update ui_dependencies.json
+        run: 
+          | 
+          echo '${{ toJson(github.event.client_payload) }}' > ./ui_dependencies_diff.json
+          cd .github/scripts/update-ui
+          deno tasks start
+
+      - name: Commit, push changes and create PR
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -b ${{ env.BRANCH_NAME }}
+          git add ${{ env.DEPENDENCIES_FILENAME }}
+          git commit -m "Update digma-ui releases"
+          git push origin ${{ env.BRANCH_NAME }}
+          gh pr create -t "Update digma-ui releases" -B main -H ${{ env.BRANCH_NAME }}
