@@ -1,4 +1,4 @@
-name: Update Jaeger version
+name: Update UI releases
 
 on:
   repository_dispatch:
