@@ -1,4 +1,4 @@
-name: Update UI releases
+name: Update digma-ui releases
 
 on:
   repository_dispatch:
@@ -8,7 +8,7 @@ jobs:
   update-ui:
     runs-on: ubuntu-latest
     env:
-      BRANCH_NAME: update-digma
+      BRANCH_NAME: update-ui
       DEPENDENCIES_FILENAME: ui_dependencies.json
     steps:
       - uses: actions/checkout@v4
