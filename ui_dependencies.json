@@ -1,54 +1,5 @@
 {
     "releases": {
-        "1.0.0": {
-            "minJetbrainsPluginVersion": "2.0.0"
-        },
-        "1.0.1": {
-            "minJetbrainsPluginVersion": "2.0.0"
-        },
-        "1.0.3": {
-            "minJetbrainsPluginVersion": "2.0.3"
-        },
-        "4.0.0": {
-            "minJetbrainsPluginVersion": "2.0.403"
-        },
-        "4.0.1": {
-            "minJetbrainsPluginVersion": "2.0.403"
-        },
-        "4.0.2": {
-            "minJetbrainsPluginVersion": "2.0.403"
-        },
-        "4.0.3": {
-            "minJetbrainsPluginVersion": "2.0.403"
-        },
-        "4.0.4": {
-            "minJetbrainsPluginVersion": "2.0.403"
-        },
-        "4.0.5": {
-            "minJaegerUIVersion": "1.29.1-digma.1.0.0",
-            "minJaegerVersion": "1.45.0",
-            "minJetbrainsPluginVersion": "2.0.403"
-        },
-        "4.0.6": {
-            "minJaegerUIVersion": "1.29.1-digma.1.0.0",
-            "minJaegerVersion": "1.45.0",
-            "minJetbrainsPluginVersion": "2.0.403"
-        },
-        "4.0.7": {
-            "minJaegerUIVersion": "1.29.1-digma.1.0.2",
-            "minJaegerVersion": "1.45.0",
-            "minJetbrainsPluginVersion": "2.0.403"
-        },
-        "4.0.8": {
-            "minJaegerUIVersion": "1.29.1-digma.1.0.2",
-            "minJaegerVersion": "1.45.0",
-            "minJetbrainsPluginVersion": "2.0.403"
-        },
-        "4.0.9": {
-            "minJaegerUIVersion": "1.29.1-digma.1.0.2",
-            "minJaegerVersion": "1.45.0",
-            "minJetbrainsPluginVersion": "2.0.403"
-        },
         "4.0.10": {
             "minJaegerUIVersion": "1.29.1-digma.1.0.2",
             "minJaegerVersion": "1.45.0",
