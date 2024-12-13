@@ -9,7 +9,7 @@ jobs:
     name: Update digma-ui releases
     runs-on: ubuntu-latest
     env:
-      BRANCH_NAME: update-ui
+      BRANCH_NAME: update-ui-${{ github.event.client_payload.release }}
     steps:
       - uses: actions/checkout@v4
         with:
