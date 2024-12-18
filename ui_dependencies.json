@@ -39,10 +39,10 @@
             "minJaegerVersion": "1.45.0",
             "minJetbrainsPluginVersion": "2.0.403"
         },
-//        "5.0.0": {
-//            "minJaegerUIVersion": "1.29.1-digma.1.0.3",
-//            "minJaegerVersion": "1.45.0",
-//            "minJetbrainsPluginVersion": "2.0.403"
-//        }
+        "5.0.0": {
+            "minJaegerUIVersion": "1.29.1-digma.1.0.3",
+            "minJaegerVersion": "1.45.0",
+            "minJetbrainsPluginVersion": "2.0.403"
+        }
     }
 }
