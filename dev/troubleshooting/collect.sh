@@ -63,8 +63,7 @@ curl -k -s -o "$folder/ignored-spans.json"  --location "$analytics_url/api/Diagn
 fi
 
 if [[ -n "$namespace" ]]; then
-
-  kubectl get deployments -n "$namespace" -o jsonpath='{range .items[*]}{"Deployment: "}{.metadata.name}{"\n"}{range .spec.template.spec.containers[*]}{"Container: "}{.name}{"\n"}{range .env[*]}{.name}{"="}{.value}{"\n"}{end}{"\n"}{end}{end}' > "$folder/deployment_env_vars.txt"
+  kubectl get events -n "$namespace" --sort-by='.metadata.creationTimestamp' > "$folder/events.txt"
   kubectl get pods -n "$namespace" --no-headers -o custom-columns="POD:metadata.name,RESTARTS:status.containerStatuses[*].restartCount" > "$folder/pod_restarts.txt"
   # Get the list of pods in the namespace
   pods=$(kubectl get pods -n "$namespace" -o jsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}')
@@ -84,6 +83,8 @@ if [[ -n "$namespace" ]]; then
       echo "Memory Usage: $memory_usage" >> "$folder/$output_file"
       echo "Output->" >> "$folder/$output_file"
       kubectl logs "$pod" -n "$namespace" >> "$folder/$output_file"
+      kubectl describe pod "$pod" -n "$namespace" > "$folder/${pod}_describe.txt"
+
       if [ $? -ne 0 ]; then
         echo "Error: Failed to download logs from pod $pod."
       fi
