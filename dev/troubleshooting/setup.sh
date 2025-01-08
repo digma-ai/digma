@@ -160,8 +160,13 @@ if [ -n "$recreateEnvironment" ]; then
    echo "Response: $response_body"
    exit 1
    fi
+   recreateEnvironment=$(echo "$recreateEnvironment" | tr '[:lower:]' '[:upper:]')
    environmentId=$(echo "$response_body" | jq -r ".[] | select(.name == \"$recreateEnvironment\" and .type == \"Public\") | .id")
    environmentId=$(echo -n "$environmentId" | jq -sRr @uri)
+   if [ -z "$environmentId" ]; then
+    echo "environment $recreateEnvironment not found"
+    exit 1
+   fi
    response=$(curl -s -w "HTTPSTATUS:%{http_code}" -X 'DELETE' \
     "$url/Environments/$environmentId" \
     -H 'accept: text/plain' \
