@@ -35,6 +35,11 @@ while [[ $# -gt 0 ]]; do
         shift
         shift
         ;;
+        --recreate-environment)
+        recreateEnvironment="$2"
+        shift
+        shift
+        ;;
         --create-user)
         create_user=true
         shift
@@ -123,6 +128,69 @@ if [ -n "$createEnvironment" ]; then
     http_status=$(echo "$response" | tr -d '\n' | sed -e 's/.*HTTPSTATUS://')
     response_body=$(echo "$response" | sed -e 's/HTTPSTATUS:.*//')
     echo "http_status: $http_status"
+    # Check the HTTP status code
+    if [ "$http_status" -ne 200 ]; then
+    echo "Failed with status code: $http_status"
+    echo "Response: $response_body"
+    exit 1
+    fi
+
+    errors_empty=$(echo "$response_body" | jq -r '.errors | length == 0')
+    # Print the response if errors list is not empty
+    if [ "$errors_empty" = "false" ]; then
+        echo "Response: $response_body"
+    fi
+fi
+
+if [ -n "$recreateEnvironment" ]; then
+   echo "recreating public environment $recreateEnvironment .."
+
+   response=$(curl -s -w "HTTPSTATUS:%{http_code}" -X 'GET' \
+    "$url/Environments" \
+    -H 'accept: text/plain' \
+    -H "Digma-Access-Token: Token $token" \
+    -H "Authorization: Bearer $accessToken")
+   http_status=$(echo "$response" | tr -d '\n' | sed -e 's/.*HTTPSTATUS://')
+   response_body=$(echo "$response" | sed -e 's/HTTPSTATUS:.*//')
+
+   echo "Get environments: $http_status"
+   # Check the HTTP status code
+   if [ "$http_status" -ne 200 ]; then
+   echo "Failed with status code: $http_status"
+   echo "Response: $response_body"
+   exit 1
+   fi
+   environmentId=$(echo "$response_body" | jq -r ".[] | select(.name == \"$recreateEnvironment\" and .type == \"Public\") | .id")
+   environmentId=$(echo -n "$environmentId" | jq -sRr @uri)
+   response=$(curl -s -w "HTTPSTATUS:%{http_code}" -X 'DELETE' \
+    "$url/Environments/$environmentId" \
+    -H 'accept: text/plain' \
+    -H "Digma-Access-Token: Token $token" \
+    -H "Authorization: Bearer $accessToken")
+   http_status=$(echo "$response" | tr -d '\n' | sed -e 's/.*HTTPSTATUS://')
+   response_body=$(echo "$response" | sed -e 's/HTTPSTATUS:.*//')
+   echo "Delete environment: $http_status"
+   # Check the HTTP status code
+   if [ "$http_status" -ne 200 ]; then
+   echo "Failed with status code: $http_status"
+   echo "Response: $response_body"
+   exit 1
+   fi
+   response=$(curl -s -w "HTTPSTATUS:%{http_code}" -X 'POST' \
+    "$url/Environments" \
+    -H 'accept: text/plain' \
+    -H 'Content-Type: application/json-patch+json' \
+    -H "Digma-Access-Token: Token $token" \
+    -H "Authorization: Bearer $accessToken" \
+    -d "{
+    \"environment\": \"$recreateEnvironment\",
+    \"type\": 1,
+    \"userId\": \"$userId\" 
+    }")
+    
+    http_status=$(echo "$response" | tr -d '\n' | sed -e 's/.*HTTPSTATUS://')
+    response_body=$(echo "$response" | sed -e 's/HTTPSTATUS:.*//')
+    echo "Create environment: $http_status"
     # Check the HTTP status code
     if [ "$http_status" -ne 200 ]; then
     echo "Failed with status code: $http_status"
