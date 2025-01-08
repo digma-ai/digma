@@ -2,7 +2,7 @@
 
 # Function to display usage
 usage() {
-    echo "Usage: $0 --url <URL> --user <USER> --pwd <PASSWORD> [--create-user] [--token <TOKEN>] [--create-environment <CREATE_ENVIRONMENT>]"
+    echo "Usage: $0 --url <URL> --user <USER> --pwd <PASSWORD> [--create-user] [--token <TOKEN>] [--create-environment <CREATE_ENVIRONMENT>] [--recreate-environment <RECREATE_ENVIRONMENT>]"
     exit 1
 }
 create_user=false
