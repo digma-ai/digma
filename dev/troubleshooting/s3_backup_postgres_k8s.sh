@@ -3,7 +3,7 @@ namespace="$1"
 presigned_url="$2"
 
 echo $(date +'%H:%M:%S') starting postgres backup to s3, connecting to pod..
-postgres_pod=$(kubectl get pods -n $namespace -l app=postgres -o jsonpath='{.items[0].metadata.name}')
+postgres_pod=$(kubectl get pods -n $namespace -l app.kubernetes.io/name=postgresql -o jsonpath='{.items[0].metadata.name}')
 kubectl exec -n $namespace $postgres_pod -- /bin/sh -c "
 echo \$(date +'%H:%M:%S') backup started;
 cd /;
