@@ -36,4 +36,4 @@ jobs:
           git add ui_dependencies.json
           git commit -m "Update digma-ui releases"
           git push origin ${{ env.BRANCH_NAME }}
-          gh pr create -f -B main
+          gh pr create -f -B main --head ${{ env.BRANCH_NAME }}
