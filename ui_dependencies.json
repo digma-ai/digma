@@ -24,6 +24,11 @@
             "minJaegerUIVersion": "1.29.1-digma.1.0.4",
             "minJaegerVersion": "1.45.0",
             "minJetbrainsPluginVersion": "2.0.405"
+        },
+        "6.4.0": {
+            "minJaegerUIVersion": "1.29.1-digma.1.0.5",
+            "minJaegerVersion": "1.45.0",
+            "minJetbrainsPluginVersion": "2.0.405"
         }
     }
 }
