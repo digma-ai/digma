@@ -2,7 +2,7 @@
   <img src="/images/bg.jpg" >
 </p>
 <h1 style="text-align: center;">
-  Use preemptive observability to nip production issues in the bud
+  Use Preemptive Observability to Nip Production Issues in the Bud
 </h1>
 
 <!-- Place this tag in your head or just before your close body tag. -->
