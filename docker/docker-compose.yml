@@ -1,26 +1,14 @@
 services:
   digma-persistence:
-    image: digmatic/digma-persistence:1.2
+    image: digmatic/digma-persistence:1.3
     shm_size: 256MB
     expose:
     - '5432'
     - '6379'
-    - '8086'
     volumes:
     - postgres_data_v1:/etc/lib/postgresql/data-pg
     - redis_data_v1:/var/lib/redis
-    - influxdb_data_v1:/root/.influxdbv2/engine/data
-    - influxdb_config_v1:/root/.influxdbv2
     environment:
-    - DOCKER_INFLUXDB_INIT_MODE=setup
-    - DOCKER_INFLUXDB_INIT_USERNAME=${INFLUXDB_USERNAME:-admin}
-    - DOCKER_INFLUXDB_INIT_PASSWORD=${INFLUXDB_PASSWORD:-12345678}
-    - DOCKER_INFLUXDB_INIT_ORG=${INFLUXDB_ORG:-digma}
-    - DOCKER_INFLUXDB_INIT_BUCKET=${INFLUXDB_BUCKET:-errors}
-    - DOCKER_INFLUXDB_INIT_RETENTION=${INFLUXDB_BUCKET_RETENTION:-24w}
-    - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=${INFLUXDB_ADMIN_TOKEN:-dc61908e-05bc-411a-9fe2-e3356b8dc7c0}
-    - INFLUXD_QUERY_CONCURRENCY=15
-    - INFLUXD_QUERY_QUEUE_SIZE=200
     - POSTGRES_USER=postgres
     - POSTGRES_PASSWORD=postgres
     - POSTGRES_NAME=postgres   ##
@@ -47,7 +35,7 @@ services:
     restart: unless-stopped
 
   digma-compound:
-    image: digmatic/digma-compound:0.3.235
+    image: digmatic/digma-compound:0.3.238
     ports:
     - 5049:5049
     - 5050:5050
@@ -58,7 +46,6 @@ services:
     - ExternalLogging__ConnectionString=${REDIS_CONNECTION:-digma-persistence}
     - ConnectionStrings__Postgres=Server=${POSTGRES_SERVER:-digma-persistence};Port=${POSTGRES_SERVER_PORT:-5432};Database=digma_analytics;User
       Id=${POSTGRES_USER:-postgres};Password=${POSTGRES_PWD:-postgres};
-    - influx2__Url=http://${INFLUXDB_URL:-digma-persistence}:8086
     - OtlpExporterUrl=
     - Jaeger__OtlpUrl=http://jaeger:4317
     - ThresholdOptions__RecentActivityUpdateThresholdSeconds=5
@@ -68,7 +55,7 @@ services:
     - GlobalExceptionSettings__ExposeInternalDetails=true
     - Kafka__PipelineWorkerCG__Workers=2
     - PipelineExecution__NodeExecutionParallelism=1
-    - ApplicationVersion=0.3.235
+    - ApplicationVersion=0.3.238
     depends_on:
     - digma-persistence
     restart: unless-stopped
@@ -76,8 +63,6 @@ services:
 volumes:
   postgres_data_v1:
   redis_data_v1:
-  influxdb_data_v1:
-  influxdb_config_v1:
   jaeger_data:
 
 networks:
