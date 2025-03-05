@@ -55,7 +55,7 @@ services:
     - GlobalExceptionSettings__ExposeInternalDetails=true
     - Kafka__PipelineWorkerCG__Workers=2
     - PipelineExecution__NodeExecutionParallelism=1
-    - ApplicationVersion=0.3.235
+    - ApplicationVersion=0.3.238
     depends_on:
     - digma-persistence
     restart: unless-stopped
