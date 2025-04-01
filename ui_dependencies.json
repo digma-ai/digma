@@ -122,6 +122,12 @@
             "minJaegerVersion": "1.45.0",
             "minJetbrainsPluginVersion": "2.0.410",
             "minVisualStudioExtensionVersion": "1.2.3"
+        },
+        "11.1.0": {
+            "minJaegerUIVersion": "1.29.1-digma.1.1.2",
+            "minJaegerVersion": "1.45.0",
+            "minJetbrainsPluginVersion": "2.0.410",
+            "minVisualStudioExtensionVersion": "1.2.3"
         }
     }
 }
