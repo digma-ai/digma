@@ -35,7 +35,7 @@ services:
     restart: unless-stopped
 
   digma-compound:
-    image: digmatic/digma-compound:0.3.269
+    image: digmatic/digma-compound:0.3.273
     ports:
     - 5049:5049
     - 5050:5050
@@ -55,7 +55,7 @@ services:
     - GlobalExceptionSettings__ExposeInternalDetails=true
     - Kafka__PipelineWorkerCG__Workers=2
     - PipelineExecution__NodeExecutionParallelism=1
-    - ApplicationVersion=0.3.269
+    - ApplicationVersion=0.3.273
     depends_on:
     - digma-persistence
     restart: unless-stopped
