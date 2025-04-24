@@ -1,7 +1,7 @@
 {
   "apiVersion": "v1",
   "pluginLatestVersion": "2.0.412",
-  "visualStudioPluginLatestVersion": "1.2.12",
+  "visualStudioPluginLatestVersion": "1.2.11",
   "backendLatestVersion": "0.3.273",
   "versionMatrix": [],
   "forceUpdates":{
